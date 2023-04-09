@@ -1,0 +1,69 @@
++++ crear array:
+
+
+int main()
+{
+int    *comp;
+int *g_map;
+int array_size = 4;
+
+  comp = (int *)malloc(sizeof(int) * array_size);
+  g_map = (int *)malloc(sizeof(int) * array_size);
+  return 0;
+}
+
+++++ asignar valors
+int main()
+{
+int    *comp;
+int *g_map;
+int array_size = 4;
+
+  comp = (int *)malloc(sizeof(int) * array_size);
+  g_map = (int *)malloc(sizeof(int) * array_size);
+  g_map[0] = 1;
+  g_map[1] = 1;
+  g_map[2] = 1;
+  g_map[3] = 1;
+  return 0;
+}
+
+int main()
+{
+int    *comp;
+int *g_map;
+int array_size = 4;
+
+  comp = (int *)malloc(sizeof(int) * array_size);
+  g_map = (int *)malloc(sizeof(int) * array_size);
+  g_map[0] = 1;
+  g_map[1] = 2;
+  g_map[2] = 4;
+  g_map[3] = 3;
+
+  comp[0] = 0;
+  comp[1] = 0;
+  comp[2] = 0;
+  comp[3] = 0;
+
+  if(g_map[0] !=  g_map[1])
+    {
+      int comp_loop;
+      comp_loop = array_size-1;
+      comp[g_map[0]-1] = 1;
+      comp[g_map[1]-1] = 1;
+      while(comp_loop != 1)
+      {
+        if (comp[g_map[comp_loop]-1] == 1)
+        {
+          return (0);
+        }
+         else
+        {
+          comp[g_map[comp_loop]-1] = 1;
+          comp_loop--;
+        }
+      }
+    }
+  return 1;
+}
