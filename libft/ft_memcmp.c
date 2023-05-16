@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doller-m <doller-m@student.42barcel>       +#+  +:+       +#+        */
+/*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:58:44 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/16 15:29:55 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:26:03 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-int	memcmp(const void *s1, const void *s2, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	int		i;
-	char	*rs1;
-	char	*rs2;
+	unsigned long int		i;
+	char					*rs1;
+	char					*rs2;
 
 	i = 0;
 	rs1 = (void *)s1;

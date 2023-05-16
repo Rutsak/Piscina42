@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doller-m <doller-m@student.42barcel>       +#+  +:+       +#+        */
+/*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 13:26:19 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/16 15:31:10 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:25:20 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
 
-void	*calloc(size_t count, size_t size)
+void	*ft_calloc(size_t count, size_t size)
 {
 	char	*mem;
 	int		i;
@@ -35,6 +35,6 @@ void	*calloc(size_t count, size_t size)
 
 /*int main(void)
 {
-	calloc(2,3);
+	ft_calloc(2,3);
 	return(0);
 }*/

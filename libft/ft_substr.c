@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 13:02:37 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/16 15:23:56 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:29:10 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	scopy = (unsigned char *)s;
 	i = 0;
-	str = (char *)ft_calloc(1, len + 1);
+	str = (unsigned char *)ft_calloc(1, len + 1);
 	if (!str)
 		return (0);
 	while (scopy[i] != (char)start)

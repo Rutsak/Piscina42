@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 10:26:11 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/10 15:32:49 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/16 16:57:22 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	int	i;
-	int	ldst;
+	unsigned long int	i;
+	int					ldst;
 
 	i = 0;
 	while (dst[i] != '\0')

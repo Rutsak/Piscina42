@@ -6,7 +6,7 @@
 #    By: doller-m <doller-m@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/08 10:17:53 by doller-m          #+#    #+#              #
-#    Updated: 2023/05/16 15:39:35 by doller-m         ###   ########.fr        #
+#    Updated: 2023/05/16 17:21:28 by doller-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,16 +44,13 @@ SRCS =	ft_atoi.c \
 
 OBJS = $(SRCS:.c=.o)
 
-%.o : %.c
-	$(CC) -c -MD $(CFLAGS) $< -o $@
-
--include *.d
+%.o : %.c libft.h
+	$(CC) -c $(CFLAGS) $< -o $@ -I libft.h
 
 $(NAME) : $(OBJS)
-	ar -crs $(NAME) $(OBJS)
+	ar rcs $(NAME) $(OBJS)
 
-all :
-	$(CC) -c $(CFALGS) $(SRCS) $(HEADER)
+all : $(NAME)
 
 clean :
 	rm -rf *.o

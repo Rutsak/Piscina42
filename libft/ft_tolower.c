@@ -6,11 +6,11 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:03:39 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/08 16:12:14 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:27:15 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	tolower(int c)
+int	ft_tolower(int c)
 {
 	if (c >= 65 && c <= 90)
 		return (c + 32);

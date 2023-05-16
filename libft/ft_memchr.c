@@ -6,16 +6,16 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:26:44 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/11 13:21:36 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:25:52 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-void	*memchr(const void *s, int c, size_t n)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int				i;
-	unsigned char	*str;
+	unsigned long int	i;
+	unsigned char		*str;
 
 	str = (unsigned char *)s;
 	i = 0;

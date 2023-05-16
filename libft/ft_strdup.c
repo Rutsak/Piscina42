@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doller-m <doller-m@student.42barcel>       +#+  +:+       +#+        */
+/*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 11:12:33 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/16 15:28:10 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:26:36 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-char	*strdup(const char *s1)
+char	*ft_strdup(const char *s1)
 {
 	char	*mem;
 	int		i;
@@ -40,5 +40,5 @@ char	*strdup(const char *s1)
 {
 	char	*a;
 
-	a = strdup("Hola que ase");
+	a = ft_strdup("Hola que ase");
 }*/
