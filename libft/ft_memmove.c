@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:57:40 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/11 11:32:47 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:29:15 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 		(strdst[len - 1]) = (strsrc[len - 1]);
 		len--;
 	}
-	return((void *)src);
+	return ((void *)src);
 }

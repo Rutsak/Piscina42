@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:01:25 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/10 14:44:49 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:26:05 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int	i;
-	char *rs1;
-	char *rs2;
+	int		i;
+	char	*rs1;
+	char	*rs2;
 
 	i = 0;
 	rs1 = (char *)s1;

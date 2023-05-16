@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:06:02 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/10 11:32:20 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:25:23 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 			j++;
 			if (j == len)
 			{
-				return &(pajar[i]);
+				return (&pajar[i]);
 			}
 		}
 		i++;

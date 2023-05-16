@@ -1,40 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doller-m <doller-m@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/11 13:26:19 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/16 15:31:10 by doller-m         ###   ########.fr       */
+/*   Created: 2023/05/12 11:12:33 by doller-m          #+#    #+#             */
+/*   Updated: 2023/05/16 15:28:10 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdio.h>
 
-void	*calloc(size_t count, size_t size)
+char	*strdup(const char *s1)
 {
 	char	*mem;
 	int		i;
 
 	i = 0;
-	mem = (char *)malloc(count * size);
+	while (s1[i] != '\0')
+	{
+		i++;
+	}
+	mem = (char *)malloc(i + 1);
 	if (!mem)
 		return (0);
 	else
 	{
-		while (i < (int)(count * size))
+		while (i >= 0)
 		{
-			mem [i] = '0';
-			i++;
+			mem [i] = s1[i];
+			i--;
 		}
 	}
-	return ((void *)mem);
+	return (mem);
 }
 
 /*int main(void)
 {
-	calloc(2,3);
-	return(0);
+	char	*a;
+
+	a = strdup("Hola que ase");
 }*/

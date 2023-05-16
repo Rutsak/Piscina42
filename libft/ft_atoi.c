@@ -6,10 +6,9 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 17:05:30 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/09 16:27:45 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:32:45 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 int	ft_atoi(const char *str)
 {
@@ -28,13 +27,13 @@ int	ft_atoi(const char *str)
 		while (str[i + j] >= 48 && str[i + j] <= 57)
 			j++;
 	}
-	n =str[i] - 48 ;
+	n = str[i] - 48;
 	while (k < j)
 	{
 		n = (n * 10) + (str[i + k] - 48);
 		k++;
 	}
-	if (str[i-1] == '-')
+	if (str[i - 1] == '-')
 		n = n * (-1);
 	return (n);
 }

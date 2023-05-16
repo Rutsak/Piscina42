@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:56:21 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/09 16:29:26 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:31:45 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	char		*str;
+	char				*str;
 	unsigned long int	i;
 
 	str = (char *)s;
