@@ -5,31 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 15:29:19 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/16 16:53:13 by doller-m         ###   ########.fr       */
+/*   Created: 2023/05/19 12:30:00 by doller-m          #+#    #+#             */
+/*   Updated: 2023/05/19 12:55:29 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*#include <stdio.h>*/
-
-int	ft_isalpha(char c)
+int	ft_isalpha(int c)
 {
-	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
-	{
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
 		return (1);
-	}
 	else
-	{
 		return (0);
-	}
 }
-
-/*int main(void)
-{
-    char    c;
-    int     ret;
-
-    c = 'a';
-    ret = ft_isalpha(c);
-    printf ("%i", ret);
-}*/

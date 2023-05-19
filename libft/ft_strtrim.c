@@ -1,39 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/03 12:57:40 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/19 10:48:22 by doller-m         ###   ########.fr       */
+/*   Created: 2023/05/17 17:04:37 by doller-m          #+#    #+#             */
+/*   Updated: 2023/05/18 12:54:48 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	unsigned long int	i;
-	unsigned char		*strsrc;
-	unsigned char		*strdst;
+	char	*str;
+	int		f;
+	int		r;
+	int		i;
 
+	f = 0;
+	r = 0;
 	i = 0;
-	strsrc = (unsigned char *)src;
-	strdst = (unsigned char *)dst;
-	while ((strdst[i]) != '\0')
-		i++;
-	if (i <= len)
-		len = i;
-	i = 0;
-	while (strsrc[i] != '\0')
-		i++;
-	if (i <= len)
-		len = i;
-	while ((len) != 0)
+	while (f <= ft_strlen(s1))
 	{
-		(strdst[len - 1]) = (strsrc[len - 1]);
-		len--;
+		while (set[i] != '\0')
+		{
+			if (set[i] = s1[f])
+				f++;
+			else
+				i++;
+		}
 	}
-	return ((void *)src);
+	i = 0;
+	while (r <= ft_strlen(s1))
+	{
+		while (set[i] != '\0')
+		{
+			if (set[i] = s1[ft_strlen(s1)-i])
+				r++;
+			else
+				j++;
+		}
+	}
 }

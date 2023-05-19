@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: doller-m <doller-m@student.42barcel>       +#+  +:+       +#+         #
+#    By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/08 10:17:53 by doller-m          #+#    #+#              #
-#    Updated: 2023/05/16 17:21:28 by doller-m         ###   ########.fr        #
+#    Updated: 2023/05/19 15:44:58 by doller-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS =	ft_atoi.c \
 		ft_isalnum.c\
 		ft_isalpha.c\
 		ft_isascii.c\
+		ft_isprint.c\
 		ft_isdigit.c\
 		ft_memchr.c\
 		ft_memcmp.c\
@@ -32,6 +33,7 @@ SRCS =	ft_atoi.c \
 		ft_memset.c\
 		ft_strchr.c\
 		ft_strdup.c\
+		ft_strjoin.c\
 	   	ft_strlcat.c\
 		ft_strlcpy.c\
 		ft_strlen.c\
@@ -44,11 +46,11 @@ SRCS =	ft_atoi.c \
 
 OBJS = $(SRCS:.c=.o)
 
-%.o : %.c libft.h
-	$(CC) -c $(CFLAGS) $< -o $@ -I libft.h
+%.o : %.c $(HEADER)
+	$(CC) -c $(CFLAGS) $< -o $@ -I $(HEADER)
 
-$(NAME) : $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+$(NAME) : $(OBJS) $(HEADER)
+	ar -rcs $(NAME) $(OBJS)
 
 all : $(NAME)
 
@@ -60,5 +62,9 @@ fclean : clean
 
 re : fclean all
 
+cs :
+	cp *.c ~/copiesSeguretat/Piscina42/libft/
+	cp *.h ~/copiesSeguretat/Piscina42/libft/
+	cp Makefile ~/copiesSeguretat/Piscina42/libft/
 
-.PHONY : clean all clean fclean re
+.PHONY : clean all clean fclean re cs

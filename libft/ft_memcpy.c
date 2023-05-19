@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:18:59 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/11 13:04:10 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/19 10:43:32 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,15 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 
 	strsrc = (unsigned char *)src;
 	strdst = (unsigned char *)dst;
-	while ((n - 1) >= 0)
+	if (dst == 0 && src == 0)
+		return (0);
+	else
 	{
-		(strdst[n - 1]) = (strsrc[n - 1]);
-		n--;
+		while ((n) != 0)
+		{
+			(strdst[n - 1]) = (strsrc[n - 1]);
+			n--;
+		}
+		return (dst);
 	}
-	return (dst);
 }

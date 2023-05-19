@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doller-m <doller-m@student.42barcel>       +#+  +:+       +#+        */
+/*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 13:02:37 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/16 17:29:10 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/18 13:30:16 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	str = (unsigned char *)ft_calloc(1, len + 1);
 	if (!str)
 		return (0);
-	while (scopy[i] != (char)start)
+	while (i < start)
 	{
 		if (scopy[i] != '\n')
 			i++;
@@ -39,7 +39,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return ((char *)str);
 }
 
-int	main(void)
+/*int	main(void)
 {
 	char			*a;
 	char			*s;
@@ -51,4 +51,4 @@ int	main(void)
 	len = 5;
 	a = ft_substr(s, start, len);
 	printf("%s", a);
-}
+}*/

@@ -6,13 +6,13 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:21:45 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/09 13:13:09 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/19 12:47:19 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+/*#include <stdio.h>*/
 
-int	ft_digit(char c)
+int	ft_isdigit(int c)
 {
 	if (c >= 48 && c <= 57)
 	{
@@ -30,6 +30,6 @@ int	ft_digit(char c)
     int     ret;
     c = 'a';
 
-    ret = ft_digit(c);
+    ret = ft_isdigit(c);
     printf("%i",ret);
 }*/
