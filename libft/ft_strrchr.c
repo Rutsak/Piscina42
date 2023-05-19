@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:46:08 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/19 15:30:05 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/19 16:31:48 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 char	*ft_strrchr(const char *s, int c)
 {
 	int		i;
-	char	*str;
+	unsigned char	*str;
 
 	i = 0;
-	str = (char *)s;
+	str = (unsigned char *)s;
 	while (str[i] != '\0')
 	{
 		i++;
@@ -28,7 +28,7 @@ char	*ft_strrchr(const char *s, int c)
 		i--;
 	}
 	if (i >= 0)
-		return (&str[i]);
+		return ((char *)&str[i]);
 	else
 		return (0);
 }

@@ -6,7 +6,7 @@
 #    By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/08 10:17:53 by doller-m          #+#    #+#              #
-#    Updated: 2023/05/19 15:44:58 by doller-m         ###   ########.fr        #
+#    Updated: 2023/05/19 15:49:06 by doller-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,8 +63,10 @@ fclean : clean
 re : fclean all
 
 cs :
+	git add *.c *.h Makefile
 	cp *.c ~/copiesSeguretat/Piscina42/libft/
 	cp *.h ~/copiesSeguretat/Piscina42/libft/
 	cp Makefile ~/copiesSeguretat/Piscina42/libft/
+	git status
 
 .PHONY : clean all clean fclean re cs
