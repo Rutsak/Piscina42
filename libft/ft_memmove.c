@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:57:40 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/19 10:48:22 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/22 13:29:43 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,27 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	i = 0;
 	strsrc = (unsigned char *)src;
 	strdst = (unsigned char *)dst;
-	while ((strdst[i]) != '\0')
+	if (strsrc > strdst)
+	{
+		i = len;
+		while (i != 0)
+		{
+			strdst[i] = strsrc[i];
+			i--;
+		}
+	}
+	else
+	{
+		while (i != len)
+		{
+			strdst[i] = strsrc[i];
+			i++;
+		}
+	}
+	return (dst);
+}
+
+/*	while ((strdst[i]) != '\0')
 		i++;
 	if (i <= len)
 		len = i;
@@ -36,4 +56,4 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 		len--;
 	}
 	return ((void *)src);
-}
+}*/

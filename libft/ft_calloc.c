@@ -6,31 +6,33 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 13:26:19 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/16 17:25:20 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:36:05 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
+#include "libft.h"
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	char	*mem;
-	int		i;
-
+	void		*mem;
+	size_t		i;
+	
 	i = 0;
-	mem = (char *)malloc(count * size);
+	mem = malloc(count * size);
 	if (!mem)
 		return (0);
-	else
+	ft_bzero(mem, (count * size));
+/*	else
 	{
-		while (i < (int)(count * size))
+		while (i < (count * size))
 		{
-			mem [i] = '0';
+			(char *)mem [i] = 0;
 			i++;
 		}
-	}
-	return ((void *)mem);
+	}*/
+	return (mem);
 }
 
 /*int main(void)

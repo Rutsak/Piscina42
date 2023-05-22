@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:46:08 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/19 16:31:48 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/22 12:18:40 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int		i;
+	int				i;
 	unsigned char	*str;
 
 	i = 0;
