@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:26:44 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/16 17:25:52 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/24 14:11:13 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,16 @@ void	*ft_memchr(const void *s, int c, size_t n)
 
 	str = (unsigned char *)s;
 	i = 0;
-	while (i <= n)
+	while (i <= n - 1)
 	{
-		while ((str[i]) != c)
+		if ((str[i]) != c)
 		{
 			i++;
 		}
-		return (&str[i]);
+		else if ((str[i]) != c)
+			return (&str[i]);
+		else
+			return (0);
 	}
 	return (0);
 }

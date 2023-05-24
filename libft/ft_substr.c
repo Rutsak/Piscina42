@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 13:02:37 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/18 13:30:16 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:25:45 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	unsigned int	start;
 	size_t			len;
 
-	s = "Hola mundo";
-	start = 97;
-	len = 5;
+	s = "i just want this part #############";
+	start = 0;
+	len = 22;
 	a = ft_substr(s, start, len);
 	printf("%s", a);
 }*/
