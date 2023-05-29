@@ -6,28 +6,26 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:57:40 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/24 15:47:36 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/25 11:08:44 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
+/* Intentant estalviar la creaci'o de dos arrays
+
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	unsigned long int	i;
-	unsigned char		*strsrc;
-	unsigned char		*strdst;
 
 	i = 0;
-	strsrc = (unsigned char *)src;
-	strdst = (unsigned char *)dst;
-	if(!strsrc && !strdst)
+	if (!src && !dst)
 		return (NULL);
-	if	(strsrc > strdst)
+	if ((unsigned char *)src > (unsigned char *)dst)
 	{
 		while (i != len)
 		{
-			strdst[i] = strsrc[i];
+			(unsigned char *)dst[i] = (unsigned char *)src[i];
 			i++;
 		}
 	}
@@ -36,7 +34,36 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 		i = len;
 		while (i != 0)
 		{
-			strdst[i - 1] = strsrc[i - 1];
+			(unsigned char *)dst[i - 1] = (unsigned char *)src[i - 1];
+			i--;
+		}
+	}
+	return (dst);
+}*/
+
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	unsigned long int	i;
+	unsigned char		*strsrc;
+
+	i = 0;
+	strsrc = (unsigned char *)src;
+	if (!src && !dst)
+		return (NULL);
+	if (strsrc > (unsigned char *)dst)
+	{
+		while (i != len)
+		{
+			((unsigned char *)dst)[i] = strsrc[i];
+			i++;
+		}
+	}
+	else
+	{
+		i = len;
+		while (i != 0)
+		{
+			((unsigned char *)dst)[i - 1] = strsrc[i - 1];
 			i--;
 		}
 	}
@@ -57,4 +84,3 @@ int main(void)
     printf("ft_memmove: %s\n", ft_memmove(str2 + 1, str2, 2));
     return 0;
 }*/
-

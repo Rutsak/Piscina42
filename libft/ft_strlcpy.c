@@ -6,14 +6,13 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:25:56 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/24 17:23:11 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/25 11:48:16 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-// #include "libft.h"
-#include "ft_strlen.c"
+
 #include <stdio.h>
 #include <string.h>
-
+#include "libft.h"
 
 /*size_t	ft_strlen(const char *src)
 {
@@ -29,33 +28,40 @@
 	return (i);
 }*/
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+void	escriu(char *dst, const char *src, size_t dstsize, size_t len)
 {
 	size_t	l;
-	char 	*src1 = (char *)src;
+
+	l = 0;
+	if (dstsize > len)
+	{
+		while (src[l])
+		{
+			dst[l] = src[l];
+			l++;
+		}
+	}
+	else
+	{
+		while (l != dstsize - 1)
+		{
+			dst[l] = src[l];
+			l++;
+		}
+	}
+	dst[l] = '\0';
+}
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+{
+	char	*src1;
 	size_t	len;
 
-	len =ft_strlen(src1);
-	l = 0;
+	src1 = (char *)src;
+	len = ft_strlen(src1);
 	if (dstsize != 0)
 	{
-		if(dstsize > len)
-		{
-			while (src[l])
-			{
-				dst[l] = src[l];
-				l++;
-			}
-		}
-		else
-		{
-			while (l != dstsize - 1)
-			{
-				dst[l] = src[l];
-				l++;
-			}
-		}
-		dst[l] = '\0';
+		escriu(dst, src, dstsize, len);
 	}
 	return (len);
 }
