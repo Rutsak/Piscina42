@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 10:26:11 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/29 18:09:53 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/29 19:01:07 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,26 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	size_t	lsrc;
 	size_t	ldst;
 
-	i = 0;
-	while (src[i] != '\0')
-		i++;
-	lsrc = i;
+	lsrc = 0;
+	while (src[lsrc] != '\0')
+		lsrc++;
 	if (dstsize == 0)
 		return (lsrc);
+	ldst = 0;
+	while (dst[ldst] != '\0')
+		ldst++;
 	i = 0;
-	while (dst[i] != '\0')
-		i++;
-	ldst = i;
-	i = 0;
-	while ((ldst + i) < dstsize - 1)
+	while (((ldst + i) < dstsize - 1) && (src[i] != '\0'))
 	{
 		dst[ldst + i] = src[i];
 		i++;
 	}
-	while ((ldst + i) < dstsize)
-	{
-		dst[ldst + i] = '\0';
-		i++;
-	}
+	dst[ldst + i] = '\0';
+	// while ((ldst + i) < dstsize)
+	// {
+	// 	dst[ldst + i] = '\0';
+	// 	i++;
+	// }
 	if (ldst > dstsize)
 		return (lsrc + dstsize);
 	else

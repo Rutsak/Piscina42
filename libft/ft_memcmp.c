@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:58:44 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/16 17:26:03 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/05/30 11:23:56 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	unsigned long int		i;
-	char					*rs1;
-	char					*rs2;
+	size_t	i;
+	unsigned char	*rs1;
+	unsigned char	*rs2;
 
 	i = 0;
 	rs1 = (void *)s1;
@@ -25,7 +25,7 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 		return (0);
 	else
 	{
-		while (i <= n)
+		while (i <= n - 1) 
 		{
 			if (rs1[i] == rs2[i])
 				i++;
@@ -35,3 +35,19 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	}
 	return (0);
 }
+/*
+#include <string.h>
+
+int	main(void)
+{
+	char	s1[] = "abcdefghij";
+	char	s2[] = "abcdefgxyz";
+	size_t	n = 7;
+	int	a;
+	
+	a = ft_memcmp(s1, s2, n);
+	printf("Resultat FT: %i \n", a);
+	a = memcmp(s1, s2, n);
+	printf("Resultat Origen: %i \n", a);
+	return(0);
+}*/
