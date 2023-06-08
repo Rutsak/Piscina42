@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:04:37 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/24 14:50:55 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:59:35 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,87 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int		strl;
 
 	f = 0;
-	r = 0;
 	i = 0;
-	strl = ft_strlen(s1);
-	while (f <= strl)
+	strl = ft_strlen((char *)s1);
+	r = strl;
+	while (s1[f] != 0 && ft_strchr(set, s1[f]) != 0)
+		f++;
+/* 	if (ft_strlen((char *)set) == 0)
 	{
-		while (set[i] != '\0')
+		str = (char *) malloc ((sizeof (char)) * (strl + 1));
+		if (!str)
+			return (0);
+		while (i < (r - f + 1))
 		{
-			if (set[i] == s1[f])
-				f++;
-			else
-				i++;
+			str[i] = s1[f + i];
+			i++;
 		}
+		str[i] = '\0';
+		return (str);
 	}
-	i = 0;
-	while (r <= strl)
+	if (r == f)
+		return (0);
+		return (str = (char *) malloc ((sizeof (char)) * 1)); */
+	while (r > f && ft_strchr(set, s1[r]) != 0)
+		r--;
+	str = (char *) malloc ((sizeof (char)) * (r - f + 2));
+	if (!str)
+		return (0);
+	while (i < (r - f + 1))
 	{
-		while (set[i] != '\0')
-		{
-			if (set[i] == s1[strl - i])
-				r++;
-			else
-				j++;
-		}
+		str[i] = s1[f + i];
+		i++;
 	}
+	str[i] = '\0';
+	return (str);
 }
+
+/* 
+#include <string.h>
+
+char	*ft_strchr(const char *s, int c)
+{
+	int				i;
+	unsigned char	*str;
+
+	i = 0;
+	str = (unsigned char *)s;
+	while (str[i] != c)
+	{
+		if (str[i] == '\0')
+			return (0);
+		else
+			i++;
+	}
+	if (i >= 0)
+		return ((char *)&str[i]);
+	else
+		return (0);
+}
+
+#include <stdio.h>
+
+size_t	ft_strlen(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
+int main(void)
+{
+	char const	*a;
+	char const	*s1;
+	char const	*set;
+
+	s1 = "";
+	set = " \n\t";
+	a = ft_strtrim(s1, set);
+	printf("La string original es: %s\n", s1);
+	printf("El set es: %s\n", set);
+	printf("La string resultante es: %s\n", a);
+} */

@@ -6,7 +6,7 @@
 #    By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/08 10:17:53 by doller-m          #+#    #+#              #
-#    Updated: 2023/05/24 15:05:43 by doller-m         ###   ########.fr        #
+#    Updated: 2023/06/07 11:46:44 by doller-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS =	ft_atoi.c \
 		ft_memcpy.c\
 		ft_memmove.c\
 		ft_memset.c\
+		ft_split.c\
 		ft_strchr.c\
 		ft_strdup.c\
 		ft_strjoin.c\
@@ -40,6 +41,7 @@ SRCS =	ft_atoi.c \
 		ft_strncmp.c\
 		ft_strnstr.c\
 		ft_strrchr.c\
+		ft_strtrim.c\
 		ft_substr.c\
 		ft_tolower.c\
 		ft_toupper.c\

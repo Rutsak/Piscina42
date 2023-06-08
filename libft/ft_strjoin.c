@@ -6,39 +6,63 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:07:35 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/18 12:53:17 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:55:42 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*strlen no incluye el '\0'*/
 
 #include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		is1;
-	int		is2;
-	char	*strwork;
 	char	*resul;
+	int		i;
+	int		ls1;
+	int		ls2;
 
-	is1 = ft_strlen((char *)s1);
-	is2 = ft_strlen((char *)s2);
-	resul = malloc(is1 + is2 + 1);
+	if (!s1 || !s2)
+		return (NULL);
+	ls1 = ft_strlen((char *)s1);
+	ls2 = ft_strlen((char *)s2);
+	resul = malloc(ls1 + ls2 + 1);
 	if (!resul)
 		return (NULL);
-	else
+	i = 0;
+	while (s1[i] != '\0')
 	{
-		strwork = (char *)s1;
-		ft_strlcpy(resul, strwork, is1);
-		strwork = (char *)s2;
-		ft_strlcpy(&resul[is1], strwork, is2);
+		resul[i] = s1[i];
+		i++;
 	}
+	i = 0;
+	while (s2[i] != '\0')
+	{
+		resul[ls1 + i] = s2[i];
+		i++;
+	}
+	resul[ls1 + i] = '\0';
 	return (resul);
 }
+/*
+#include <stdio.h>
 
-/*int main (void)
+size_t	ft_strlen(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
+
+int main (void)
 {
 	char	*result;
-	char	*s1 = "Hola ";
-	char	*s2 = "mundo";
+	char	*s1 = "lorem ipsum";
+	char	*s2 = "dolor sit amet";
 
 	result = ft_strjoin(s1, s2);
 	printf("%s", result);
