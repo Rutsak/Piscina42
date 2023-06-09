@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:46:48 by doller-m          #+#    #+#             */
-/*   Updated: 2023/06/08 12:14:33 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/09 14:01:03 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "libft.h"
-/* 
+
 size_t	ft_strlen(char *str)
 {
 	size_t	i;
@@ -116,33 +116,37 @@ char	*ft_strchr(const char *s, int c)
 	else
 		return (0);
 }
- */
-int	word_counter(char *front, char *rear, char c)
-{
-	int words;
 
-	words = 0;
+int	word_lcounter(char *front, char c)
+{
+	int		l;
+	char	*rear;
+
+	l = 0;
 	while (*front == c)
+	{
 		front++;
+		l++;
+	}
 	if (*front == 0)
 	{
 		return (-1);
 	}
-	rear = front + 1;
+	rear = front;
 	while (*rear != '\0')
 	{
-		if (*rear == c && (*(rear + 1) != c))
+		if (*rear == c)
 		{
-			front = rear + 1;
-			words++;
+			return (l);
 		}
 		rear++;
+		l++;
 	}
-	return (words);
+	return (l);
 }
 
 
-void freewilly(char **index, int i)
+void	freewilly(char **index, int i)
 {
 	i++;
 	while (i > 0)
@@ -153,35 +157,19 @@ void freewilly(char **index, int i)
 	free (index);
 }
 
-char	**ft_split(char const *s, char c)
+void	split_write(char *front, int words, char c, char **index)
 {
-	char		**index;
-	char		*front;
-	char		*rear;
-	int			words;
-	int			i;
+	int		i;
+	char	*rear;
 
-	words = 0;
-	front = (char *)s;
-	rear = front;
-	words = word_counter(front, rear, c);
-	if (words == -1)
-		return (ft_calloc((sizeof (char *)), 1));
-	index = ft_calloc((sizeof (char *)), words + 1);
-	if (!index)
-		return (0);
-	front = (char *)s;
 	i = 0;
-	while (i <= words)
+	while (i < words)
 	{
 		while (*front == c)
 			front++;
 		rear = ft_strchr(front, c);
-		if (rear == 0)
+		if (rear == NULL)
 			rear = ft_strchr(front, '\0');
-		else if (rear[0] == rear[1])
-			while (rear[0] == rear[1])
-				rear++;
 		index[i] = ft_calloc((sizeof (char)), rear - front + 2);
 		if (!index[i])
 			freewilly(index, i);
@@ -189,20 +177,52 @@ char	**ft_split(char const *s, char c)
 		if (ft_strchr(rear, c) == rear + 1)
 			rear++;
 		front = rear + 1;
-		i ++;
+		i++;
 	}
-//	index[++i] = ft_calloc((sizeof (char)), 1);
-//	if (!index[i])
-//		freewilly(index, i);
+	index[i] = NULL;
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char		**index;
+	char		*front;
+	int			words;
+	int			len;
+
+	words = 0;
+	len = 0;
+	front = (char *)s;
+	if (c == '\0')
+	{
+		index = ft_calloc((sizeof (char *)), 2);
+		while (s[len] != '\0')
+		{
+			index[0][len] = s[len];
+			len++;
+		}
+//		index[0][len] = '\0';
+		return (index);
+	}
+	while (word_lcounter(&front[len], c) > 0)
+	{
+		len = len + word_lcounter(&front[len], c);
+		words++;
+	}
+	if (words == 0)
+		return (ft_calloc((sizeof (char *)), 1));
+	index = malloc((sizeof (char *)) * (words + 1));
+	if (!index)
+		return (0);
+	front = (char *)s;
+	split_write(front, words, c, index);
 	return (index);
 }
-/* 
+
 int	main(void)
 {
-	char	c = ' ';
-	char	s[84] = "  lorem  ipsum dolor sit amet, consectetur adipiscing elit.  risus. Suspendisse     ";
+	char	c = '-';
+	char	s[84] = "--1-2--3---4----5-----42";
 
 	ft_split(s, c);
 	return (0);
 }
- */
