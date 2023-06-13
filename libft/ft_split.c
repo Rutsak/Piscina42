@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:46:48 by doller-m          #+#    #+#             */
-/*   Updated: 2023/06/09 14:01:03 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/12 10:44:39 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "libft.h"
-
+/* 
 size_t	ft_strlen(char *str)
 {
 	size_t	i;
@@ -116,7 +116,7 @@ char	*ft_strchr(const char *s, int c)
 	else
 		return (0);
 }
-
+ */
 int	word_lcounter(char *front, char c)
 {
 	int		l;
@@ -200,7 +200,6 @@ char	**ft_split(char const *s, char c)
 			index[0][len] = s[len];
 			len++;
 		}
-//		index[0][len] = '\0';
 		return (index);
 	}
 	while (word_lcounter(&front[len], c) > 0)
@@ -217,7 +216,7 @@ char	**ft_split(char const *s, char c)
 	split_write(front, words, c, index);
 	return (index);
 }
-
+/* 
 int	main(void)
 {
 	char	c = '-';
@@ -226,3 +225,4 @@ int	main(void)
 	ft_split(s, c);
 	return (0);
 }
+ */

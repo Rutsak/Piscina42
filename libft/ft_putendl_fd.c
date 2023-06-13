@@ -1,45 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 14:08:58 by doller-m          #+#    #+#             */
-/*   Updated: 2023/06/13 13:06:51 by doller-m         ###   ########.fr       */
+/*   Created: 2023/06/13 14:39:16 by doller-m          #+#    #+#             */
+/*   Updated: 2023/06/13 16:44:22 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+/*Envía la string ’s’ al file descriptor dado,seguido de un salto de línea. */
 
-char	*ft_strchr(const char *s, int c)
+#include "libft.h"
+
+void	ft_putendl_fd(char *s, int fd)
 {
-	int				i;
-	unsigned char	*str;
+	int	i;
 
 	i = 0;
-	str = (unsigned char *)s;
-	while (str[i] != (char) c)
+	while (s[i] != '\0')
 	{
-		if (str[i] == '\0')
-			return (0);
-		else
-			i++;
+		write(fd, &s[i], 1);
+		i++;
 	}
-	if (i >= 0)
-		return ((char *)&str[i]);
-	else
-		return (0);
+	write(fd, "\n", 1);
 }
 
-/*int	main(void)
-{
-	char	src1 [10] = "abbbbbbbb";
-	char	src2 [10] = "abbbbbbbb";
-	char	*a;
-	char	*b;
-
-	a = ft_strchr(src1, 97);
-	b = strchr(src2, 97);
-	return (0);
-}*/

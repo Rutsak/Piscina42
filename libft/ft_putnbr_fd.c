@@ -1,45 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 14:08:58 by doller-m          #+#    #+#             */
-/*   Updated: 2023/06/13 13:06:51 by doller-m         ###   ########.fr       */
+/*   Created: 2023/06/13 14:41:30 by doller-m          #+#    #+#             */
+/*   Updated: 2023/06/13 17:01:41 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+/*Envía el número ’n’ al file descriptor dado.*/
 
-char	*ft_strchr(const char *s, int c)
+#include "libft.h"
+
+void	ft_putnbr_fd(int n, int fd)
 {
-	int				i;
-	unsigned char	*str;
+	char	c;
 
-	i = 0;
-	str = (unsigned char *)s;
-	while (str[i] != (char) c)
-	{
-		if (str[i] == '\0')
-			return (0);
-		else
-			i++;
-	}
-	if (i >= 0)
-		return ((char *)&str[i]);
-	else
-		return (0);
+	c = n + 48;
+	write(fd, &c, 1);
 }
-
-/*int	main(void)
+/* 
+int	main(void)
 {
-	char	src1 [10] = "abbbbbbbb";
-	char	src2 [10] = "abbbbbbbb";
-	char	*a;
-	char	*b;
-
-	a = ft_strchr(src1, 97);
-	b = strchr(src2, 97);
+	ft_putnbr_fd(6, 1);
 	return (0);
-}*/
+} */

@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:26:44 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/30 13:13:50 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:56:14 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	*ft_memchr(const void *s, int c, size_t n)
 {
 	unsigned long int	i;
-	char		*str;
+	char				*str;
 
 	str = (char *)s;
 	i = 0;
