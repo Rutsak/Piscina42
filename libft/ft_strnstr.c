@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:06:02 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/30 18:15:18 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/13 17:41:30 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,18 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	if (*needle == '\0')
 		return ((char *)haystack);
 	if (aguja[0] == pajar[i])
+	{
+		j = 0;
+		while (aguja[j] == pajar[i + j] && (i + j < len))
 		{
-			j = 0;
-			while (aguja[j] == pajar[i + j] && (i + j < len))
-			{
-				j++;
-				if (aguja[j] == '\0')
-					return (&pajar[i]);
-				if (pajar[i] == '\0')
-					return (0);
-			}
-		i++;
+			j++;
+			if (aguja[j] == '\0')
+				return (&pajar[i]);
+			if (pajar[i] == '\0')
+				return (0);
 		}
+		i++;
+	}
 	while (i < len && pajar[i] != 0)
 	{
 		if (aguja[0] != pajar[i])

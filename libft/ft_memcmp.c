@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:58:44 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/30 11:23:56 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/13 17:37:12 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t	i;
+	size_t			i;
 	unsigned char	*rs1;
 	unsigned char	*rs2;
 
@@ -25,7 +25,7 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 		return (0);
 	else
 	{
-		while (i <= n - 1) 
+		while (i <= n - 1)
 		{
 			if (rs1[i] == rs2[i])
 				i++;
@@ -35,6 +35,7 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	}
 	return (0);
 }
+
 /*
 #include <string.h>
 

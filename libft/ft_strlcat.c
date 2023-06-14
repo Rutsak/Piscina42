@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 10:26:11 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/29 19:01:07 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/14 11:50:46 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,6 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 		i++;
 	}
 	dst[ldst + i] = '\0';
-	// while ((ldst + i) < dstsize)
-	// {
-	// 	dst[ldst + i] = '\0';
-	// 	i++;
-	// }
 	if (ldst > dstsize)
 		return (lsrc + dstsize);
 	else

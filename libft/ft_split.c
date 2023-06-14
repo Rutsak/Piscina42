@@ -6,10 +6,9 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:46:48 by doller-m          #+#    #+#             */
-/*   Updated: 2023/06/12 10:44:39 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/13 17:39:45 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -144,7 +143,6 @@ int	word_lcounter(char *front, char c)
 	}
 	return (l);
 }
-
 
 void	freewilly(char **index, int i)
 {

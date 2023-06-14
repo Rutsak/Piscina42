@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 14:52:02 by doller-m          #+#    #+#             */
-/*   Updated: 2023/06/13 16:50:38 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/14 11:56:47 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ char	*ft_strtrim(char const *s1, char const *set);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putendl_fd(char *s, int fd);
-
+void	ft_putchar_fd(char c, int fd);
 
 #endif

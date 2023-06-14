@@ -6,7 +6,7 @@
 #    By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/08 10:17:53 by doller-m          #+#    #+#              #
-#    Updated: 2023/06/13 17:02:34 by doller-m         ###   ########.fr        #
+#    Updated: 2023/06/14 11:56:30 by doller-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SRCS =	ft_atoi.c \
 		ft_putstr_fd.c\
 		ft_putnbr_fd.c\
 		ft_putendl_fd.c\
+		ft_putchar_fd.c\
 
 OBJS = $(SRCS:.c=.o)
 

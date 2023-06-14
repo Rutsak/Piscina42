@@ -6,13 +6,13 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:15:59 by doller-m          #+#    #+#             */
-/*   Updated: 2023/06/13 15:31:37 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/14 11:52:37 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* A cada carácter de la string ’s’, aplica la función ’f’ dando como parámetros el índice de cada carácter 
-dentro de ’s’ y el propio carácter. Genera una nueva string con el resultado del uso sucesivo de ’f’
-*/
+/* A cada carácter de la string ’s’, aplica la función ’f’ dando como 
+parámetros el índice de cada carácter dentro de ’s’ y el propio carácter.
+Genera una nueva string con el resultado del uso sucesivo de ’f’ */
 #include "libft.h"
 
 char	*reserva(int len)
@@ -44,4 +44,3 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	}
 	return (s_transf);
 }
-
