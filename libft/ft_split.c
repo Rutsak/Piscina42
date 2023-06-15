@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:46:48 by doller-m          #+#    #+#             */
-/*   Updated: 2023/06/15 17:34:23 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:55:06 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,16 +130,12 @@ int	word_lcounter(char *front, char c)
 		l++;
 	}
 	if (*front == 0)
-	{
 		return (-1);
-	}
 	rear = front;
 	while (*rear != '\0')
 	{
 		if (*rear == c)
-		{
 			return (l);
-		}
 		rear++;
 		l++;
 	}
@@ -156,7 +152,7 @@ void	freewilly(char **index, int i)
 	free (index);
 }
 
-void	split_write(char *front, int words, char c, char **index)
+int	split_write(char *front, int words, char c, char **index)
 {
 	int		i;
 	char	*rear;
@@ -173,7 +169,7 @@ void	split_write(char *front, int words, char c, char **index)
 		if (!index[i])
 		{
 			freewilly(index, i);
-			return ;
+			return (0);
 		}
 		ft_strlcpy(index[i], front, rear - front +1);
 		if (ft_strchr(rear, c) == rear + 1)
@@ -182,6 +178,7 @@ void	split_write(char *front, int words, char c, char **index)
 		i++;
 	}
 	index[i] = NULL;
+	return (1);
 }
 
 char	**ft_split(char const *s, char c)
@@ -194,7 +191,7 @@ char	**ft_split(char const *s, char c)
 	words = 0;
 	len = 0;
 	front = (char *)s;
-	while (word_lcounter(&front[len], c) > 0 &front[len] != '\0')
+	while (word_lcounter(&front[len], c) > 0 && front[len] != '\0')
 	{
 		len = len + word_lcounter(&front[len], c);
 		words++;
@@ -203,7 +200,8 @@ char	**ft_split(char const *s, char c)
 	if (!index)
 		return (0);
 	front = (char *)s;
-	split_write(front, words, c, index);
+	if (split_write(front, words, c, index) == 0)
+		return (0);
 	return (index);
 }
 /* 

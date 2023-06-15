@@ -6,13 +6,13 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:42:53 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/16 15:26:58 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:58:23 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-size_t	ft_strlen(char *str)
+size_t	ft_strlen(const char *str)
 {
 	size_t	i;
 
