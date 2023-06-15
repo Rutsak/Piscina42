@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:46:48 by doller-m          #+#    #+#             */
-/*   Updated: 2023/06/13 17:39:45 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:34:23 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ int	word_lcounter(char *front, char c)
 	char	*rear;
 
 	l = 0;
+	if (*front == '\0')
+		return (0);
 	while (*front == c)
 	{
 		front++;
@@ -146,7 +148,6 @@ int	word_lcounter(char *front, char c)
 
 void	freewilly(char **index, int i)
 {
-	i++;
 	while (i > 0)
 	{
 		free (index[i - 1]);
@@ -168,9 +169,12 @@ void	split_write(char *front, int words, char c, char **index)
 		rear = ft_strchr(front, c);
 		if (rear == NULL)
 			rear = ft_strchr(front, '\0');
-		index[i] = ft_calloc((sizeof (char)), rear - front + 2);
+		index[i] = ft_calloc((sizeof (char)), rear - front + 1);
 		if (!index[i])
+		{
 			freewilly(index, i);
+			return ;
+		}
 		ft_strlcpy(index[i], front, rear - front +1);
 		if (ft_strchr(rear, c) == rear + 1)
 			rear++;
@@ -190,23 +194,11 @@ char	**ft_split(char const *s, char c)
 	words = 0;
 	len = 0;
 	front = (char *)s;
-	if (c == '\0')
-	{
-		index = ft_calloc((sizeof (char *)), 2);
-		while (s[len] != '\0')
-		{
-			index[0][len] = s[len];
-			len++;
-		}
-		return (index);
-	}
-	while (word_lcounter(&front[len], c) > 0)
+	while (word_lcounter(&front[len], c) > 0 &front[len] != '\0')
 	{
 		len = len + word_lcounter(&front[len], c);
 		words++;
 	}
-	if (words == 0)
-		return (ft_calloc((sizeof (char *)), 1));
 	index = malloc((sizeof (char *)) * (words + 1));
 	if (!index)
 		return (0);
@@ -217,10 +209,13 @@ char	**ft_split(char const *s, char c)
 /* 
 int	main(void)
 {
-	char	c = '-';
-	char	s[84] = "--1-2--3---4----5-----42";
+	char		**index;
+	char		c = '\0';
+	char s[100] = "nonempty";
 
-	ft_split(s, c);
+	index = ft_split(s, c);
+	printf("%s\n", index[0]);
+	//printf("%s", index[1]);
 	return (0);
 }
  */
