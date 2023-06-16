@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:46:48 by doller-m          #+#    #+#             */
-/*   Updated: 2023/06/15 17:55:06 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/16 14:35:45 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ char	*ft_strchr(const char *s, int c)
 		return (0);
 }
  */
-int	word_lcounter(char *front, char c)
+static int	word_lcounter(char *front, char c)
 {
 	int		l;
 	char	*rear;
@@ -142,7 +142,7 @@ int	word_lcounter(char *front, char c)
 	return (l);
 }
 
-void	freewilly(char **index, int i)
+static void	freewilly(char **index, int i)
 {
 	while (i > 0)
 	{
@@ -152,7 +152,7 @@ void	freewilly(char **index, int i)
 	free (index);
 }
 
-int	split_write(char *front, int words, char c, char **index)
+static int	split_write(char *front, int words, char c, char **index)
 {
 	int		i;
 	char	*rear;

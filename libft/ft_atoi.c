@@ -6,11 +6,11 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 17:05:30 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/24 11:21:00 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/16 14:29:21 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	numeros(char *str, int i, int j, int k)
+static int	numeros(char *str, int i, int j, int k)
 {
 	int	num;
 

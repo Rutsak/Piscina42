@@ -6,14 +6,14 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:47:39 by doller-m          #+#    #+#             */
-/*   Updated: 2023/06/13 12:44:36 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/16 14:33:09 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-int	n_leng(int n)
+static int	n_leng(int n)
 {
 	int				i;
 	unsigned int	num;
@@ -38,7 +38,7 @@ int	n_leng(int n)
 	return (i + 1);
 }
 
-char	*reserva(int len)
+static char	*reserva(int len)
 {
 	char	*a;
 
@@ -49,7 +49,7 @@ char	*reserva(int len)
 	return (a);
 }
 
-char	*escriu(char *a, int len, int neg, unsigned int result)
+static char	*escriu(char *a, int len, int neg, unsigned int result)
 {
 	int				i;
 	int				rest;

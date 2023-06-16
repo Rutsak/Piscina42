@@ -6,13 +6,23 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:07:35 by doller-m          #+#    #+#             */
-/*   Updated: 2023/06/01 17:55:42 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/16 14:35:43 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*strlen no incluye el '\0'*/
-
 #include "libft.h"
+
+static void	s1_result(char const *s1, char *resul)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] != '\0')
+	{
+		resul[i] = s1[i];
+		i++;
+	}
+}
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -28,12 +38,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	resul = malloc(ls1 + ls2 + 1);
 	if (!resul)
 		return (NULL);
-	i = 0;
-	while (s1[i] != '\0')
-	{
-		resul[i] = s1[i];
-		i++;
-	}
+	s1_result(s1, resul);
 	i = 0;
 	while (s2[i] != '\0')
 	{

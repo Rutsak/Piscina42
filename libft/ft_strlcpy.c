@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:25:56 by doller-m          #+#    #+#             */
-/*   Updated: 2023/05/25 11:48:16 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/16 14:35:37 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 	return (i);
 }*/
 
-void	escriu(char *dst, const char *src, size_t dstsize, size_t len)
+static void	escriu(char *dst, const char *src, size_t dstsize, size_t len)
 {
 	size_t	l;
 

@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:15:59 by doller-m          #+#    #+#             */
-/*   Updated: 2023/06/14 11:52:37 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/16 14:35:33 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@ parámetros el índice de cada carácter dentro de ’s’ y el propio carácter
 Genera una nueva string con el resultado del uso sucesivo de ’f’ */
 #include "libft.h"
 
-char	*reserva(int len)
+static char	*reserva(int len)
 {
 	char	*a;
 
