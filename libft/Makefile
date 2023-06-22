@@ -6,7 +6,7 @@
 #    By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/08 10:17:53 by doller-m          #+#    #+#              #
-#    Updated: 2023/06/14 11:56:30 by doller-m         ###   ########.fr        #
+#    Updated: 2023/06/22 13:16:55 by doller-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,13 +53,28 @@ SRCS =	ft_atoi.c \
 		ft_putendl_fd.c\
 		ft_putchar_fd.c\
 
+SRCS_B =	ft_lstnew_bonus.c\
+			ft_lstadd_front_bonus.c\
+			ft_lstsize_bonus.c\
+			ft_lstlast_bonus.c\
+			ft_lstadd_back_bonus.c\
+			ft_lstdelone_bonus.c\
+			ft_lstclear_bonus.c\
+			ft_lstiter_bonus.c\
+			ft_lstmap_bonus.c\
+
 OBJS = $(SRCS:.c=.o)
+
+OBJS_B = $(SRCS_B:.c=.o)
 
 %.o : %.c $(HEADER)
 	$(CC) -c $(CFLAGS) $< -o $@ -I $(HEADER)
 
 $(NAME) : $(OBJS) $(HEADER)
 	ar -rcs $(NAME) $(OBJS)
+
+bonus : $(NAME) $(OBJS_B)
+	ar -rcs $(NAME) $(OBJS) $(OBJS_B)
 
 all : $(NAME)
 
