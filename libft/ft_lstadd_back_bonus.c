@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:38:21 by doller-m          #+#    #+#             */
-/*   Updated: 2023/06/21 14:36:51 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/23 14:54:32 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	t_list	*temp;
 
 	temp = *lst;
-
 	if (!*lst)
 		*lst = new;
 	else
