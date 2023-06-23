@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 13:17:12 by doller-m          #+#    #+#             */
-/*   Updated: 2023/06/23 15:29:24 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/23 15:54:41 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,18 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	{
 		while (lst)
 		{
-			nw_node = f(lst->content);
-			temp_node = ft_lstnew(nw_node);
-			if (temp_node == 0)
+			temp_node = f(lst->content);
+			nw_node = ft_lstnew(temp_node);
+			if (nw_node == 0)
 			{
-				ft_lstclear(&lst, del);
-				free(nw_node);
+				ft_lstclear(&nw_lst, del);
+				free(temp_node);
 				return (0);
 			}
-			ft_lstadd_back(&nw_lst, temp_node);
-			temp_node = temp_node->next;
+			ft_lstadd_back(&nw_lst, nw_node);
+			nw_node = nw_node->next;
 			lst = lst->next;
 		}
-		free(nw_node);
 		return (nw_lst);
 	}
 	return (0);

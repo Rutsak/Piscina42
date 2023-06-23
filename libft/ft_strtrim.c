@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:04:37 by doller-m          #+#    #+#             */
-/*   Updated: 2023/06/14 11:53:46 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:39:58 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,18 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int		f;
 	int		r;
 	int		i;
-	int		strl;
 
 	f = 0;
 	i = 0;
-	strl = ft_strlen((char *)s1);
-	r = strl;
+	r = ft_strlen((char *)s1);
 	while (s1[f] != 0 && ft_strchr(set, s1[f]) != 0)
 		f++;
-	while (r > f && ft_strchr(set, s1[r]) != 0)
+	while (r > f && ft_strchr(set, s1[r - 1]) != 0)
 		r--;
-	str = (char *) malloc ((sizeof (char)) * (r - f + 2));
+	str = (char *) malloc ((sizeof (char)) * (r - f + 1));
 	if (!str)
 		return (0);
-	while (i < (r - f + 1))
+	while (i < (r - f))
 	{
 		str[i] = s1[f + i];
 		i++;
