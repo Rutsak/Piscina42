@@ -1,4 +1,4 @@
-NAME = get_next_line.a
+NAME = a.out
 
 HEADER = get_next_line.h
 
@@ -6,21 +6,24 @@ CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra -D BUFFER_SIZE=42
 
-SRCS =	get_next_line.c \
+SRCS =	main.c\
+		get_next_line.c \
 		get_next_line_utils.c\
-
+		
 OBJS = $(SRCS:.c=.o)
 
 %.o : %.c $(HEADER)
 	$(CC) -c $(CFLAGS) $< -o $@ -I $(HEADER)
 
 $(NAME) : $(OBJS) $(HEADER)
-	ar -rcs $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(HEADER)
 
 all : $(NAME)
 
 clean :
 	rm -rf *.o
+	rm -rf *.gch
+	rm a.out
 
 fclean : clean
 	rm -f $(NAME)

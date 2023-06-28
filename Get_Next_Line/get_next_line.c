@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:42 by doller-m          #+#    #+#             */
-/*   Updated: 2023/06/27 16:50:28 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/28 12:53:18 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	i = 0 - 1;
 	if (start > ft_strlen((char *)s))
 	{
-		str = (unsigned char *)malloc(1, 1);
+		str = (unsigned char *)malloc(1);
 		if (!str)
 			return (0);
 		return ((char *)str);
@@ -56,10 +56,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return ((char *)str);
 }
 
-void	freemem(char *str)
+/* void	freemem(char *str)
 {
 
-}
+} */
 
 char	*analisis(char *str_work)
 {
@@ -68,11 +68,11 @@ char	*analisis(char *str_work)
 	size_t	return_len;
 
 	end_line = ft_strchr (str_work, '\n');
-	return_len = &str_work[ft_strlen(str_work)] - &end_line;
+	return_len = &str_work[ft_strlen(str_work)] - &end_line[0];
 	if (end_line == 0)
 		return (NULL);
 	str_return = ft_substr(str_work, 0, &end_line - &str_work);
-	str_work = ft_substr(str_work, &end_line, return_len);
+	str_work = ft_substr(str_work, &end_line - &str_work, return_len);
 	return (str_return);
 }
 
@@ -83,6 +83,7 @@ char	*get_next_line(int fd)
 	char		*buffer;
 	int			read_status;
 
+	buffer = NULL;
 	if (BUFFER_SIZE <= 0)
 		return (0);
 	read_status = read (fd, buffer, BUFFER_SIZE);
@@ -91,7 +92,8 @@ char	*get_next_line(int fd)
 	str_work = ft_strjoin (str_work, buffer);
 	if (!str_work)
 		return (0);
-	if (str_work == '\0' && read_status == 0)
+	if (str_work[0] == '\0' && read_status == 0)
 		return (0);
 	str_return = analisis(str_work);
+	return (str_return);
 }

@@ -6,11 +6,13 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:02 by doller-m          #+#    #+#             */
-/*   Updated: 2023/06/27 13:21:18 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/28 12:53:19 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
+#include <stdlib.h>
+#include "get_next_line.h"
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -56,7 +58,7 @@ static void	s1_result(char const *s1, char *resul)
 	}
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*resul;
 	int		i;
