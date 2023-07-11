@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:02 by doller-m          #+#    #+#             */
-/*   Updated: 2023/06/28 12:53:19 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/06/29 13:28:21 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	s1_result(char const *s1, char *resul)
 	}
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*gnl_strjoin(char *s1, char *s2)
 {
 	char	*resul;
 	int		i;
@@ -68,19 +68,17 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!s1 || !s2)
 		return (NULL);
 	ls1 = ft_strlen((char *)s1);
-	ls2 = ft_strlen((char *)s2);
+	ls2 = BUFFER_SIZE;
 	resul = malloc(ls1 + ls2 + 1);
 	if (!resul)
 		return (NULL);
 	s1_result(s1, resul);
 	i = 0;
-	while (s2[i] != '\0')
+	while (i <= BUFFER_SIZE)
 	{
 		resul[ls1 + i] = s2[i];
 		i++;
 	}
 	resul[ls1 + i] = '\0';
-	free(s1);
-	free(s2);
 	return (resul);
 }

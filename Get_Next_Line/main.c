@@ -5,14 +5,14 @@
 
 int	main(void)
 {
-	char	file[] = "test_saltsdelinea.txt";
-	//char	str[] = "testint text";
 	char	*str_resultant;
 	int		fd1;
+	char	file[] = "contes.txt";
+	//char	str[] = "testint text";
 	//size_t	test;
 
 	fd1 = open(file, O_RDONLY);
-	printf("El FD del arxiu es: %i \n", fd1);
+	//printf("El FD del arxiu es: %i \n", fd1);
 /* 	test = read(fd1, str, BUFFER_SIZE);
 	printf("La longitud llegida es %zu \n", test);
 	printf("El buffer te: \n%s", str); */
@@ -20,10 +20,10 @@ int	main(void)
 	if(!str_resultant)
 		return(0);
  	str_resultant = get_next_line(fd1);
-	printf("%s", str_resultant);
+	printf("%s\n", str_resultant);
 	str_resultant = get_next_line(fd1);
-	printf("%s", str_resultant);
+	printf("%s\n", str_resultant);
 	str_resultant = get_next_line(fd1);
-	printf("%s", str_resultant);
+	printf("%s\n", str_resultant);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:45:31 by doller-m          #+#    #+#             */
-/*   Updated: 2023/06/28 11:42:26 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/07/11 12:33:55 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 
 char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(const char *str);
-char	*ft_strjoin(char *s1, char *s2);
+char	*gnl_strjoin(char *s1, char *s2);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*analisis(char *str_work);
+char	*analisis(char **str_work);
 char	*get_next_line(int fd);
 
 #endif
