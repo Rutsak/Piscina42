@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:42 by doller-m          #+#    #+#             */
-/*   Updated: 2023/07/11 17:05:06 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/07/11 18:11:38 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ char	*analisis(char **str_work)
 	size_t	return_len;
 
 	end_line = ft_strchr (*str_work, '\n');
+	if (end_line == 0)
+		return (0);
 	return_len = (&end_line[0] - &*str_work[0]) + 1;
 	workreturn_len = (ft_strlen(*str_work)) - return_len;
 	if (end_line == 0)
@@ -88,15 +90,23 @@ char	*get_next_line(int fd)
 	if (str_work == NULL)
 		str_work = "";
 	if (BUFFER_SIZE <= 0)
-		return (0);
+		return (NULL);
 	read_status = read (fd, buffer, BUFFER_SIZE);
 	if (read_status == -1)
-		return (0);
+		return (NULL);
 	str_work = gnl_strjoin (str_work, buffer);
 	if (!str_work)
-		return (0);
+		return (NULL);
 	if (str_work[0] == '\0' && read_status == 0)
-		return (0);
+	{
+		free(str_work);
+		return (NULL);
+	}
 	str_return = analisis(&str_work);
+	while (str_return == 0)
+	{
+		read_status = read (fd, buffer, BUFFER_SIZE);
+		str_return = analisis(&str_work);
+	}
 	return (str_return);
 }
