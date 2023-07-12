@@ -4,7 +4,7 @@ HEADER = get_next_line.h
 
 CC = gcc
 
-CFLAGS = -g -Wall -Werror -Wextra -D BUFFER_SIZE=42
+CFLAGS = -g -Wall -Werror -Wextra -D BUFFER_SIZE=1
 
 SRCS =	main.c\
 		get_next_line.c \

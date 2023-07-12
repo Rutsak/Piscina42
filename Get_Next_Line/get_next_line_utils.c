@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:02 by doller-m          #+#    #+#             */
-/*   Updated: 2023/06/29 13:28:21 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/07/12 17:34:32 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,20 @@ char	*gnl_strjoin(char *s1, char *s2)
 	int		ls1;
 	int		ls2;
 
-	if (!s1 || !s2)
-		return (NULL);
-	ls1 = ft_strlen((char *)s1);
+/* 	if (!s1 || !s2)
+		return (NULL); */
+	if (!s1)
+		ls1 = 0;
+	else
+		ls1 = ft_strlen((char *)s1);
 	ls2 = BUFFER_SIZE;
 	resul = malloc(ls1 + ls2 + 1);
 	if (!resul)
 		return (NULL);
-	s1_result(s1, resul);
+	if (s1)
+		s1_result(s1, resul);
 	i = 0;
-	while (i <= BUFFER_SIZE)
+	while (i < BUFFER_SIZE)
 	{
 		resul[ls1 + i] = s2[i];
 		i++;
