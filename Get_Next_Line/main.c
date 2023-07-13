@@ -7,7 +7,7 @@ int	main(void)
 {
 	char	*str_resultant;
 	int		fd1;
-	char	file[] = "0.txt";
+	char	file[] = "test_saltsdelinea.txt";
 	//char	str[] = "testint text";
 	//size_t	test;
 
