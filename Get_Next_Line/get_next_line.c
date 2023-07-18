@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:42 by doller-m          #+#    #+#             */
-/*   Updated: 2023/07/13 16:52:18 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/07/18 17:21:12 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ char	*analisis(char **str_work, int read_status)
 	size_t	return_len;
 
 	end_line = ft_strchr (*str_work, '\n');
+	if (end_line == 0 && read_status == 0 && **str_work == '\0')
+		return (NULL);
 	if (end_line == 0 && read_status == 0)
 		return (*str_work);
 	if (end_line == 0 && read_status != 0)
@@ -95,6 +97,8 @@ char	*get_next_line(int fd)
 	char		*str_return;
 	char		buffer[BUFFER_SIZE];
 	int			read_status;
+	char		*str_erase;
+
 
 	if (BUFFER_SIZE <= 0)
 		return (NULL);
@@ -113,8 +117,11 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	str_return = analisis(&str_work, read_status);
-/* 	if (!str_return)
-		return (NULL); */
+/*	if (!str_return)
+	{
+		free(str_work);
+		return (NULL);
+	}*/
 	while (str_return == 0)
 	{
 		if (read_status != 0)
@@ -124,9 +131,11 @@ char	*get_next_line(int fd)
 				return (NULL);
 			if (read_status != 0)
 			{
+				str_erase = str_work;
 				str_work = gnl_strjoin (str_work, buffer);
 				if (!str_work)
 					return (NULL);
+				free(str_erase);
 			}
 		}
 		str_return = analisis(&str_work, read_status);

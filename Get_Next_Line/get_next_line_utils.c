@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:02 by doller-m          #+#    #+#             */
-/*   Updated: 2023/07/12 17:34:32 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/07/18 14:15:30 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ char	*gnl_strjoin(char *s1, char *s2)
 	int		ls1;
 	int		ls2;
 
-/* 	if (!s1 || !s2)
-		return (NULL); */
 	if (!s1)
 		ls1 = 0;
 	else
