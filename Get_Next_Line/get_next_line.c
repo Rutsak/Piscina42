@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:42 by doller-m          #+#    #+#             */
-/*   Updated: 2023/07/18 17:21:12 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/07/19 12:58:04 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,53 +91,77 @@ char	*analisis(char **str_work, int read_status)
 	}
 }
 
+int	str_work_creator(char **str_work, int fd, char buffer[BUFFER_SIZE])
+{
+	int		read_status;
+	char	*str_erase;
+
+
+	read_status = read (fd, buffer, BUFFER_SIZE);
+	if (read_status == -1)
+		return (-1);
+	if (read_status != 0)
+	{
+		if (*str_work)
+			str_erase = *str_work;
+		*str_work = gnl_strjoin (*str_work, buffer);
+		if (!str_work)
+			return (-1);
+		free(str_erase);
+	}
+	if (*str_work[0] == '\0' && read_status == 0)
+	{
+		free(str_work);
+		return (0);
+	}
+return (0);
+/* 	if (!*str_work)
+	{
+		read_status = read (fd, buffer, BUFFER_SIZE);
+		if (read_status == -1)
+			return (-1);
+		*str_work = gnl_strjoin (*str_work, buffer);
+		if (!str_work)
+			return (-1);
+	}
+	if (*str_work[0] == '\0' && read_status == 0)
+	{
+		free(str_work);
+		return (0);
+	}
+	else
+	{
+		read_status = read (fd, buffer, BUFFER_SIZE);
+		if (read_status == -1)
+			return (-1);
+		if (read_status != 0)
+		{
+			str_erase = *str_work;
+			*str_work = gnl_strjoin (*str_work, buffer);
+			if (!str_work)
+				return (-1);
+			free(str_erase);
+		}
+	}
+	return (0);
+} */
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*str_work;
 	char		*str_return;
 	char		buffer[BUFFER_SIZE];
 	int			read_status;
-	char		*str_erase;
 
-
-	if (BUFFER_SIZE <= 0)
-		return (NULL);
-	if (!str_work)
-	{
-		read_status = read (fd, buffer, BUFFER_SIZE);
-		if (read_status == -1)
-			return (NULL);
-		str_work = gnl_strjoin (str_work, buffer);
-		if (!str_work)
-			return (NULL);
-	}
-	if (str_work[0] == '\0' && read_status == 0)
-	{
-		free(str_work);
-		return (NULL);
-	}
+	if (BUFFER_SIZE <= 0 || fd < 0)
+		return (0);
+	read_status = str_work_creator(&str_work, fd, buffer);
 	str_return = analisis(&str_work, read_status);
-/*	if (!str_return)
-	{
-		free(str_work);
-		return (NULL);
-	}*/
 	while (str_return == 0)
 	{
 		if (read_status != 0)
-		{
-			read_status = read (fd, buffer, BUFFER_SIZE);
-			if (read_status == -1)
-				return (NULL);
-			if (read_status != 0)
-			{
-				str_erase = str_work;
-				str_work = gnl_strjoin (str_work, buffer);
-				if (!str_work)
-					return (NULL);
-				free(str_erase);
-			}
-		}
+			read_status = str_work_creator(&str_work, fd, buffer);
 		str_return = analisis(&str_work, read_status);
 	}
 	return (str_return);
