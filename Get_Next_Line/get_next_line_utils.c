@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:02 by doller-m          #+#    #+#             */
-/*   Updated: 2023/07/18 14:15:30 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/07/21 13:41:34 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 #include <stdlib.h>
 #include "get_next_line.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*gnl_strchr(const char *s, int c)
 {
 	int				i;
 	unsigned char	*str;
 
+	if (s == NULL)
+		return (0);
 	i = 0;
 	str = (unsigned char *)s;
 	while (str[i] != (char) c)

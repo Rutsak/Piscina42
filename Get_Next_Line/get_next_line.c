@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:42 by doller-m          #+#    #+#             */
-/*   Updated: 2023/07/19 16:20:01 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/07/21 13:25:51 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,31 +64,27 @@ char	*analisis(char **str_work, int read_status)
 	size_t	workreturn_len;
 	size_t	return_len;
 
-	end_line = ft_strchr (*str_work, '\n');
-	if (end_line == 0 && read_status == 0 && **str_work == '\0')
+	end_line = gnl_strchr (*str_work, '\n');
+	if (end_line == 0 && read_status == 0 && *str_work == NULL)
 		return (NULL);
-/* 	if (end_line == 0 && read_status < BUFFER_SIZE)
-		return (*str_work); */
-	if (end_line == 0 && read_status != 0)
+	if (end_line == 0 && read_status == 0)
+		end_line = gnl_strchr (*str_work, '\0');
+	if (end_line == 0)
 		return (NULL);
+	return_len = (&end_line[1] - &*str_work[0]);
+	workreturn_len = (ft_strlen(*str_work)) - return_len;
+	str_return = ft_substr(*str_work, 0, return_len);
+	if (!str_return)
+		return (NULL);
+	erase = *str_work;
+	if (return_len == 0)
+		*str_work = NULL;
 	else
-	{
-		end_line = end_line + 1;
-		return_len = (&end_line[0] - &*str_work[0]);
-		workreturn_len = (ft_strlen(*str_work)) - return_len;
-		str_return = ft_substr(*str_work, 0, return_len);
-		if (!str_return)
-			return (NULL);
-		erase = *str_work;
 		*str_work = ft_substr(*str_work, return_len, workreturn_len);
-		if (!str_work)
-		{
-			free (erase);
-			return (NULL);
-		}
-		free (erase);
-		return (str_return);
-	}
+	free (erase);
+	if (!str_work)
+		return (NULL);
+	return (str_return);
 }
 
 int	str_work_creator(char **str_work, int fd, char buffer[BUFFER_SIZE])
@@ -107,46 +103,16 @@ int	str_work_creator(char **str_work, int fd, char buffer[BUFFER_SIZE])
 			str_erase = NULL;
 		*str_work = gnl_strjoin (*str_work, buffer);
 		if (!str_work)
+		{
+			free(str_erase);
 			return (-1);
+		}
 		if (str_erase)
 			free(str_erase);
 	}
-	if (*str_work[0] == '\0' && read_status == 0)
-	{
-		free(str_work);
+	if (*str_work == NULL && read_status == 0)
 		return (0);
-	}
-return (0);
-/* 	if (!*str_work)
-	{
-		read_status = read (fd, buffer, BUFFER_SIZE);
-		if (read_status == -1)
-			return (-1);
-		*str_work = gnl_strjoin (*str_work, buffer);
-		if (!str_work)
-			return (-1);
-	}
-	if (*str_work[0] == '\0' && read_status == 0)
-	{
-		free(str_work);
-		return (0);
-	}
-	else
-	{
-		read_status = read (fd, buffer, BUFFER_SIZE);
-		if (read_status == -1)
-			return (-1);
-		if (read_status != 0)
-		{
-			str_erase = *str_work;
-			*str_work = gnl_strjoin (*str_work, buffer);
-			if (!str_work)
-				return (-1);
-			free(str_erase);
-		}
-	}
-	return (0);
-} */
+	return (read_status);
 }
 
 char	*get_next_line(int fd)
@@ -160,12 +126,16 @@ char	*get_next_line(int fd)
 		return (0);
 	buffer[0] = '\0';
 	read_status = str_work_creator(&str_work, fd, buffer);
+	if (read_status == -1)
+		return (NULL);
 	str_return = analisis(&str_work, read_status);
 	while (str_return == 0)
 	{
 		if (read_status != 0)
 			read_status = str_work_creator(&str_work, fd, buffer);
 		str_return = analisis(&str_work, read_status);
+		if (str_return == 0 && read_status == 0 && str_work == NULL)
+			return (NULL);
 	}
 	return (str_return);
 }
