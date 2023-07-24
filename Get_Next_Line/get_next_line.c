@@ -6,7 +6,7 @@
 /*   By: rutsak <rutsak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:42 by doller-m          #+#    #+#             */
-/*   Updated: 2023/07/24 12:01:03 by rutsak           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:30:50 by rutsak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,5 @@ char	*get_next_line(int fd)
 		}
 		str_return = analisis(&str_work, read_status);
 	}
-//	free(str_work);
 	return (str_return);
 }
