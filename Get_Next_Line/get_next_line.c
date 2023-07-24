@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rutsak <rutsak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:42 by doller-m          #+#    #+#             */
-/*   Updated: 2023/07/13 16:52:18 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/07/24 12:01:03 by rutsak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ char	*get_next_line(int fd)
 		read_status = read (fd, buffer, BUFFER_SIZE);
 		if (read_status == -1)
 			return (NULL);
+		if(!str_work && read_status == 0)
+			return (0);
 		str_work = gnl_strjoin (str_work, buffer);
 		if (!str_work)
 			return (NULL);
@@ -112,9 +114,7 @@ char	*get_next_line(int fd)
 		free(str_work);
 		return (NULL);
 	}
-	str_return = analisis(&str_work, read_status);
-/* 	if (!str_return)
-		return (NULL); */
+	str_return = NULL;
 	while (str_return == 0)
 	{
 		if (read_status != 0)
@@ -131,5 +131,6 @@ char	*get_next_line(int fd)
 		}
 		str_return = analisis(&str_work, read_status);
 	}
+//	free(str_work);
 	return (str_return);
 }
