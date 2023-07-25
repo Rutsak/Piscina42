@@ -6,7 +6,7 @@
 /*   By: rutsak <rutsak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:42 by doller-m          #+#    #+#             */
-/*   Updated: 2023/07/25 14:13:56 by rutsak           ###   ########.fr       */
+/*   Updated: 2023/07/25 19:44:27 by rutsak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	*get_next_line(int fd)
 
 	if (BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer = (char *)malloc(BUFFER_SIZE);
+	buffer = (char *)malloc((BUFFER_SIZE + 1)*sizeof(char));
 	if (!buffer)
 		return (NULL);
 	if (!str_work)
