@@ -6,7 +6,7 @@
 /*   By: rutsak <rutsak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:42 by doller-m          #+#    #+#             */
-/*   Updated: 2023/07/24 19:08:07 by rutsak           ###   ########.fr       */
+/*   Updated: 2023/07/25 14:13:56 by rutsak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,11 @@ char	*get_next_line(int fd)
 	char		*buffer;
 	int			read_status;
 
-	buffer = (char *)malloc(BUFFER_SIZE);
+
 	if (BUFFER_SIZE <= 0)
+		return (NULL);
+	buffer = (char *)malloc(BUFFER_SIZE);
+	if (!buffer)
 		return (NULL);
 	if (!str_work)
 	{
@@ -109,7 +112,7 @@ char	*get_next_line(int fd)
 		}
 		if(!str_work && read_status == 0)
 		{
-			free(buffer);
+//			free(buffer);
 			return (0);
 		}	
 		str_work = gnl_strjoin (str_work, buffer);
@@ -117,7 +120,6 @@ char	*get_next_line(int fd)
 		{
 			free(buffer);
 			return (NULL);
-
 		}
 	}
 	if (str_work[0] == '\0' && read_status == 0)
