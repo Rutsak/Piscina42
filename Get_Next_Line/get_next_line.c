@@ -6,7 +6,7 @@
 /*   By: rutsak <rutsak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:42 by doller-m          #+#    #+#             */
-/*   Updated: 2023/07/25 19:44:27 by rutsak           ###   ########.fr       */
+/*   Updated: 2023/07/26 13:47:26 by rutsak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return ((char *)str);
 }
 
-char	*analisis(char **str_work, int read_status)
+char	*analisis(char **str_work)
 {
 	char	*end_line;
 	char	*str_return;
@@ -65,28 +65,29 @@ char	*analisis(char **str_work, int read_status)
 	size_t	return_len;
 
 	end_line = ft_strchr (*str_work, '\n');
-	if (end_line == 0 && read_status == 0)
-		return (*str_work);
-	if (end_line == 0 && read_status != 0)
+	if(end_line == 0)
+		return(NULL);
+	return_len = (&end_line[0] - &*str_work[0]) + 1;
+	workreturn_len = (ft_strlen(*str_work)) - return_len;
+	str_return = ft_substr(*str_work, 0, return_len);
+	if (!str_return)
 		return (NULL);
-	else
+	erase = *str_work;
+	if(workreturn_len == 0)
 	{
-		end_line = end_line + 1;
-		return_len = (&end_line[0] - &*str_work[0]);
-		workreturn_len = (ft_strlen(*str_work)) - return_len;
-		str_return = ft_substr(*str_work, 0, return_len);
-		if (!str_return)
-			return (NULL);
-		erase = *str_work;
-		*str_work = ft_substr(*str_work, return_len, workreturn_len);
-		if (!str_work)
-		{
-			free (erase);
-			return (NULL);
-		}
+		*str_work = NULL;
 		free (erase);
 		return (str_return);
 	}
+	else
+		*str_work = ft_substr(*str_work, return_len, workreturn_len);
+	if (!str_work)
+	{
+		free (erase);
+		return (NULL);
+	}
+	free (erase);
+	return (str_return);
 }
 
 char	*get_next_line(int fd)
@@ -96,15 +97,17 @@ char	*get_next_line(int fd)
 	char		*buffer;
 	int			read_status;
 
-
-	if (BUFFER_SIZE <= 0)
+/* 	printf("BUFFERSIZE: %i\n", BUFFER_SIZE);
+	printf("Str_work: %s\n", str_work); */
+	if (BUFFER_SIZE <= 0 || fd <= 0)
 		return (NULL);
-	buffer = (char *)malloc((BUFFER_SIZE + 1)*sizeof(char));
+	buffer = (char *)malloc((BUFFER_SIZE)*sizeof(char));
 	if (!buffer)
 		return (NULL);
-	if (!str_work)
+/* 	if (!str_work)
 	{
 		read_status = read (fd, buffer, BUFFER_SIZE);
+		printf("Buffer inicial: %s\n", buffer);
 		if (read_status == -1)
 		{
 			free(buffer);
@@ -112,28 +115,67 @@ char	*get_next_line(int fd)
 		}
 		if(!str_work && read_status == 0)
 		{
-//			free(buffer);
-			return (0);
-		}	
+			free(buffer);
+			return (NULL);
+		}
 		str_work = gnl_strjoin (str_work, buffer);
 		if (!str_work)
 		{
 			free(buffer);
 			return (NULL);
 		}
-	}
-	if (str_work[0] == '\0' && read_status == 0)
+	} */
+// valor por defecto en read status
+/*  	if (str_work[0] == '\0' && read_status == 0)
 	{
 		free(buffer);
-		free(str_work);
+//		free(str_work);
 		return (NULL);
+	} */
+//	printf("StrWork: %s\n", str_work);
+	if(!str_work)
+	{
+		read_status = read (fd, buffer, BUFFER_SIZE);
+		if (read_status == -1 || read_status == 0)
+		{
+			free(buffer);
+			return (NULL);
+		}
+//		printf("Buffer inicial: %s\n", buffer);
+		str_work = gnl_strjoin (str_work, buffer);
+//		printf("Work: %s\n", str_work);
+
+		if (!str_work)
+		{
+			free (buffer);
+			return (NULL);
+		}
 	}
-	str_return = NULL;
+	str_return = analisis(&str_work);
+//	printf("Work preloop: %s\n", str_work);
 	while (str_return == 0)
 	{
-		if (read_status != 0)
+		read_status = read (fd, buffer, BUFFER_SIZE);
+//		printf("Buffer loop: %s\n", buffer);
+		if(read_status == 0)
+		{
+			free (buffer);
+			str_return = str_work;
+			str_work = (char *)malloc(1);
+			str_work = NULL;
+			return (str_return);
+		}
+		str_work = gnl_strjoin (str_work, buffer);
+//		printf("Work loop: %s\n", str_work);
+		if (!str_work)
+		{
+			free (buffer);
+			return (NULL);
+		}
+		/* if (read_status != 0)
 		{
 			read_status = read (fd, buffer, BUFFER_SIZE);
+			printf("Buffer loop: %s\n", buffer);
 			if (read_status == -1)
 				return (NULL);
 			if (read_status != 0)
@@ -143,7 +185,7 @@ char	*get_next_line(int fd)
 					return (NULL);
 			}
 		}
-		str_return = analisis(&str_work, read_status);
+ */		str_return = analisis(&str_work);
 	}
 	free(buffer);
 	return (str_return);
