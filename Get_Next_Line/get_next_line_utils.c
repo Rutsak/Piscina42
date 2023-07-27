@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rutsak <rutsak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:02 by doller-m          #+#    #+#             */
-/*   Updated: 2023/07/25 19:34:19 by rutsak           ###   ########.fr       */
+/*   Updated: 2023/07/27 13:07:24 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ char	*gnl_strjoin(char *s1, char *s2)
 		i++;
 	}
 	resul[ls1 + i] = '\0';
+	free (s1);
 	return (resul);
 }
