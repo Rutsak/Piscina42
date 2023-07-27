@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:42 by doller-m          #+#    #+#             */
-/*   Updated: 2023/07/27 13:12:09 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/07/27 17:30:08 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	*get_next_line(int fd)
 
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
-	buffer = (char *)malloc((BUFFER_SIZE)*sizeof(char));
+	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);
 	str_return = 0;
@@ -109,22 +109,29 @@ char	*get_next_line(int fd)
 		if (read_status == -1)
 		{
 			free (buffer);
+			free (str_work);
 			return (NULL);
 		}
 		if (read_status == 0)
 		{
 			free (buffer);
-			str_return = str_work;
-			str_work = (char *)malloc(1);
-			if (!str_work)
+			str_return = analisis(&str_work);
+			if (!str_return)
 			{
-				free (str_return);
-				return (0);
+				str_return = str_work;
+				str_work = (char *)malloc(1);
+				if (!str_work)
+				{
+					free (str_return);
+					return (0);
+				}
+				free (str_work);
+				str_work = NULL;
+				return (str_return);
 			}
-			free (str_work);
-			str_work = NULL;
 			return (str_return);
 		}
+		buffer[read_status] = '\0';
 		str_work = gnl_strjoin (str_work, buffer);
 		if (!str_work)
 		{
