@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rutsak <rutsak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:42 by doller-m          #+#    #+#             */
-/*   Updated: 2023/07/27 17:30:08 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/07/28 11:39:52 by rutsak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ char	*get_next_line(int fd)
 		if (read_status == -1)
 		{
 			free (buffer);
-			free (str_work);
 			return (NULL);
 		}
 		if (read_status == 0)
