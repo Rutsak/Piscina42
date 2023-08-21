@@ -13,7 +13,7 @@ SRCS =	main.c\
 OBJS = $(SRCS:.c=.o)
 
 %.o : %.c $(HEADER)
-	$(CC) -c $(CFLAGS) $< -o $@ -I $(HEADER)
+	$(CC) -c $(CFLAGS) $< -o $@
 
 $(NAME) : $(OBJS) $(HEADER)
 	$(CC) $(CFLAGS) $(OBJS) $(HEADER)
@@ -32,9 +32,8 @@ re : fclean all
 
 cs :
 	git add get*.c *.h
-	cp *.c ~/copiesSeguretat/Piscina42/Get_Next_Line/
-	cp *.h ~/copiesSeguretat/Piscina42/Get_Next_Line/
-	cp Makefile ~/copiesSeguretat/Piscina42/Get_Next_Line/
+	git commit -m 'automatic de casa'
 	git status
-
+	git log --oneline --pretty --graph --decorate --all
+	
 .PHONY : clean all clean fclean re cs

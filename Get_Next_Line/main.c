@@ -7,7 +7,7 @@ int	main(void)
 {
 	char	*str_resultant;
 	int		fd1;
-	char	file[] = "test_saltsdelinea.txt";
+	char	file[] = "test.txt";
 	//char	str[] = "testint text";
 	//size_t	test;
 
@@ -20,10 +20,34 @@ int	main(void)
 	if(!str_resultant)
 		return(0);
  	str_resultant = get_next_line(fd1);
-	printf("%s\n", str_resultant);
+	if (str_resultant == NULL)
+		printf("NULL");
+	else
+		printf("%s", str_resultant);
 	str_resultant = get_next_line(fd1);
-	printf("%s\n", str_resultant);
+	if (str_resultant == NULL)
+		printf("NULL\n");
+	else
+		printf("%s", str_resultant);
 	str_resultant = get_next_line(fd1);
-	printf("%s\n", str_resultant);
+	if (str_resultant == NULL)
+		printf("NULL\n");
+	else
+		printf("%s", str_resultant);
+	str_resultant = get_next_line(fd1);
+	if (str_resultant == NULL)
+		printf("NULL\n");
+	else
+		printf("%s", str_resultant);
+	str_resultant = get_next_line(fd1);
+	if (str_resultant == NULL)
+		printf("NULL\n");
+	else
+		printf("%s", str_resultant);
+	str_resultant = get_next_line(fd1);
+	if (str_resultant == NULL)
+		printf("NULL\n");
+	else
+		printf("%s", str_resultant);
 	return (0);
 }
