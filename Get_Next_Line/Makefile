@@ -4,7 +4,7 @@ HEADER = get_next_line.h
 
 CC = gcc
 
-CFLAGS = -g -Wall -Werror -Wextra -D BUFFER_SIZE=1
+CFLAGS = -g -Wall -Werror -Wextra -D BUFFER_SIZE=10
 
 SRCS =	main.c\
 		get_next_line.c \
@@ -13,7 +13,7 @@ SRCS =	main.c\
 OBJS = $(SRCS:.c=.o)
 
 %.o : %.c $(HEADER)
-	$(CC) -c $(CFLAGS) $< -o $@
+	$(CC) -c $(CFLAGS) $< -o $@ -I $(HEADER)
 
 $(NAME) : $(OBJS) $(HEADER)
 	$(CC) $(CFLAGS) $(OBJS) $(HEADER)
@@ -32,8 +32,9 @@ re : fclean all
 
 cs :
 	git add get*.c *.h
-	git commit -m 'automatic de casa'
+	cp *.c ~/copiesSeguretat/Piscina42/Get_Next_Line/
+	cp *.h ~/copiesSeguretat/Piscina42/Get_Next_Line/
+	cp Makefile ~/copiesSeguretat/Piscina42/Get_Next_Line/
 	git status
-	git log --oneline --pretty --graph --decorate --all
-	
+
 .PHONY : clean all clean fclean re cs

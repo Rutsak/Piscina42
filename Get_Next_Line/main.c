@@ -17,37 +17,27 @@ int	main(void)
 	printf("La longitud llegida es %zu \n", test);
 	printf("El buffer te: \n%s", str); */
 	str_resultant = (char *)malloc(BUFFER_SIZE + 1);
-	if(!str_resultant)
-		return(0);
+	if (!str_resultant)
+		return (0);
  	str_resultant = get_next_line(fd1);
-	if (str_resultant == NULL)
-		printf("NULL");
-	else
-		printf("%s", str_resultant);
+	printf("%s\n", str_resultant);
 	str_resultant = get_next_line(fd1);
-	if (str_resultant == NULL)
-		printf("NULL\n");
-	else
-		printf("%s", str_resultant);
+	printf("%s\n", str_resultant);
 	str_resultant = get_next_line(fd1);
-	if (str_resultant == NULL)
-		printf("NULL\n");
-	else
-		printf("%s", str_resultant);
+	printf("%s\n", str_resultant);
 	str_resultant = get_next_line(fd1);
-	if (str_resultant == NULL)
-		printf("NULL\n");
-	else
-		printf("%s", str_resultant);
+	printf("%s\n", str_resultant);
 	str_resultant = get_next_line(fd1);
-	if (str_resultant == NULL)
-		printf("NULL\n");
-	else
-		printf("%s", str_resultant);
+	printf("%s\n", str_resultant);
 	str_resultant = get_next_line(fd1);
-	if (str_resultant == NULL)
-		printf("NULL\n");
-	else
-		printf("%s", str_resultant);
+	printf("%s\n", str_resultant);
+	str_resultant = get_next_line(fd1);
+	printf("%s\n", str_resultant);
+	str_resultant = get_next_line(fd1);
+	printf("%s\n", str_resultant);
+	str_resultant = get_next_line(fd1);
+	printf("%s\n", str_resultant);
+	str_resultant = get_next_line(fd1);
+	printf("%s\n", str_resultant);
 	return (0);
 }

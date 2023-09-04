@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rutsak <rutsak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:42 by doller-m          #+#    #+#             */
-/*   Updated: 2023/07/28 11:39:52 by rutsak           ###   ########.fr       */
+/*   Updated: 2023/09/04 14:00:39 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,46 +14,11 @@
 #include <stdlib.h>
 #include "get_next_line.h"
 
-static unsigned char	*str_gen(unsigned int start, size_t fin)
+char	*gnl_free(char **str)
 {
-	unsigned char	*str;
-
-	if ((int)fin - (int)start > 0)
-		str = (unsigned char *)malloc(fin - start + 1);
-	else
-		str = (unsigned char *)malloc(1);
-	if (!str)
-		return (0);
-	return (str);
-}
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	unsigned int	i;
-	unsigned char	*str;
-	size_t			fin;
-
-	i = 0 - 1;
-	if (start > ft_strlen((char *)s))
-	{
-		str = (unsigned char *)malloc(1);
-		if (!str)
-			return (0);
-		return ((char *)str);
-	}
-	if (start + len < ft_strlen((char *)s))
-		fin = start + len;
-	else
-		fin = ft_strlen((char *)s);
-	str = str_gen(start, fin);
-	if (str == 0)
-		return (0);
-	if (start >= ft_strlen((char *)s))
-		return ((char *)str);
-	while (++i < fin - start)
-		str[i] = s[i + start];
-	str[i] = '\0';
-	return ((char *)str);
+	free (*str);
+	*str = NULL;
+	return (NULL);
 }
 
 char	*analisis(char **str_work)
@@ -82,10 +47,7 @@ char	*analisis(char **str_work)
 	else
 		*str_work = ft_substr(*str_work, return_len, workreturn_len);
 	if (!str_work)
-	{
-		free (erase);
-		return (NULL);
-	}
+		return (gnl_free(&erase));
 	free (erase);
 	return (str_return);
 }
@@ -109,23 +71,19 @@ char	*get_next_line(int fd)
 		if (read_status == -1)
 		{
 			free (buffer);
-			return (NULL);
+			return (gnl_free(&str_work));
 		}
 		if (read_status == 0)
 		{
-			free (buffer);
 			str_return = analisis(&str_work);
+			free (buffer);
 			if (!str_return)
 			{
 				str_return = str_work;
 				str_work = (char *)malloc(1);
 				if (!str_work)
-				{
-					free (str_return);
-					return (0);
-				}
-				free (str_work);
-				str_work = NULL;
+					return (gnl_free(&str_return));
+				gnl_free(&str_work);
 				return (str_return);
 			}
 			return (str_return);
@@ -133,10 +91,7 @@ char	*get_next_line(int fd)
 		buffer[read_status] = '\0';
 		str_work = gnl_strjoin (str_work, buffer);
 		if (!str_work)
-		{
-			free (buffer);
-			return (NULL);
-		}
+			return (gnl_free(&buffer));
 		str_return = analisis(&str_work);
 	}
 	free(buffer);
