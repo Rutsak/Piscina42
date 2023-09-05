@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:42 by doller-m          #+#    #+#             */
-/*   Updated: 2023/09/05 13:07:59 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/09/05 17:08:06 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,32 @@ char	*gnl_free(char **str)
 	return (NULL);
 }
 
-/* char	*gnl_strwork_gen(char ***str_work, char **erase, char **str_return)
+char	*gnl_gen(char **str_work, char *line, size_t workr_len, size_t r_len)
 {
-	**str_work = NULL;
+	char	*erase;
+
+	erase = *str_work;
+	if (workr_len == 0)
+	{
+		*str_work = NULL;
+		free (erase);
+		return (line);
+	}
+	else
+		*str_work = ft_substr(*str_work, r_len, workr_len);
+	if (!str_work)
+		return (gnl_free(&erase));
+	free (erase);
+	return (line);
+	*str_work = NULL;
 	free (&erase);
-	return (&str_return);
-} */
+	return (line);
+}
 
 char	*analisis(char **str_work)
 {
 	char	*end_line;
 	char	*str_return;
-	char	*erase;
 	size_t	workreturn_len;
 	size_t	return_len;
 
@@ -44,63 +58,51 @@ char	*analisis(char **str_work)
 	str_return = ft_substr(*str_work, 0, return_len);
 	if (!str_return)
 		return (NULL);
-	erase = *str_work;
-	if (workreturn_len == 0)
-	{
-		*str_work = NULL;
-		free (erase);
-		return (str_return);
-	}
-	else
-		*str_work = ft_substr(*str_work, return_len, workreturn_len);
-	if (!str_work)
-		return (gnl_free(&erase));
-	free (erase);
-	return (str_return);
+	return (gnl_gen(str_work, str_return, workreturn_len, return_len));
 }
 
-char	*read_end_str_return(char **str_return, char **str_work, char **buffer)
+int	read_gnl(char **str_work, int fd)
 {
-	*str_return = analisis(str_work);
-	free (*buffer);
-	if (!*str_return)
+	char		*buffer;
+	int			read_status;
+
+	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buffer)
+		return (-1);
+	read_status = read (fd, buffer, BUFFER_SIZE);
+	if (read_status == -1)
 	{
-		str_return = str_work;
-		*str_work = (char *)malloc(1);
-		if (!str_work)
-			return (gnl_free(str_work));
-		gnl_free(str_work);
-		return (*str_return);
+		gnl_free(&buffer);
+		return (-1);
 	}
-	return (*str_return);
+	buffer[read_status] = '\0';
+	*str_work = gnl_strjoin (*str_work, buffer);
+	if (!str_work)
+	{
+		gnl_free(&buffer);
+		return (-1);
+	}
+	gnl_free(&buffer);
+	return (read_status);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*str_work;
 	char		*str_return;
-	char		*buffer;
 	int			read_status;
 
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
-	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buffer)
-		return (NULL);
 	str_return = 0;
 	while (str_return == 0)
 	{
-		read_status = read (fd, buffer, BUFFER_SIZE);
+		read_status = read_gnl(&str_work, fd);
 		if (read_status == -1)
-		{
-			free (buffer);
 			return (gnl_free(&str_work));
-		}
+		str_return = analisis(&str_work);
 		if (read_status == 0)
 		{
-		return (read_end_str_return(&str_return, &str_work, &buffer));
-/* 			str_return = analisis(&str_work);
-			free (buffer);
 			if (!str_return)
 			{
 				str_return = str_work;
@@ -110,14 +112,7 @@ char	*get_next_line(int fd)
 				gnl_free(&str_work);
 				return (str_return);
 			}
-			return (str_return); */
 		}
-		buffer[read_status] = '\0';
-		str_work = gnl_strjoin (str_work, buffer);
-		if (!str_work)
-			return (gnl_free(&buffer));
-		str_return = analisis(&str_work);
 	}
-	free(buffer);
 	return (str_return);
 }
