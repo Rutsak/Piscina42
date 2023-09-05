@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:45:31 by doller-m          #+#    #+#             */
-/*   Updated: 2023/09/04 13:58:10 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/09/04 15:10:44 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
-
 
 char			*ft_strchr(const char *s, int c);
 size_t			ft_strlen(const char *str);

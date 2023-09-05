@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:42 by doller-m          #+#    #+#             */
-/*   Updated: 2023/09/04 14:00:39 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/09/05 13:07:59 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ char	*gnl_free(char **str)
 	*str = NULL;
 	return (NULL);
 }
+
+/* char	*gnl_strwork_gen(char ***str_work, char **erase, char **str_return)
+{
+	**str_work = NULL;
+	free (&erase);
+	return (&str_return);
+} */
 
 char	*analisis(char **str_work)
 {
@@ -52,6 +59,22 @@ char	*analisis(char **str_work)
 	return (str_return);
 }
 
+char	*read_end_str_return(char **str_return, char **str_work, char **buffer)
+{
+	*str_return = analisis(str_work);
+	free (*buffer);
+	if (!*str_return)
+	{
+		str_return = str_work;
+		*str_work = (char *)malloc(1);
+		if (!str_work)
+			return (gnl_free(str_work));
+		gnl_free(str_work);
+		return (*str_return);
+	}
+	return (*str_return);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*str_work;
@@ -75,7 +98,8 @@ char	*get_next_line(int fd)
 		}
 		if (read_status == 0)
 		{
-			str_return = analisis(&str_work);
+		return (read_end_str_return(&str_return, &str_work, &buffer));
+/* 			str_return = analisis(&str_work);
 			free (buffer);
 			if (!str_return)
 			{
@@ -86,7 +110,7 @@ char	*get_next_line(int fd)
 				gnl_free(&str_work);
 				return (str_return);
 			}
-			return (str_return);
+			return (str_return); */
 		}
 		buffer[read_status] = '\0';
 		str_work = gnl_strjoin (str_work, buffer);
