@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:42 by doller-m          #+#    #+#             */
-/*   Updated: 2023/09/05 17:08:06 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/09/06 18:02:44 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*gnl_gen(char **str_work, char *line, size_t workr_len, size_t r_len)
 	return (line);
 }
 
-char	*analisis(char **str_work)
+char	*analisis(char **str_work, int read_status)
 {
 	char	*end_line;
 	char	*str_return;
@@ -56,9 +56,20 @@ char	*analisis(char **str_work)
 	return_len = (&end_line[0] - &*str_work[0]) + 1;
 	workreturn_len = (ft_strlen(*str_work)) - return_len;
 	str_return = ft_substr(*str_work, 0, return_len);
-	if (!str_return)
-		return (NULL);
-	return (gnl_gen(str_work, str_return, workreturn_len, return_len));
+	gnl_gen(str_work, str_return, workreturn_len, return_len);
+	if (read_status == 0)
+	{
+		if (!str_return)
+		{
+			str_return = *str_work;
+			*str_work = (char *)malloc(1);
+			if (!str_work)
+				return (gnl_free(&str_return));
+			gnl_free(str_work);
+			return (str_return);
+		}
+	}
+	return (str_return);
 }
 
 int	read_gnl(char **str_work, int fd)
@@ -76,7 +87,8 @@ int	read_gnl(char **str_work, int fd)
 		return (-1);
 	}
 	buffer[read_status] = '\0';
-	*str_work = gnl_strjoin (*str_work, buffer);
+	if (buffer[0] != '\0')
+		*str_work = gnl_strjoin (*str_work, buffer);
 	if (!str_work)
 	{
 		gnl_free(&buffer);
@@ -100,8 +112,8 @@ char	*get_next_line(int fd)
 		read_status = read_gnl(&str_work, fd);
 		if (read_status == -1)
 			return (gnl_free(&str_work));
-		str_return = analisis(&str_work);
-		if (read_status == 0)
+		str_return = analisis(&str_work, read_status);
+/* 		if (read_status == 0)
 		{
 			if (!str_return)
 			{
@@ -112,7 +124,7 @@ char	*get_next_line(int fd)
 				gnl_free(&str_work);
 				return (str_return);
 			}
-		}
+		} */
 	}
 	return (str_return);
 }
