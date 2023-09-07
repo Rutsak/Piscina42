@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:02 by doller-m          #+#    #+#             */
-/*   Updated: 2023/09/05 15:31:04 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/09/07 16:17:26 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*gnl_strjoin(char *s1, char *s2)
 	j = 0;
 	if (!s1)
 	{
-		s1 = malloc(1 * sizeof (char));
+		s1 = malloc(1 * sizeof(char));
 		if (!s1)
 			return (NULL);
 		s1[0] = '\0';
