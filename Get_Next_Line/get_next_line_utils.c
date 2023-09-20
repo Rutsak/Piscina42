@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:02 by doller-m          #+#    #+#             */
-/*   Updated: 2023/09/07 16:17:26 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/09/12 12:49:20 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*gnl_strjoin(char *s1, char *s2)
 	while (s2[i])
 		str[j++] = s2[i++];
 	str[j] = 0;
-	free(s1);
+	gnl_free(&s1);
 	return (str);
 }
 
