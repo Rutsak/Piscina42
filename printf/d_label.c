@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   i_label.c                                          :+:      :+:    :+:   */
+/*   d_label.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 16:49:26 by doller-m          #+#    #+#             */
-/*   Updated: 2023/09/20 16:50:16 by doller-m         ###   ########.fr       */
+/*   Created: 2023/09/20 16:52:27 by doller-m          #+#    #+#             */
+/*   Updated: 2023/09/20 17:25:49 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-/* #include <stdarg.h>
+#include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
 
@@ -22,65 +22,36 @@ int	printchar(char *c)
 
 	write_status = write(1, c, 1);
 	return (write_status);
-} */
+}
 
-int	digit(unsigned int n)
+int	d_label(double n)
 {
-	int				i;
+	int		i;
+	int		test;
 
 	i = 0;
 	if (n == 0)
 		return (1);
-	while (n > 0)
+	test = (int) n;
+	if (n/test !=1)
+		i = 1;
+	while (n/test !=1 )
 	{
-		n = n / 10;
+		n = n * 10;
+		test = (int) n;
 		i++;
 	}
 	return (i);
 }
 
-char	descompon(unsigned int n, int pos, int len)
-{
-	char	a;
-
-	while (len != pos)
-	{
-		a = (n % 10) + 48;
-		n = n / 10;
-		len--;
-	}
-	return (a);
-}
-
-int	i_label(int n)
-{
-	int				i;
-	char			a;
-	int				len;
-	unsigned int	n_unsign;
-
-	if (n < 0)
-	{
-		n_unsign = n * (-1);
-		printchar("-");
-	}
-	else
-		n_unsign = n;
-	len = digit(n_unsign);
-	i = 0;
-	while (i != len)
-	{
-		a = descompon(n_unsign, i, len);
-		printchar(&a);
-		i++;
-	}
-	return (i);
-}
-/* 
 int	main(void)
 {
-	int	i = -856;
+	double	n;
+	int		i;
 
-	i_label(i);
-	return (0);
-} */
+	n = 1.234;
+	i = d_label(n);
+	printf("valor de N: %f \n", n);
+	printf("valor de i: %i \n", i);
+	return (i);
+}

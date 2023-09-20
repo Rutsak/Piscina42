@@ -6,13 +6,13 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:20:27 by doller-m          #+#    #+#             */
-/*   Updated: 2023/09/20 15:06:21 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:15:47 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-#include <stdarg.h>
+/* #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
 
@@ -22,7 +22,7 @@ int	printchar(char *c)
 
 	write_status = write(1, c, 1);
 	return (write_status);
-}
+} */
 
 char	hexa_char(int num)
 {
@@ -75,7 +75,7 @@ int	p_label(char *pointer)
 	i = 2 + hexa_print(nbr);
 	return (i);
 }
-int	main(void)
+/* int	main(void)
 {
 	char	*a;
 	int		impr;
@@ -84,4 +84,4 @@ int	main(void)
 	impr = p_label(a);
 	printf("\nCaracters impresos = %i", impr);
 	return (0);
-}
+} */

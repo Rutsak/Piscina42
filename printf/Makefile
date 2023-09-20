@@ -10,12 +10,13 @@ SRCS =	ft_printf.c\
 		s_label.c \
 		i_label.c \
 		p_label.c \
-		
+		d_label.c \
 
 CORESRCS =	ft_printf.c\
 			s_label.c \
 			i_label.c \
 			p_label.c \
+			d_label.c \
 			Makefile \
 			ft_printf.h \
 
