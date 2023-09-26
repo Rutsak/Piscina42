@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 16:52:27 by doller-m          #+#    #+#             */
-/*   Updated: 2023/09/20 17:25:49 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:58:12 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,16 @@ int	d_label(double n)
 {
 	int		i;
 	int		test;
+	double	test1;
 
 	i = 0;
 	if (n == 0)
 		return (1);
 	test = (int) n;
+	test1 = n - (double)test;
+	printf("valor de test: %i \n", test);
+	printf("valor de test1: %f \n", test1);
+	printf("valor de N: %f \n", n);
 	if (n/test !=1)
 		i = 1;
 	while (n/test !=1 )
@@ -43,7 +48,7 @@ int	d_label(double n)
 	}
 	return (i);
 }
-
+/* 
 int	main(void)
 {
 	double	n;
@@ -54,4 +59,4 @@ int	main(void)
 	printf("valor de N: %f \n", n);
 	printf("valor de i: %i \n", i);
 	return (i);
-}
+} */

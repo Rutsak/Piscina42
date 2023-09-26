@@ -4,6 +4,8 @@ HEADER = ft_printf.h
 
 CC = gcc
 
+CCH = ar -rcs
+
 CFLAGS = -g -Wall -Werror -Wextra
 
 SRCS =	ft_printf.c\
@@ -26,14 +28,13 @@ OBJS = $(SRCS:.c=.o)
 	$(CC) -c $(CFLAGS) $< -o $@ -I $(HEADER)
 
 $(NAME) : $(OBJS) $(HEADER)
-	$(CC) $(CFLAGS) $(OBJS) $(HEADER)
+	$(CCH) $(NAME) $(OBJS)
 
 all : $(NAME)
 
 clean :
 	rm -rf *.o
 	rm -rf *.gch
-	rm a.out
 
 fclean : clean
 	rm -f $(NAME)
