@@ -13,6 +13,8 @@ SRCS =	ft_printf.c\
 		i_label.c \
 		p_label.c \
 		d_label.c \
+		percent_label.c \
+		c_label.c \
 
 CORESRCS =	ft_printf.c\
 			s_label.c \
@@ -21,6 +23,8 @@ CORESRCS =	ft_printf.c\
 			d_label.c \
 			Makefile \
 			ft_printf.h \
+			percent_label.c \
+			c_label.c \
 
 OBJS = $(SRCS:.c=.o)
 

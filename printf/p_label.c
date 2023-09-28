@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:20:27 by doller-m          #+#    #+#             */
-/*   Updated: 2023/09/20 15:15:47 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:24:13 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	hexa_print(unsigned long long nbr)
 	return (i);
 }
 
-int	p_label(char *pointer)
+int	p_label(char *str)
 {
 	int						i;
 	unsigned long long		nbr;
@@ -71,7 +71,7 @@ int	p_label(char *pointer)
 	i = 0;
 	printchar ("0");
 	printchar ("x");
-	nbr = (unsigned long long)pointer;
+	nbr = (unsigned long long)str;
 	i = 2 + hexa_print(nbr);
 	return (i);
 }
