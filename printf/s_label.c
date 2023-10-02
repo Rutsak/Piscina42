@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:53:15 by doller-m          #+#    #+#             */
-/*   Updated: 2023/09/19 12:12:22 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/10/02 15:30:21 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,15 @@ int	s_label(char *str)
 
 	i = 0;
 	if (!str)
-		return (-1);
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
 	else
 	{
 		while (str[i] != '\0')
 		{
-			done = printchar(&str[i]);
+			done = printchar(str[i]);
 			if (done < 0)
 				return (-1);
 			i++;

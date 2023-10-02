@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:20:27 by doller-m          #+#    #+#             */
-/*   Updated: 2023/09/28 15:24:13 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/10/02 15:34:31 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,17 @@ char	hexa_char(int num)
 int	hexa_print(unsigned long long nbr)
 {
 	int					character;
-	int					i = 0;
+	int					i;
 	char				a;
 
+	i = 0;
 	if (nbr > 0)
 	{
 		character = nbr % 16;
 		a = hexa_char(character);
-		nbr = nbr/16;
+		nbr = nbr / 16;
 		i = i + 1 + hexa_print(nbr);
-		printchar (&a);
+		printchar (a);
 	}
 	return (i);
 }
@@ -69,9 +70,14 @@ int	p_label(char *str)
 	unsigned long long		nbr;
 
 	i = 0;
-	printchar ("0");
-	printchar ("x");
+	printchar ('0');
+	printchar ('x');
 	nbr = (unsigned long long)str;
+	if (nbr == 0)
+	{
+		write(1, "0", 1);
+		return (3);
+	}
 	i = 2 + hexa_print(nbr);
 	return (i);
 }

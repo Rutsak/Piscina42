@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 16:52:27 by doller-m          #+#    #+#             */
-/*   Updated: 2023/09/26 17:58:12 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/10/02 15:23:14 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 #include <stdio.h>
 #include <unistd.h>
 
-int	printchar(char *c)
+/* int	printchar(char *c)
 {
 	int	write_status;
 
 	write_status = write(1, c, 1);
 	return (write_status);
-}
+} */
 
 int	d_label(double n)
 {
@@ -35,12 +35,9 @@ int	d_label(double n)
 		return (1);
 	test = (int) n;
 	test1 = n - (double)test;
-	printf("valor de test: %i \n", test);
-	printf("valor de test1: %f \n", test1);
-	printf("valor de N: %f \n", n);
-	if (n/test !=1)
+	if (n / test != 1)
 		i = 1;
-	while (n/test !=1 )
+	while (n / test != 1)
 	{
 		n = n * 10;
 		test = (int) n;

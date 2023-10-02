@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:49:26 by doller-m          #+#    #+#             */
-/*   Updated: 2023/09/20 16:50:16 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/10/02 13:25:26 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	i_label(int n)
 	if (n < 0)
 	{
 		n_unsign = n * (-1);
-		printchar("-");
+		printchar('-');
 	}
 	else
 		n_unsign = n;
@@ -71,7 +71,7 @@ int	i_label(int n)
 	while (i != len)
 	{
 		a = descompon(n_unsign, i, len);
-		printchar(&a);
+		printchar(a);
 		i++;
 	}
 	return (i);
