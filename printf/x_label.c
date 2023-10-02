@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_label.c                                          :+:      :+:    :+:   */
+/*   x_label.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 12:20:27 by doller-m          #+#    #+#             */
-/*   Updated: 2023/10/02 17:27:15 by doller-m         ###   ########.fr       */
+/*   Created: 2023/10/02 16:08:08 by doller-m          #+#    #+#             */
+/*   Updated: 2023/10/02 17:42:47 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	printchar(char *c)
 	return (write_status);
 } */
 
-char	hexa_char(int num)
+/* char	hexa_char(int num)
 {
 	char	a;
 
@@ -44,9 +44,9 @@ char	hexa_char(int num)
 	else if (num == 15)
 		return ('f');
 	return (0);
-}
+}*/
 
-int	hexa_print(unsigned long long nbr)
+int	hexa_print_x(int nbr, char label)
 {
 	int					character;
 	int					i;
@@ -59,26 +59,27 @@ int	hexa_print(unsigned long long nbr)
 		a = hexa_char(character);
 		nbr = nbr / 16;
 		i = i + 1 + hexa_print(nbr);
-		printchar (a);
+		if (label == 'x')
+			printchar (a);
+		if (label == 'X')
+			printchar (a + 32);
 	}
 	return (i);
 }
 
-int	p_label(char *str)
+int	x_label(int str, char label)
 {
-	int						i;
-	unsigned long long		nbr;
+	int	i;
+	int	nbr;
 
 	i = 0;
-	printchar ('0');
-	printchar ('x');
-	nbr = (unsigned long long)str;
+	nbr = (int)str;
 	if (nbr == 0)
 	{
 		write(1, "0", 1);
 		return (3);
 	}
-	i = 2 + hexa_print(nbr);
+	i = hexa_print_x(nbr, label);
 	return (i);
 }
 /* int	main(void)
@@ -87,7 +88,7 @@ int	p_label(char *str)
 	int		impr;
 
 	a = "Hola";
-	impr = p_label(a);
+	impr = x_label(a);
 	printf("\nCaracters impresos = %i", impr);
 	return (0);
 } */

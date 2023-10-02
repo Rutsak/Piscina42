@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 16:44:39 by doller-m          #+#    #+#             */
-/*   Updated: 2023/10/02 15:28:11 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:41:59 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	wall_ifs(char label, va_list va)
 	else if (label == 'u')
 		len = i_label(va_arg(va, int));
 	else if (label == 'x')
-		len = p_label(va_arg(va, char *));
+		len = x_label(va_arg(va, int), label);
 	else if (label == 'X')
-		len = p_label(va_arg(va, char *));
+		len = x_label(va_arg(va, int), label);
 	else if (label == '%')
 		len = percent_label();
 	return (len);
@@ -79,12 +79,12 @@ int	ft_printf(const char *a, ...)
 /* int	main(void)
 {
 	char	*a;
-	char	*b;
+	int		b;
 	char	*c;
 	int		len;
 
-	a = "%c";
-	b = "x";
+	a = "%i";
+	b = -10;
 	c = "zaa";
 	len = ft_printf(a, b, c);
 	printf("\nResultat %i", len);
