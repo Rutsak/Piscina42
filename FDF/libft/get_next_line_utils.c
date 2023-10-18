@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:02 by doller-m          #+#    #+#             */
-/*   Updated: 2023/10/05 14:23:26 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/10/18 12:47:23 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "libft.h"
 
-/* char	*ft_strchr(const char *s, int c)
+char	*gnl_strchr(const char *s, int c)
 {
 	int				i;
 	unsigned char	*str;
@@ -34,7 +34,7 @@
 		return ((char *)&str[i]);
 	else
 		return (0);
-} */
+}
 
 /* size_t	ft_strlen(const char *str)
 {
@@ -76,7 +76,7 @@ char	*gnl_strjoin(char *s1, char *s2)
 	return (str);
 }
 
-/* unsigned char	*str_gen(unsigned int start, size_t fin)
+unsigned char	*gnl_str_gen(unsigned int start, size_t fin)
 {
 	unsigned char	*str;
 
@@ -89,7 +89,7 @@ char	*gnl_strjoin(char *s1, char *s2)
 	return (str);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*gnl_substr(char const *s, unsigned int start, size_t len)
 {
 	unsigned int	i;
 	unsigned char	*str;
@@ -107,7 +107,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		fin = start + len;
 	else
 		fin = ft_strlen((char *)s);
-	str = str_gen(start, fin);
+	str = gnl_str_gen(start, fin);
 	if (str == 0)
 		return (0);
 	if (start >= ft_strlen((char *)s))
@@ -116,4 +116,4 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		str[i] = s[i + start];
 	str[i] = '\0';
 	return ((char *)str);
-} */
+}

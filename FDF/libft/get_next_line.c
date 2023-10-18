@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:42 by doller-m          #+#    #+#             */
-/*   Updated: 2023/10/05 14:23:04 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/10/18 12:42:08 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*gnl_gen(char **str_work, char *line, size_t workr_len, size_t r_len)
 		return (line);
 	}
 	else
-		*str_work = ft_substr(*str_work, r_len, workr_len);
+		*str_work = gnl_substr(*str_work, r_len, workr_len);
 	if (!str_work)
 		return (gnl_free(&erase));
 	gnl_free (&erase);
@@ -51,12 +51,12 @@ int	analisis(char **str_work, char **str_return, int read_status)
 
 	if (!*str_work && *str_return)
 		return (1);
-	end_line = ft_strchr(*str_work, '\n');
+	end_line = gnl_strchr(*str_work, '\n');
 	if (end_line == 0 && read_status > 0)
 		return (0);
 	if (end_line == 0 && read_status == 0)
 	{
-		*str_return = ft_substr(*str_work, 0, ft_strlen(*str_work));
+		*str_return = gnl_substr(*str_work, 0, ft_strlen(*str_work));
 		if (!str_return)
 			return (-1);
 		gnl_free(str_work);
@@ -64,7 +64,7 @@ int	analisis(char **str_work, char **str_return, int read_status)
 	}
 	return_len = (&end_line[0] - &*str_work[0]) + 1;
 	workreturn_len = (ft_strlen(*str_work)) - return_len;
-	*str_return = ft_substr(*str_work, 0, return_len);
+	*str_return = gnl_substr(*str_work, 0, return_len);
 	if (!str_return)
 		return (-1);
 	if (gnl_gen(str_work, *str_return, workreturn_len, return_len) == NULL)

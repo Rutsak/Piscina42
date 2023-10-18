@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:41:54 by doller-m          #+#    #+#             */
-/*   Updated: 2023/10/11 15:53:13 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:07:32 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,15 @@
 
 	mlx_loop(mlx);
 } */
-int	map_test(const char **map)
+int	map_test(const char *map)
 {
 	int		fd;
 	int		i;
 	char	*row;
 
-	fd = open(*map, O_RDONLY);
+	fd = open(map, O_RDONLY);
 	row = get_next_line(fd);
+	printf("El mapa es %s", row);
 	if (!row)
 		return (-1);
 	i = 1;
@@ -39,6 +40,7 @@ int	map_test(const char **map)
 	{
 		row = get_next_line(fd);
 		i++;
+		printf("El mapa es %s", row);
 	}
 	close(fd);
 	free(row);
@@ -47,13 +49,13 @@ int	map_test(const char **map)
 
 int	main(int argc, char **argv)
 {
-	int	map_size;
+	int		map_size;
 
 	if (argc != 2)
 		return (-1);
 	else
 	{
-		map_size = map_test((const char **)argv);
+		map_size = map_test((const char *)argv[1]);
 	}
 	return (0);
 }
