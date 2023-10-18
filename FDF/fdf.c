@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:41:54 by doller-m          #+#    #+#             */
-/*   Updated: 2023/10/18 13:07:32 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:33:39 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,16 @@ int	map_test(const char *map)
 	char	*row;
 
 	fd = open(map, O_RDONLY);
-	row = get_next_line(fd);
-	printf("El mapa es %s", row);
+	row = get_next_line(fd, ' ');
+	printf("row es: %s\n", row);
 	if (!row)
 		return (-1);
 	i = 1;
 	while (row)
 	{
-		row = get_next_line(fd);
+		row = get_next_line(fd, ' ');
+		printf("row es: %s\n", row);
 		i++;
-		printf("El mapa es %s", row);
 	}
 	close(fd);
 	free(row);

@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:46:42 by doller-m          #+#    #+#             */
-/*   Updated: 2023/10/18 12:42:08 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:22:33 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*gnl_gen(char **str_work, char *line, size_t workr_len, size_t r_len)
 	return (line);
 }
 
-int	analisis(char **str_work, char **str_return, int read_status)
+int	analisis(char **str_work, char **str_return, int read_status, char separator)
 {
 	char	*end_line;
 	size_t	workreturn_len;
@@ -51,7 +51,7 @@ int	analisis(char **str_work, char **str_return, int read_status)
 
 	if (!*str_work && *str_return)
 		return (1);
-	end_line = gnl_strchr(*str_work, '\n');
+	end_line = gnl_strchr(*str_work, separator);
 	if (end_line == 0 && read_status > 0)
 		return (0);
 	if (end_line == 0 && read_status == 0)
@@ -95,7 +95,7 @@ int	read_gnl(char **str_work, int fd)
 	return (read_status);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, char separator)
 {
 	static char	*str_work;
 	char		*str_return;
@@ -112,7 +112,7 @@ char	*get_next_line(int fd)
 			return (gnl_free(&str_work));
 		if (!read_status && !str_work && !str_return)
 			return (NULL);
-		if (analisis(&str_work, &str_return, read_status) == -1)
+		if (analisis(&str_work, &str_return, read_status, separator) == -1)
 			return (gnl_free(&str_work), gnl_free(&str_return), NULL);
 		if (str_return)
 			return (str_return);
