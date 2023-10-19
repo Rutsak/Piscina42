@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 14:52:02 by doller-m          #+#    #+#             */
-/*   Updated: 2023/10/18 13:22:10 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/10/19 13:24:22 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void			ft_lstdelone(t_list *lst, void (*del)(void*));
 void			ft_lstclear(t_list **lst, void (*del)(void*));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-char			*get_next_line(int fd, char separator);
+char			*get_next_line(int fd);
 char			*gnl_strjoin(char *s1, char *s2);
 char			*gnl_free(char **str);
 char			*gnl_strchr(const char *s, int c);
