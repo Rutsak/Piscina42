@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:41:54 by doller-m          #+#    #+#             */
-/*   Updated: 2023/10/19 17:00:44 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:38:47 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,34 +46,105 @@ int	matrix_point_cleaner(char *map)
 	return (high);
 }
 
-int	map_test(const char *map)
+int	map_long(char **row_splited)
 {
-	int		fd;
-	int		i;
-	char	*row;
-	char	*row1;
-	int		row_int;
+	int	i;
 
-	fd = open(map, O_RDONLY);
-	row = get_next_line(fd);
-	if (!row)
-		return (-1);
-	i = 0;
-	while (row)
+	i =0;
+	while (row_splited[i] != NULL)
+		i++;
+	return (i);
+}
+
+static void	fdf_free(int **index, int i)
+{
+	while (i > 0)
 	{
-		row1 = ft_strchr(row, ' ');
-		if (row1 == NULL)
+		free (index[i - 1]);
+		i--;
+	}
+	free (index);
+}
+
+int	**map_gen(int num_coord, int map_lines)
+{
+	int		i;
+	int		**geo_coord;
+
+	geo_coord = malloc((sizeof (int *)) * (num_coord + 1));
+	if (!geo_coord)
+		return (0);
+	i = 0;
+	while (i < num_coord)
+	{
+		geo_coord[i] = ft_calloc((sizeof (int)), map_lines);
+		if (!geo_coord[i])
+		{
+			fdf_free(geo_coord, i);
 			return (0);
-		row_int = matrix_point_cleaner(row);
-		printf("row es: %s\n", row);
-		row = ++row1;
-		printf("row es: %s\n", row);
-		printf("row_int es: %i\n", row_int);
+		}
 		i++;
 	}
-	close(fd);
-	free(row);
+	return (geo_coord);
+}
+
+int	**map_fill(int fd, int map_lines)
+{
+	int		i;
+	int		j;
+	int		num_coord;
+	int		**geo_coord;
+	char	**row_splited;
+	char	row_char;
+	int		row_int;
+
+	row_splited = ft_split(get_next_line(fd), ' ');
+	num_coord = map_long(row_splited);
+	i = 0;
+	j = 0;
+	geo_coord = map_gen(num_coord, map_lines);
+	while (j < map_lines)
+	{
+		while (row_splited[i][0] != '\0' && row_splited[i][0] != '\n')
+		{
+			row_char = *row_splited[i];
+			row_int = ft_atoi(&row_char);
+			geo_coord[i][j] = row_int;
+			printf("Alçada de coordenada [%i][%i]: %i \n", i, j, geo_coord[i][j]);
+			i++;
+		}
+		j++;
+		i = 0;
+		if (j < map_lines)
+			row_splited = ft_split(get_next_line(fd), ' ');
+	}
+	free(row_splited);
+	return (geo_coord);
+}
+
+int	map_test(int fd)
+{
+	int	i;
+
+	i = 0;
+	while (get_next_line(fd) != NULL)
+		i++;
 	return (i);
+}
+
+int	open_map(const char *map)
+{
+	int		fd;
+	int		map_lines;
+	int		**geo_coord;
+
+	fd = open(map, O_RDONLY);
+	map_lines = map_test(fd);
+	close(fd);
+	fd = open(map, O_RDONLY);
+	geo_coord = map_fill(fd, map_lines);
+	close(fd);
+	return (1);
 }
 
 int	main(int argc, char **argv)
@@ -84,7 +155,7 @@ int	main(int argc, char **argv)
 		return (-1);
 	else
 	{
-		map_size = map_test((const char *)argv[1]);
+		map_size = open_map((const char *)argv[1]);
 	}
 	return (0);
 }
