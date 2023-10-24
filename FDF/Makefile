@@ -6,7 +6,7 @@
 #    By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/04 14:13:56 by doller-m          #+#    #+#              #
-#    Updated: 2023/10/18 12:16:58 by doller-m         ###   ########.fr        #
+#    Updated: 2023/10/24 18:30:18 by doller-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ fclean : clean
 re : fclean all
 
 cs :
+	make fclean
 	git add *.c *.h Makefile
 	cp *.c ~/copiesSeguretat/Piscina42/FDF/
 	cp *.h ~/copiesSeguretat/Piscina42/FDF/

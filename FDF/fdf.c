@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:41:54 by doller-m          #+#    #+#             */
-/*   Updated: 2023/10/24 16:38:47 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/10/24 18:28:04 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	**map_fill(int fd, int map_lines)
 	int		num_coord;
 	int		**geo_coord;
 	char	**row_splited;
-	char	row_char;
+	char	*row_char;
 	int		row_int;
 
 	row_splited = ft_split(get_next_line(fd), ' ');
@@ -105,10 +105,14 @@ int	**map_fill(int fd, int map_lines)
 	geo_coord = map_gen(num_coord, map_lines);
 	while (j < map_lines)
 	{
-		while (row_splited[i][0] != '\0' && row_splited[i][0] != '\n')
+//		while (row_splited[i][0] != '\0' && row_splited[i][0] != '\n')
+		while (i < (num_coord-1))
 		{
-			row_char = *row_splited[i];
-			row_int = ft_atoi(&row_char);
+// ojo si es mes de un char tindr'e problemes. cal replantejar la conversi'o			
+			row_char = row_splited[i];
+			printf("row_char %s\n", row_char);
+			row_int = ft_atoi(row_char);
+			printf("row_int = %i\n", row_int);
 			geo_coord[i][j] = row_int;
 			printf("Alçada de coordenada [%i][%i]: %i \n", i, j, geo_coord[i][j]);
 			i++;
@@ -122,24 +126,18 @@ int	**map_fill(int fd, int map_lines)
 	return (geo_coord);
 }
 
-int	map_test(int fd)
-{
-	int	i;
-
-	i = 0;
-	while (get_next_line(fd) != NULL)
-		i++;
-	return (i);
-}
-
 int	open_map(const char *map)
 {
 	int		fd;
 	int		map_lines;
+	int		i;
 	int		**geo_coord;
 
 	fd = open(map, O_RDONLY);
-	map_lines = map_test(fd);
+	i = 0;
+	while (get_next_line(fd) != NULL)
+		i++;
+	map_lines = i;
 	close(fd);
 	fd = open(map, O_RDONLY);
 	geo_coord = map_fill(fd, map_lines);
