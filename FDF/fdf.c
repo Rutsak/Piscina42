@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:41:54 by doller-m          #+#    #+#             */
-/*   Updated: 2023/10/24 18:28:04 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:27:09 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,11 @@ int	main(void)
 	mlx_loop(mlx);
 } */
 
-int	matrix_point_cleaner(char *map)
-{
-	int		high;
-	char	*set;
-	char	*result_char;
-
-	set = " /n";
-	result_char = ft_strtrim(map, set);
-	high = ft_atoi(result_char);
-	return (high);
-}
-
 int	map_long(char **row_splited)
 {
 	int	i;
 
-	i =0;
+	i = 0;
 	while (row_splited[i] != NULL)
 		i++;
 	return (i);
@@ -95,23 +83,18 @@ int	**map_fill(int fd, int map_lines)
 	int		num_coord;
 	int		**geo_coord;
 	char	**row_splited;
-	char	*row_char;
 	int		row_int;
 
 	row_splited = ft_split(get_next_line(fd), ' ');
 	num_coord = map_long(row_splited);
+	geo_coord = map_gen(num_coord, map_lines);
 	i = 0;
 	j = 0;
-	geo_coord = map_gen(num_coord, map_lines);
 	while (j < map_lines)
 	{
-//		while (row_splited[i][0] != '\0' && row_splited[i][0] != '\n')
-		while (i < (num_coord-1))
+		while (i < (num_coord - 1))
 		{
-// ojo si es mes de un char tindr'e problemes. cal replantejar la conversi'o			
-			row_char = row_splited[i];
-			printf("row_char %s\n", row_char);
-			row_int = ft_atoi(row_char);
+			row_int = ft_atoi(row_splited[i]);
 			printf("row_int = %i\n", row_int);
 			geo_coord[i][j] = row_int;
 			printf("Alçada de coordenada [%i][%i]: %i \n", i, j, geo_coord[i][j]);
