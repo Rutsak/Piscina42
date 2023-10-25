@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:41:54 by doller-m          #+#    #+#             */
-/*   Updated: 2023/10/25 16:27:09 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:45:52 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,24 +80,20 @@ int	**map_fill(int fd, int map_lines)
 {
 	int		i;
 	int		j;
-	int		num_coord;
 	int		**geo_coord;
 	char	**row_splited;
 	int		row_int;
 
 	row_splited = ft_split(get_next_line(fd), ' ');
-	num_coord = map_long(row_splited);
-	geo_coord = map_gen(num_coord, map_lines);
+	geo_coord = map_gen(map_long(row_splited), map_lines);
 	i = 0;
 	j = 0;
 	while (j < map_lines)
 	{
-		while (i < (num_coord - 1))
+		while (i < (map_long(row_splited) - 1))
 		{
 			row_int = ft_atoi(row_splited[i]);
-			printf("row_int = %i\n", row_int);
 			geo_coord[i][j] = row_int;
-			printf("Alçada de coordenada [%i][%i]: %i \n", i, j, geo_coord[i][j]);
 			i++;
 		}
 		j++;
