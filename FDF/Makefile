@@ -6,7 +6,7 @@
 #    By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/04 14:13:56 by doller-m          #+#    #+#              #
-#    Updated: 2023/10/24 18:30:18 by doller-m         ###   ########.fr        #
+#    Updated: 2023/10/26 12:05:45 by doller-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ LIBFT = ./libft/libft.a
 MINILIBX = ./mlx/libmlx.a
 
 SRCS =	fdf.c\
+		paint_fdf.c\
 
 OBJS = $(SRCS:.c=.o)
 
