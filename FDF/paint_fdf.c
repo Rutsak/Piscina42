@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:00:17 by doller-m          #+#    #+#             */
-/*   Updated: 2023/10/26 17:36:22 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/11/07 16:38:11 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,35 @@
 #include <mlx.h>
 #include <fcntl.h>
 #include "fdf.h"
+
+int	scr_line_gen(int x_o, int y_o, int x_d, int y_d)
+{
+	double	pendiente;
+	int		x;
+	int		y;
+	int		color;
+
+	color = 0xFFFFFF;
+	pendiente = 0;
+	if (((double) y_d - (double) y_o) != 0)
+		pendiente = ((double)y_d - (double)y_o) / ((double)x_d - (double)x_o);
+	x = 0;
+	while (x <= (x_d - x_o))
+	{
+		y = (pendiente * x);
+		scr_pix_gen(scr_dt, x + x_o, y + y_o, color);
+		printf("x: %i, y: %i \n", x + x_o, y + y_o);
+		x++;
+	}
+	printf("Fi Bucle \n");
+	return (0);
+}
+
+int	scr_pix_gen(struct s_screen_data scr_dt, int x, int y, int color)
+{
+	mlx_pixel_put(scr_dt.mlx, scr_dt.mlx_w, x, y, color);
+	return (1);
+}
 
 int	scr_win_gen(void)
 {
@@ -35,17 +64,13 @@ int	scr_win_gen(void)
 		free(scr_dt.mlx);
 		return (0);
 	}
-	scr_pix_gen(scr_dt, x, y, color);
+//	scr_pix_gen(scr_dt, x, y, color);
+	scr_line_gen(50, 50, 300, 50);
+	scr_line_gen(300, 50, 500, 200);
 	mlx_loop(scr_dt.mlx);
 	mlx_destroy_window(scr_dt.mlx, scr_dt.mlx_w);
 	free(scr_dt.mlx);
 	return (0);
-}
-
-int	scr_pix_gen(struct s_screen_data scr_dt, int x, int y, int color)
-{
-	mlx_pixel_put(scr_dt.mlx, scr_dt.mlx_w, x, y, color);
-	return (1);
 }
 
 int	main(void)
