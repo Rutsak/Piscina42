@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:00:17 by doller-m          #+#    #+#             */
-/*   Updated: 2023/11/07 16:38:11 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:22:10 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,13 @@
 #include <fcntl.h>
 #include "fdf.h"
 
-int	scr_line_gen(int x_o, int y_o, int x_d, int y_d)
+int	scr_pix_gen(t_scr_dt scr_dt, int x, int y, int color)
+{
+	mlx_pixel_put(scr_dt.mlx, scr_dt.mlx_w, x, y, color);
+	return (1);
+}
+
+int	scr_line_drw(t_scr_dt scr_dt, int x_o, int y_o, int x_d, int y_d)
 {
 	double	pendiente;
 	int		x;
@@ -24,7 +30,7 @@ int	scr_line_gen(int x_o, int y_o, int x_d, int y_d)
 
 	color = 0xFFFFFF;
 	pendiente = 0;
-	if (((double) y_d - (double) y_o) != 0)
+	if (((double) x_d - (double) x_o) != 0)
 		pendiente = ((double)y_d - (double)y_o) / ((double)x_d - (double)x_o);
 	x = 0;
 	while (x <= (x_d - x_o))
@@ -38,17 +44,12 @@ int	scr_line_gen(int x_o, int y_o, int x_d, int y_d)
 	return (0);
 }
 
-int	scr_pix_gen(struct s_screen_data scr_dt, int x, int y, int color)
-{
-	mlx_pixel_put(scr_dt.mlx, scr_dt.mlx_w, x, y, color);
-	return (1);
-}
-
 int	scr_win_gen(void)
 {
-	int	x;
-	int	y;
-	int	color;
+	int			x;
+	int			y;
+	int			color;
+	t_scr_dt	scr_dt;
 
 	x = 250;
 	y = x;
@@ -65,19 +66,20 @@ int	scr_win_gen(void)
 		return (0);
 	}
 //	scr_pix_gen(scr_dt, x, y, color);
-	scr_line_gen(50, 50, 300, 50);
-	scr_line_gen(300, 50, 500, 200);
+//	scr_line_drw(5, 50, 100, 100);
+//	scr_line_drw(100, 100, 500, 150);
+	scr_line_drw(scr_dt, 100, 100, 500, 150);
 	mlx_loop(scr_dt.mlx);
 	mlx_destroy_window(scr_dt.mlx, scr_dt.mlx_w);
 	free(scr_dt.mlx);
 	return (0);
 }
 
-int	main(void)
+/* int	main(void)
 {
 	scr_win_gen();
 	return (0);
-}
+} */
 
 /* int	main(void)
 {

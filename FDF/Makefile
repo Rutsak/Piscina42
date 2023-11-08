@@ -6,7 +6,7 @@
 #    By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/04 14:13:56 by doller-m          #+#    #+#              #
-#    Updated: 2023/10/26 12:05:45 by doller-m         ###   ########.fr        #
+#    Updated: 2023/11/08 14:33:28 by doller-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ HEADER = fdf.h
 
 CC = gcc
 
-CFLAGS = -g -Wall -Werror -Wextra
+CFLAGS = -g -Wall -Werror -Wextra #-fsanitaizer=address
 
 MINILIBX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework Appkit
 
@@ -26,6 +26,7 @@ MINILIBX = ./mlx/libmlx.a
 
 SRCS =	fdf.c\
 		paint_fdf.c\
+		3d_fdf.c\
 
 OBJS = $(SRCS:.c=.o)
 

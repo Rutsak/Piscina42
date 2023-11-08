@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:41:54 by doller-m          #+#    #+#             */
-/*   Updated: 2023/10/25 16:45:52 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:31:35 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@ int	main(void)
 	mlx_loop(mlx);
 } */
 
-int	map_long(char **row_splited)
+int	map_long(char **row_splited, t_map_dt mapa)
 {
 	int	i;
 
 	i = 0;
 	while (row_splited[i] != NULL)
 		i++;
+	mapa.map_col = i;
 	return (i);
 }
 
@@ -54,72 +55,72 @@ static void	fdf_free(int **index, int i)
 	free (index);
 }
 
-int	**map_gen(int num_coord, int map_lines)
+int	**map_gen(t_map_dt mapa)
 {
 	int		i;
-	int		**geo_coord;
+//	int		**geo_coord;
 
-	geo_coord = malloc((sizeof (int *)) * (num_coord + 1));
-	if (!geo_coord)
+	mapa.geo_coord = malloc((sizeof (int *)) * (mapa.map_col + 1));
+	if (!mapa.geo_coord)
 		return (0);
 	i = 0;
-	while (i < num_coord)
+	while (i < mapa.map_col)
 	{
-		geo_coord[i] = ft_calloc((sizeof (int)), map_lines);
-		if (!geo_coord[i])
+		mapa.geo_coord[i] = ft_calloc((sizeof (int)), mapa.map_lines);
+		if (!mapa.geo_coord[i])
 		{
-			fdf_free(geo_coord, i);
+			fdf_free(mapa.geo_coord, i);
 			return (0);
 		}
 		i++;
 	}
-	return (geo_coord);
+	return (mapa.geo_coord);
 }
 
-int	**map_fill(int fd, int map_lines)
+int	**map_fill(int fd, t_map_dt mapa)
 {
 	int		i;
 	int		j;
-	int		**geo_coord;
 	char	**row_splited;
 	int		row_int;
+//	int		**geo_coord;
 
 	row_splited = ft_split(get_next_line(fd), ' ');
-	geo_coord = map_gen(map_long(row_splited), map_lines);
+	mapa.map_col = map_long(row_splited, mapa);
+	mapa.geo_coord = map_gen(mapa);
 	i = 0;
 	j = 0;
-	while (j < map_lines)
+	while (j < mapa.map_lines)
 	{
-		while (i < (map_long(row_splited) - 1))
+		while (i < (mapa.map_col - 1))
 		{
 			row_int = ft_atoi(row_splited[i]);
-			geo_coord[i][j] = row_int;
+			mapa.geo_coord[i][j] = row_int;
 			i++;
 		}
 		j++;
 		i = 0;
-		if (j < map_lines)
+		if (j < mapa.map_lines)
 			row_splited = ft_split(get_next_line(fd), ' ');
 	}
 	free(row_splited);
-	return (geo_coord);
+	return (mapa.geo_coord);
 }
 
 int	open_map(const char *map)
 {
-	int		fd;
-	int		map_lines;
-	int		i;
-	int		**geo_coord;
+	int			fd;
+	int			i;
+	t_map_dt	mapa;
 
 	fd = open(map, O_RDONLY);
 	i = 0;
 	while (get_next_line(fd) != NULL)
 		i++;
-	map_lines = i;
+	mapa.map_lines = i;
 	close(fd);
 	fd = open(map, O_RDONLY);
-	geo_coord = map_fill(fd, map_lines);
+	mapa.geo_coord = map_fill(fd, mapa);
 	close(fd);
 	return (1);
 }
