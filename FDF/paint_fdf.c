@@ -6,54 +6,91 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:00:17 by doller-m          #+#    #+#             */
-/*   Updated: 2023/11/08 16:22:10 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:53:37 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include <mlx.h>
 #include <fcntl.h>
 #include "fdf.h"
 
-int	scr_pix_gen(t_scr_dt scr_dt, int x, int y, int color)
+int	scr_pix_gen(t_scr_dt scr_dt, int x, int y)
 {
-	mlx_pixel_put(scr_dt.mlx, scr_dt.mlx_w, x, y, color);
+	mlx_pixel_put(scr_dt.mlx, scr_dt.mlx_w, x, y, scr_dt.color);
 	return (1);
 }
 
-int	scr_line_drw(t_scr_dt scr_dt, int x_o, int y_o, int x_d, int y_d)
+int	scr_line_drw(t_scr_dt scr_dt, t_2D_point origin, t_2D_point end)
 {
-	double	pendiente;
-	int		x;
-	int		y;
-	int		color;
+	double	x_line;
+	double	y_line;
+	double	x_pixel;
+	double	y_pixel;
+	int		pixels;
 
-	color = 0xFFFFFF;
-	pendiente = 0;
-	if (((double) x_d - (double) x_o) != 0)
-		pendiente = ((double)y_d - (double)y_o) / ((double)x_d - (double)x_o);
-	x = 0;
-	while (x <= (x_d - x_o))
+	x_line = end.x - origin.x;
+	y_line = end.y - origin.y;
+	pixels = sqrt((x_line * x_line) + (y_line * y_line));
+	x_line /= pixels;
+	y_line /= pixels;
+	x_pixel = origin.x;
+	y_pixel = origin.y;
+	while (pixels)
 	{
-		y = (pendiente * x);
-		scr_pix_gen(scr_dt, x + x_o, y + y_o, color);
-		printf("x: %i, y: %i \n", x + x_o, y + y_o);
-		x++;
+		scr_pix_gen(scr_dt, x_pixel, y_pixel);
+		x_pixel += x_line;
+		y_pixel += y_line;
+		--pixels;
 	}
-	printf("Fi Bucle \n");
 	return (0);
 }
 
-int	scr_win_gen(void)
+int	scr_draw(t_scr_dt scr_dt, t_map_dt map_dt)
 {
-	int			x;
-	int			y;
-	int			color;
+	int			i;
+	int			j;
+	t_2D_point	p_origin;
+	t_2D_point	p_end;
+
+/* 	p_origin.x = 10;
+	p_origin.y = 10;
+	p_end.x = 10;
+	p_end.y = 250; */
+	i = 0;
+	j = 0;
+	while (i < map_dt.map_lines)
+	{
+		while (j < map_dt.map_col)
+		{
+			printf("Altura [%i][%i]: %i\n", i, j, map_dt.geo_coord[i][j]);
+			p_origin = map_dot_loader(map_dt, scr_dt, i, j);
+			p_end = map_dot_loader(map_dt, scr_dt, i + 1, j + 1);
+			scr_line_drw(scr_dt, p_origin, p_end);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+/* 	while (i < map_dt.map_lines)
+	{
+		while (j < map_dt.map_col)
+		{
+			printf("Altura [%i][%i]: %i\n", i, j, map_dt.geo_coord[i][j]);
+			scr_line_drw(scr_dt, (i * scr_dt.scale) + scr_dt.frame, (j * scr_dt.scale) + scr_dt.frame, (i + 1 * scr_dt.scale) + scr_dt.frame, (j * scr_dt.scale) + scr_dt.frame);
+			scr_line_drw(scr_dt, (i * scr_dt.scale) + scr_dt.frame, (j * scr_dt.scale) + scr_dt.frame, (i * scr_dt.scale) + scr_dt.frame, (j + 1 * scr_dt.scale) + scr_dt.frame);
+			j++;
+		}
+		j = 0;
+		i++;
+	} */
+	return (0);
+}
+
+int	scr_win_gen(t_map_dt map_dt)
+{
 	t_scr_dt	scr_dt;
 
-	x = 250;
-	y = x;
-	color = 0xFFFFFF;
+	scr_dt.color = 0xFFFFFF;
 	scr_dt.x_win = 500;
 	scr_dt.y_win = 500;
 	scr_dt.mlx = mlx_init();
@@ -65,10 +102,10 @@ int	scr_win_gen(void)
 		free(scr_dt.mlx);
 		return (0);
 	}
-//	scr_pix_gen(scr_dt, x, y, color);
-//	scr_line_drw(5, 50, 100, 100);
-//	scr_line_drw(100, 100, 500, 150);
-	scr_line_drw(scr_dt, 100, 100, 500, 150);
+	scr_dt.scale = 10;
+	scr_dt.frame_x = 50;
+	scr_dt.frame_y = 50;
+	scr_draw(scr_dt, map_dt);
 	mlx_loop(scr_dt.mlx);
 	mlx_destroy_window(scr_dt.mlx, scr_dt.mlx_w);
 	free(scr_dt.mlx);

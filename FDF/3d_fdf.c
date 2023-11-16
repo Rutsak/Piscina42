@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:22:51 by doller-m          #+#    #+#             */
-/*   Updated: 2023/11/08 14:48:34 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/11/09 17:11:01 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	scr_y_convert(int x, int y, int z, int grades)
 	return (i);
 }
 
-int	main(void)
+/* int	main(void)
 {
 	int	x;
 	int	y;
@@ -54,4 +54,4 @@ int	main(void)
 	scr_y = scr_y_convert(x, y, z, grades);
 	printf("scrY %i\n", scr_y);
 	return (0);
-}
+} */
