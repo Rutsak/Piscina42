@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:00:17 by doller-m          #+#    #+#             */
-/*   Updated: 2023/11/20 14:44:02 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/11/20 17:17:47 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ int	scr_line_drw(t_scr_dt scr_dt, t_2D_point origin, t_2D_point end)
 	y_pixel = origin.y;
 	while (pixels)
 	{
-		scr_pix_gen(scr_dt, x_pixel, y_pixel);
+		if (x_pixel > 0 && x_pixel < scr_dt.x_win)
+		{
+			if (y_pixel > 0 && y_pixel < scr_dt.y_win)
+				scr_pix_gen(scr_dt, x_pixel, y_pixel);
+		}
 		x_pixel += x_line;
 		y_pixel += y_line;
 		--pixels;
@@ -45,7 +49,7 @@ int	scr_line_drw(t_scr_dt scr_dt, t_2D_point origin, t_2D_point end)
 	return (0);
 }
 
-int	scr_draw(t_scr_dt scr_dt, t_map_dt map_dt)
+int	scr_draw(t_scr_dt *scr_dt, t_map_dt *map_dt)
 {
 	int			i;
 	int			j;
@@ -54,20 +58,20 @@ int	scr_draw(t_scr_dt scr_dt, t_map_dt map_dt)
 
 	i = 0;
 	j = 0;
-	printf("Filas: %i\n", map_dt.map_lines);
-	printf("Columnas: %i\n", map_dt.map_col);
-	while (i < map_dt.map_lines)
+	printf("Filas: %i\n", map_dt->map_lines);
+	printf("Columnas: %i\n", map_dt->map_col);
+	while (i < map_dt->map_lines)
 	{
-		while (j < map_dt.map_col)
+		while (j < map_dt->map_col)
 		{
-			printf("Altura [%i][%i]: %i\n", i, j, map_dt.geo_coord[i][j]);
-			p_origin = map_dot_loader(map_dt, scr_dt, i, j);
-			p_end = map_dot_loader(map_dt, scr_dt, i, j + 1);
-			if (j <= map_dt.map_col - 2)
-				scr_line_drw(scr_dt, p_origin, p_end);
-			p_end = map_dot_loader(map_dt, scr_dt, i + 1, j);
-			if (i <= map_dt.map_lines - 2)
-				scr_line_drw(scr_dt, p_origin, p_end);
+			printf("Altura [%i][%i]: %i\n", i, j, map_dt->geo_coord[i][j]);
+			p_origin = map_dot_loader(*map_dt, *scr_dt, i, j);
+			p_end = map_dot_loader(*map_dt, *scr_dt, i, j + 1);
+			if (j <= map_dt->map_col - 2)
+				scr_line_drw(*scr_dt, p_origin, p_end);
+			p_end = map_dot_loader(*map_dt, *scr_dt, i + 1, j);
+			if (i <= map_dt->map_lines - 2)
+				scr_line_drw(*scr_dt, p_origin, p_end);
 			j++;
 		}
 		j = 0;
@@ -76,7 +80,7 @@ int	scr_draw(t_scr_dt scr_dt, t_map_dt map_dt)
 	return (0);
 }
 
-int	scr_win_gen(t_map_dt map_dt)
+int	scr_win_gen(t_map_dt *map_dt)
 {
 	t_scr_dt	scr_dt;
 
@@ -95,7 +99,7 @@ int	scr_win_gen(t_map_dt map_dt)
 	scr_dt.scale = 10;
 	scr_dt.frame_x = 50;
 	scr_dt.frame_y = 50;
-	scr_draw(scr_dt, map_dt);
+	scr_draw(&scr_dt, map_dt);
 	mlx_loop(scr_dt.mlx);
 	mlx_destroy_window(scr_dt.mlx, scr_dt.mlx_w);
 	free(scr_dt.mlx);

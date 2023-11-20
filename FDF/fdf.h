@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:42:20 by doller-m          #+#    #+#             */
-/*   Updated: 2023/11/20 15:14:05 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/11/20 17:13:50 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,10 @@ typedef struct s_2D_point
 	long int	y;
 }	t_2D_point;
 
-int			scr_win_gen(t_map_dt map_dt);
+int			scr_win_gen(t_map_dt *map_dt);
 int			scr_pix_gen(t_scr_dt scr_dt, int x, int y);
+int			scr_x_convert(int x, int y, int z, t_scr_dt scr_dt);
+int			scr_y_convert(int x, int y, int z, t_scr_dt scr_dt);
 t_2D_point	map_dot_loader(t_map_dt map_dt, t_scr_dt scr_dt, int x, int y);
 
 #endif
