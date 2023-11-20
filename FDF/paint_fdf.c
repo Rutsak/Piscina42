@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:00:17 by doller-m          #+#    #+#             */
-/*   Updated: 2023/11/16 12:53:37 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/11/20 14:44:02 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,37 +52,27 @@ int	scr_draw(t_scr_dt scr_dt, t_map_dt map_dt)
 	t_2D_point	p_origin;
 	t_2D_point	p_end;
 
-/* 	p_origin.x = 10;
-	p_origin.y = 10;
-	p_end.x = 10;
-	p_end.y = 250; */
 	i = 0;
 	j = 0;
+	printf("Filas: %i\n", map_dt.map_lines);
+	printf("Columnas: %i\n", map_dt.map_col);
 	while (i < map_dt.map_lines)
 	{
 		while (j < map_dt.map_col)
 		{
 			printf("Altura [%i][%i]: %i\n", i, j, map_dt.geo_coord[i][j]);
 			p_origin = map_dot_loader(map_dt, scr_dt, i, j);
-			p_end = map_dot_loader(map_dt, scr_dt, i + 1, j + 1);
-			scr_line_drw(scr_dt, p_origin, p_end);
+			p_end = map_dot_loader(map_dt, scr_dt, i, j + 1);
+			if (j <= map_dt.map_col - 2)
+				scr_line_drw(scr_dt, p_origin, p_end);
+			p_end = map_dot_loader(map_dt, scr_dt, i + 1, j);
+			if (i <= map_dt.map_lines - 2)
+				scr_line_drw(scr_dt, p_origin, p_end);
 			j++;
 		}
 		j = 0;
 		i++;
 	}
-/* 	while (i < map_dt.map_lines)
-	{
-		while (j < map_dt.map_col)
-		{
-			printf("Altura [%i][%i]: %i\n", i, j, map_dt.geo_coord[i][j]);
-			scr_line_drw(scr_dt, (i * scr_dt.scale) + scr_dt.frame, (j * scr_dt.scale) + scr_dt.frame, (i + 1 * scr_dt.scale) + scr_dt.frame, (j * scr_dt.scale) + scr_dt.frame);
-			scr_line_drw(scr_dt, (i * scr_dt.scale) + scr_dt.frame, (j * scr_dt.scale) + scr_dt.frame, (i * scr_dt.scale) + scr_dt.frame, (j + 1 * scr_dt.scale) + scr_dt.frame);
-			j++;
-		}
-		j = 0;
-		i++;
-	} */
 	return (0);
 }
 

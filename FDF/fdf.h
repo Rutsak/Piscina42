@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:42:20 by doller-m          #+#    #+#             */
-/*   Updated: 2023/11/16 12:53:14 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/11/20 15:14:05 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_screen_data
 	int		scale;
 	int		frame_x;
 	int		frame_y;
+	int		p_grades;
 }	t_scr_dt;
 
 /* struct s_map_data
