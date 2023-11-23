@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:41:54 by doller-m          #+#    #+#             */
-/*   Updated: 2023/11/20 17:55:49 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:21:11 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,27 @@ int	map_long(char **row_splited, t_map_dt map_dt)
 	return (i);
 }
 
-int	**map_gen(t_map_dt map_dt)
+int	**map_gen(t_map_dt *map_dt)
 {
 	int		i;
 
-	map_dt.geo_coord = ft_calloc(sizeof (int *), map_dt.map_lines + 1);
-	if (!map_dt.geo_coord)
+	map_dt->geo_coord = ft_calloc(sizeof (int *), map_dt->map_lines + 1);
+	if (!map_dt->geo_coord)
 		return (NULL);
-	map_dt.geo_coord[map_dt.map_lines + 1] = NULL;
+//	map_dt->geo_coord[map_dt->map_lines + 1] = NULL;
 	i = 0;
-	while (i < map_dt.map_lines)
+	while (i < map_dt->map_lines)
 	{
-		map_dt.geo_coord[i] = ft_calloc((sizeof (int)), map_dt.map_col + 1);
-		if (!map_dt.geo_coord[i])
+		map_dt->geo_coord[i] = ft_calloc((sizeof (int)), map_dt->map_col + 1);
+		if (!map_dt->geo_coord[i])
 		{
-			fdf_free(map_dt.geo_coord, i);
+			fdf_free(map_dt->geo_coord, i);
 			return (NULL);
 		}
-		map_dt.geo_coord[i][map_dt.map_col + 1] = '\0';
+//		map_dt->geo_coord[i][map_dt->map_col + 1] = '\0';
 		i++;
 	}
-	return (map_dt.geo_coord);
+	return (map_dt->geo_coord);
 }
 // si Get_Next_Line torna NULL, el ATOI dona error
 
@@ -65,26 +65,26 @@ int	map_fill(int fd, t_map_dt *map_dt)
 {
 	int		i;
 	int		j;
+	char	*a;
 	char	**row_splited;
 	int		row_int;
 
+//	printf("entra en pa fill\n");
 	row_splited = NULL;
-	row_splited = ft_split(get_next_line(fd), ' ');
-/* 	if (*row_splited == NULL)
-		return (0); */
+	a = get_next_line(fd);
+	row_splited = ft_split(a, ' ');
+//	row_splited = ft_split(get_next_line(fd), ' ');
 	map_dt->map_col = map_long(row_splited, *map_dt) - 1;
-	map_dt->geo_coord = map_gen(*map_dt);
+	map_dt->geo_coord = map_gen(map_dt);
 	i = 0;
 	j = 0;
 	while (i < map_dt->map_lines)
 	{
 		while (j < (map_dt->map_col))
 		{
-			printf("Rowspllited %s \n", *row_splited);
-/* 			if (*row_splited == NULL)
-				return (0); */
+//			printf("Rowspllited %s \n", *row_splited);
 			row_int = ft_atoi(row_splited[j]);
-			printf("Atoi[%i]: %i\n", j, row_int);
+//			printf("Atoi[%i]: %i\n", j, row_int);
 			map_dt->geo_coord[i][j] = row_int;
 			j++;
 		}
@@ -93,6 +93,7 @@ int	map_fill(int fd, t_map_dt *map_dt)
 		if (i < map_dt->map_lines)
 			row_splited = ft_split(get_next_line(fd), ' ');
 	}
+//	printf("saliendo de map fill\n");
 	free(row_splited);
 	return (1);
 }
@@ -113,6 +114,7 @@ int	open_map(const char *map)
 	map_dt.map_lines = i;
 	close(fd);
 	fd = open(map, O_RDONLY);
+//	printf("antes de map_fill\n");
 	map_fill(fd, &map_dt);
 	close(fd);
 	scr_win_gen(&map_dt);

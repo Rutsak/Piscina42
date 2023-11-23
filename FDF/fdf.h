@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:42:20 by doller-m          #+#    #+#             */
-/*   Updated: 2023/11/20 17:13:50 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:49:45 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <math.h>
 # include "./libft/libft.h"
+# include "keys.h"
 
 /* struct s_screen_data
 {
@@ -37,7 +38,9 @@ typedef struct s_screen_data
 	int		scale;
 	int		frame_x;
 	int		frame_y;
-	int		p_grades;
+	int		grades_x;
+	int		grades_y;
+	int		grades_z;
 }	t_scr_dt;
 
 /* struct s_map_data
@@ -54,6 +57,13 @@ typedef struct s_map_data
 	int		map_col;
 }	t_map_dt;
 
+typedef struct s_point_3d
+{
+	long int	x;
+	long int	y;
+	long int	z;
+}	t_point_3d;
+
 typedef struct s_2D_point
 {
 	long int	x;
@@ -64,6 +74,8 @@ int			scr_win_gen(t_map_dt *map_dt);
 int			scr_pix_gen(t_scr_dt scr_dt, int x, int y);
 int			scr_x_convert(int x, int y, int z, t_scr_dt scr_dt);
 int			scr_y_convert(int x, int y, int z, t_scr_dt scr_dt);
-t_2D_point	map_dot_loader(t_map_dt map_dt, t_scr_dt scr_dt, int x, int y);
+t_2D_point	map_dot_loader(t_map_dt *map_dt, t_scr_dt *scr_dt, int x, int y);
+int			close_window(t_scr_dt *scr_dt, t_map_dt *map_dt);
+
 
 #endif

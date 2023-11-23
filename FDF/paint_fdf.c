@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:00:17 by doller-m          #+#    #+#             */
-/*   Updated: 2023/11/20 17:17:47 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:21:48 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,31 @@ int	scr_draw(t_scr_dt *scr_dt, t_map_dt *map_dt)
 	j = 0;
 	printf("Filas: %i\n", map_dt->map_lines);
 	printf("Columnas: %i\n", map_dt->map_col);
+	printf("Window: [%i][%i]\n", scr_dt->x_win, scr_dt->y_win);
+	printf("Color/Scale/Frame: %i/%i/[%i][%i]\n", scr_dt->color, scr_dt->scale, scr_dt->frame_x, scr_dt->frame_y);
+	printf("X-Grades: %i\n", scr_dt->grades_x);
+	printf("Y-Grades: %i\n", scr_dt->grades_y);
+	printf("Z-Grades: %i\n", scr_dt->grades_z);
 	while (i < map_dt->map_lines)
 	{
 		while (j < map_dt->map_col)
 		{
 			printf("Altura [%i][%i]: %i\n", i, j, map_dt->geo_coord[i][j]);
-			p_origin = map_dot_loader(*map_dt, *scr_dt, i, j);
-			p_end = map_dot_loader(*map_dt, *scr_dt, i, j + 1);
+			p_origin = map_dot_loader(map_dt, scr_dt, i, j);
+			printf("p_origin [%i][%i][%i] -> {%li, %li} \n", i, j, map_dt->geo_coord[i][j], p_origin.x, p_origin.y);
+			p_end = map_dot_loader(map_dt, scr_dt, i, j + 1);
+			printf("p_end [%i][%i][%i] -> {%li, %li} \n", i, j + 1, map_dt->geo_coord[i][j + 1], p_end.x, p_end.y);
 			if (j <= map_dt->map_col - 2)
 				scr_line_drw(*scr_dt, p_origin, p_end);
-			p_end = map_dot_loader(*map_dt, *scr_dt, i + 1, j);
-			if (i <= map_dt->map_lines - 2)
-				scr_line_drw(*scr_dt, p_origin, p_end);
+			if (i + 1 < map_dt->map_lines)
+			{
+				p_end = map_dot_loader(map_dt, scr_dt, i + 1, j);
+				if (i <= map_dt->map_lines - 2)
+				{
+					printf("p_end [%i][%i][%i] -> {%li, %li} \n", i + 1, j, map_dt->geo_coord[i + 1][j], p_end.x, p_end.y);
+					scr_line_drw(*scr_dt, p_origin, p_end);
+				}
+			}
 			j++;
 		}
 		j = 0;
@@ -97,8 +110,11 @@ int	scr_win_gen(t_map_dt *map_dt)
 		return (0);
 	}
 	scr_dt.scale = 10;
-	scr_dt.frame_x = 50;
-	scr_dt.frame_y = 50;
+	scr_dt.frame_x = 150;
+	scr_dt.frame_y = 150;
+	scr_dt.grades_x = 0;
+	scr_dt.grades_y = 0;
+	scr_dt.grades_z = 0;
 	scr_draw(&scr_dt, map_dt);
 	mlx_loop(scr_dt.mlx);
 	mlx_destroy_window(scr_dt.mlx, scr_dt.mlx_w);
