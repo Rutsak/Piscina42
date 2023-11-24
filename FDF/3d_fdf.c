@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   3d_fdf.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rutsak <rutsak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:22:51 by doller-m          #+#    #+#             */
-/*   Updated: 2023/11/23 12:51:15 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:18:29 by rutsak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ double	gr_to_rad(t_scr_dt scr_dt)
 int	scr_x_convert(int x, int y, int z, t_scr_dt scr_dt)
 {
 	double	i;
+	double	d;
 /*	double	a;
 	double	b;
 	double	c;
@@ -42,13 +43,16 @@ int	scr_x_convert(int x, int y, int z, t_scr_dt scr_dt)
 	c = 0 * z;
 	i = a - b + c; */
 //	i = (cos(gr_to_rad(scr_dt)) * x) + (-cos(gr_to_rad(scr_dt)) * y) + (0 * z);
-	i = (x + y) * sin(gr_to_rad(scr_dt)) - z;
+//	i = (x + y) * sin(gr_to_rad(scr_dt)) - z;
+	d = 2;
+	i = (d * (z + d))/ x;
 	return (i);
 }
 
 int	scr_y_convert(int x, int y, int z, t_scr_dt scr_dt)
 {
 	double	i;
+	double	d;
 /* 	double	a;
 	double	b;
 	double	c;
@@ -58,8 +62,10 @@ int	scr_y_convert(int x, int y, int z, t_scr_dt scr_dt)
 	c = 1 * z;
 	i = - a - b + c; */
 //	i = (-sin(gr_to_rad(scr_dt)) * x) + (-sin(gr_to_rad(scr_dt)) * y) + (1 * z);
-	i = z;
-	i = (x - y) * cos(gr_to_rad(scr_dt));
+	d = 2;
+	i = (d * (z + d)) / y;
+//	i = z;
+//	i = (x - y) * cos(gr_to_rad(scr_dt));
 	return (i);
 }
 
