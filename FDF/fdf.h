@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:42:20 by doller-m          #+#    #+#             */
-/*   Updated: 2023/11/23 12:49:45 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/11/27 17:35:22 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,18 @@
 
 typedef struct s_screen_data
 {
-	void	*mlx;
-	void	*mlx_w;
-	int		x_win;
-	int		y_win;
-	int		color;
-	int		scale;
-	int		frame_x;
-	int		frame_y;
-	int		grades_x;
-	int		grades_y;
-	int		grades_z;
+	void		*mlx;
+	void		*mlx_w;
+	int			x_win;
+	int			y_win;
+	int			color;
+	float		scale;
+	int			frame_x;
+	int			frame_y;
+	int			grades_x;
+	int			grades_y;
+	int			grades_z;
+	int			proj_grades;
 }	t_scr_dt;
 
 /* struct s_map_data
@@ -66,8 +67,8 @@ typedef struct s_point_3d
 
 typedef struct s_2D_point
 {
-	long int	x;
-	long int	y;
+	double	x;
+	double	y;
 }	t_2D_point;
 
 int			scr_win_gen(t_map_dt *map_dt);

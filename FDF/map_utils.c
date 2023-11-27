@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:51:02 by doller-m          #+#    #+#             */
-/*   Updated: 2023/11/23 15:27:43 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/11/27 15:33:34 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	z_rotate(t_scr_dt *scr_dt, t_point_3d *pnt3d)
 
 t_2D_point	map_dot_loader(t_map_dt *map_dt, t_scr_dt *scr_dt, int x, int y)
 {
-	int			x_conv;
-	int			y_conv;
+	double		x_conv;
+	double		y_conv;
 	t_point_3d	temp_3d;
 	t_2D_point	a;
 
@@ -57,13 +57,13 @@ t_2D_point	map_dot_loader(t_map_dt *map_dt, t_scr_dt *scr_dt, int x, int y)
 	temp_3d.x = x;
 	temp_3d.y = y;
 	temp_3d.z = map_dt->geo_coord[x][y];
-	x_rotate(scr_dt, &temp_3d);
-	y_rotate(scr_dt, &temp_3d);
-	z_rotate(scr_dt, &temp_3d);
+//	x_rotate(scr_dt, &temp_3d);
+//	y_rotate(scr_dt, &temp_3d);
+//	z_rotate(scr_dt, &temp_3d);
 	x_conv = scr_x_convert(temp_3d.x, temp_3d.y, temp_3d.z, *scr_dt);
-	printf("x_conv %i \n", x_conv);
+//	printf("x_conv %f \n", x_conv);
 	y_conv = scr_y_convert(temp_3d.x, temp_3d.y, temp_3d.z, *scr_dt);
-	printf("y_conv %i \n", y_conv);
+//	printf("y_conv %f \n", y_conv);
 	a.x = (x_conv * scr_dt->scale) + scr_dt->frame_x;
 	a.y = (y_conv * scr_dt->scale) + scr_dt->frame_x;
 	return (a);
