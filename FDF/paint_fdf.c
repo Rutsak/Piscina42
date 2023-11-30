@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:00:17 by doller-m          #+#    #+#             */
-/*   Updated: 2023/11/27 17:44:01 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/11/30 16:52:40 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,14 +109,18 @@ int	scr_win_gen(t_map_dt *map_dt)
 		free(scr_dt.mlx);
 		return (0);
 	}
-	scr_dt.scale = 20;
+	scr_dt.scale = 15;
 	scr_dt.frame_x = 150;
 	scr_dt.frame_y = 150;
 	scr_dt.grades_x = 0;
 	scr_dt.grades_y = 0;
-	scr_dt.grades_z = 0;
+	scr_dt.grades_z = 30;
 	scr_dt.proj_grades = 30;
-	scr_draw(&scr_dt, map_dt);
+	while (scr_dt.grades_z < 90)
+	{
+		scr_draw(&scr_dt, map_dt);
+		scr_dt.grades_z++;
+	}
 	mlx_loop(scr_dt.mlx);
 	mlx_destroy_window(scr_dt.mlx, scr_dt.mlx_w);
 	free(scr_dt.mlx);

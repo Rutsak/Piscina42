@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:41:54 by doller-m          #+#    #+#             */
-/*   Updated: 2023/11/23 15:21:11 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:25:24 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,13 @@ int	map_fill(int fd, t_map_dt *map_dt)
 			row_int = ft_atoi(row_splited[j]);
 //			printf("Atoi[%i]: %i\n", j, row_int);
 			map_dt->geo_coord[i][j] = row_int;
+			if (row_int > map_dt->max_z)
+			{
+				map_dt->max_z = row_int;
+//				printf("Maxz: %i\n", map_dt->max_z);
+			}
+			if (row_int < map_dt->min_z)
+				map_dt->min_z = row_int;
 			j++;
 		}
 		i++;
@@ -107,6 +114,8 @@ int	open_map(const char *map)
 	map_dt.geo_coord = NULL;
 	map_dt.map_col = 0;
 	map_dt.map_lines = 0;
+	map_dt.max_z = 0;
+	map_dt.min_z = 0;
 	fd = open(map, O_RDONLY);
 	i = 0;
 	while (get_next_line(fd) != NULL)

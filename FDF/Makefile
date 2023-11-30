@@ -6,7 +6,7 @@
 #    By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/04 14:13:56 by doller-m          #+#    #+#              #
-#    Updated: 2023/11/23 14:33:48 by doller-m         ###   ########.fr        #
+#    Updated: 2023/11/30 15:56:37 by doller-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ HEADER = fdf.h
 
 CC = gcc
 
-CFLAGS = -g -Wall -Werror -Wextra -fsanitize='address,undefined'
+CFLAGS = -g -Wall -Werror -Wextra #-fsanitize='address,undefined'
 
 MINILIBX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework Appkit
 
@@ -28,6 +28,7 @@ SRCS =	fdf.c\
 		paint_fdf.c\
 		3d_fdf.c\
 		map_utils.c\
+		matrius.c\
 		hooks.c\
 
 OBJS = $(SRCS:.c=.o)
