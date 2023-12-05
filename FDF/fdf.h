@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:42:20 by doller-m          #+#    #+#             */
-/*   Updated: 2023/11/30 15:48:30 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/12/05 17:05:51 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,6 @@
 # include <math.h>
 # include "./libft/libft.h"
 # include "keys.h"
-
-/* struct s_screen_data
-{
-	void	*mlx;
-	void	*mlx_w;
-	int		x_win;
-	int		y_win;
-} scr_dt; */
 
 typedef struct s_screen_data
 {
@@ -41,21 +33,7 @@ typedef struct s_screen_data
 	int		grades_x;
 	int		grades_y;
 	int		grades_z;
-	int		proj_grades;
-	int		left;
-	int		right;
-	int		bottom;
-	int		top;
-	int		near;
-	int		far;
 }	t_scr_dt;
-
-/* struct s_map_data
-{
-	int		**geo_coord;
-	int		map_lines;
-	int		map_col;
-} map_dt; */
 
 typedef struct s_map_data
 {
@@ -65,6 +43,12 @@ typedef struct s_map_data
 	int		min_z;
 	int		max_z;
 }	t_map_dt;
+
+typedef struct s_param
+{
+	t_map_dt	*map_dt;
+	t_scr_dt	*scr_dt;
+}	t_param;
 
 typedef struct s_point_3d
 {
@@ -79,13 +63,16 @@ typedef struct s_2D_point
 
 int			scr_win_gen(t_map_dt *map_dt);
 int			scr_pix_gen(t_scr_dt scr_dt, int x, int y);
+int			scr_draw(t_scr_dt *scr_dt, t_map_dt *map_dt);
 int			scr_x_convert(int x, int y, int z, t_scr_dt scr_dt);
 int			scr_y_convert(int x, int y, int z, t_scr_dt scr_dt);
-void		rotate_x(t_point_3d *points, t_point_3d *proyection, float ang, int len);
-void		rotate_y(t_point_3d *points, t_point_3d *proyection, float ang, int len);
-void		rotate_z(t_point_3d *points, t_point_3d *proyection, float ang, int len);
+void		rotate_x(t_point_3d *points, t_point_3d *proy, float ang, int len);
+void		rotate_y(t_point_3d *points, t_point_3d *proy, float ang, int len);
+void		rotate_z(t_point_3d *points, t_point_3d *proy, float ang, int len);
+void		scale(t_point_3d *points, t_point_3d *proy, float scale, int len);
 t_2D_point	map_dot_loader(t_map_dt *map_dt, t_scr_dt *scr_dt, int x, int y);
-int			close_window(t_scr_dt *scr_dt, t_map_dt *map_dt);
-
+void		fdf_free(int **index, int i);
+int			key_pressed(int keycode, t_param *param);
+int			close_window(t_param *param);
 
 #endif

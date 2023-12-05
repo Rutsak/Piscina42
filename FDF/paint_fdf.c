@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:00:17 by doller-m          #+#    #+#             */
-/*   Updated: 2023/11/30 16:52:40 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/12/05 17:12:39 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,20 @@ int	scr_draw(t_scr_dt *scr_dt, t_map_dt *map_dt)
 int	scr_win_gen(t_map_dt *map_dt)
 {
 	t_scr_dt	scr_dt;
+	t_param		param;
 
+	param.scr_dt = &scr_dt;
+	param.map_dt = map_dt;
 	scr_dt.color = 0xFFFFFF;
 	scr_dt.x_win = 1000;
 	scr_dt.y_win = 1000;
 	scr_dt.mlx = mlx_init();
+	scr_dt.scale = 25;
+	scr_dt.frame_x = 150;
+	scr_dt.frame_y = 150;
+	scr_dt.grades_x = 30;
+	scr_dt.grades_y = 0;
+	scr_dt.grades_z = 0;
 	if (scr_dt.mlx == NULL)
 		return (0);
 	scr_dt.mlx_w = mlx_new_window(scr_dt.mlx, scr_dt.x_win, scr_dt.y_win, "Hi");
@@ -109,21 +118,11 @@ int	scr_win_gen(t_map_dt *map_dt)
 		free(scr_dt.mlx);
 		return (0);
 	}
-	scr_dt.scale = 15;
-	scr_dt.frame_x = 150;
-	scr_dt.frame_y = 150;
-	scr_dt.grades_x = 0;
-	scr_dt.grades_y = 0;
-	scr_dt.grades_z = 30;
-	scr_dt.proj_grades = 30;
-	while (scr_dt.grades_z < 90)
-	{
-		scr_draw(&scr_dt, map_dt);
-		scr_dt.grades_z++;
-	}
+	mlx_key_hook(scr_dt.mlx_w, key_pressed, &scr_dt);
+	scr_draw(&scr_dt, map_dt);
 	mlx_loop(scr_dt.mlx);
-	mlx_destroy_window(scr_dt.mlx, scr_dt.mlx_w);
-	free(scr_dt.mlx);
+//	mlx_destroy_window(scr_dt.mlx, scr_dt.mlx_w);
+//	free(scr_dt.mlx);
 	return (0);
 }
 

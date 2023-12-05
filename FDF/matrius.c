@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:05:24 by doller-m          #+#    #+#             */
-/*   Updated: 2023/11/30 15:34:03 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/12/05 11:58:47 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,23 @@ void	rotate_z(t_point_3d *points, t_point_3d *proyection, float ang, int len)
 	while (i < len)
 	{
 		proyection[i] = mul_mat(proyect_matrix, points[i]);
+		i++;
+	}
+}
+
+void	scale(t_point_3d *points, t_point_3d *proy, float scale, int len)
+{
+	int		i;
+	float	proyect_matrix[3][3];
+
+	matrix_init(proyect_matrix);
+	proyect_matrix[0][0] = scale;
+	proyect_matrix[1][1] = scale;
+	proyect_matrix[2][2] = scale;
+	i = 0;
+	while (i < len)
+	{
+		proy[i] = mul_mat(proyect_matrix, points[i]);
 		i++;
 	}
 }
