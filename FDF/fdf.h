@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:42:20 by doller-m          #+#    #+#             */
-/*   Updated: 2023/12/05 17:05:51 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/12/11 15:02:29 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ typedef struct s_map_data
 	int		**geo_coord;
 	int		map_lines;
 	int		map_col;
-	int		min_z;
-	int		max_z;
 }	t_map_dt;
 
 typedef struct s_param

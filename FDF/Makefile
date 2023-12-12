@@ -6,7 +6,7 @@
 #    By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/04 14:13:56 by doller-m          #+#    #+#              #
-#    Updated: 2023/12/05 15:10:08 by doller-m         ###   ########.fr        #
+#    Updated: 2023/12/11 15:02:41 by doller-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,13 @@ CFLAGS = -g -Wall -Werror -Wextra #-fsanitize='address,undefined'
 
 MINILIBX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework Appkit
 
-LIBFT = ./libft/libft.a
+LIBFT_PATH = ./libft/
 
-MINILIBX = ./mlx/libmlx.a
+LIBFT = $(LIBFT_PATH)libft.a
+
+MINILIBX_PATH = ./mlx/
+
+MINILIBX = $(MINILIBX_PATH)libmlx.a
 
 SRCS =	fdf.c\
 		paint_fdf.c\
@@ -33,26 +37,30 @@ SRCS =	fdf.c\
 
 OBJS = $(SRCS:.c=.o)
 
-%.o : %.c $(HEADER)
-	$(CC) -c $(CFLAGS) -Imlx -c $< -o $@ -I $(HEADER)
+all : subsystem $(NAME)
 
-$(NAME) : $(OBJS) $(HEADER)
-	make -C ./libft
-	make -C ./mlx
-	$(CC) $(CFLAGS) $(OBJS) $(HEADER) ${LIBFT} ${MINILIBX} $(MINILIBX_FLAGS)
+%.o : %.c $(HEADER) Makefile
+	$(CC) -c $(CFLAGS) -Imlx -c $< -o $@
 
-all : $(NAME)
+$(NAME) : $(OBJS) 
+	
+	$(CC) $(CFLAGS) $(MINILIBX_FLAGS) $(OBJS) $(LIBFT) $(MINILIBX) -o $(NAME)
+
+
+subsystem : 
+	make -C $(LIBFT_PATH) all
+	make -C $(MINILIBX_PATH) all
 
 clean :
 	rm -rf *.o
 	rm -rf *.gch
-	rm a.out
-	${MAKE} clean -C ./libft
-	${MAKE} clean -C ./mlx
+	$(MAKE) -C $(MINILIBX_PATH) clean 
+	$(MAKE) -C $(LIBFT_PATH) clean
 
 fclean : clean
 	rm -f $(NAME)
-	${MAKE} fclean -C ./libft
+	$(MAKE) -C $(MINILIBX_PATH) clean 
+	$(MAKE) -C $(LIBFT_PATH) fclean
 
 re : fclean all
 
@@ -66,4 +74,4 @@ cs :
 	cp -r mlx ~/copiesSeguretat/Piscina42/FDF/
 	git status
 
-.PHONY : all clean fclean re cs
+.PHONY : all clean fclean re cs subsystem

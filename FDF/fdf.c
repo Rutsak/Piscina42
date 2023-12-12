@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:41:54 by doller-m          #+#    #+#             */
-/*   Updated: 2023/12/05 16:16:41 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/12/11 14:29:39 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	map_fill(int fd, t_map_dt *map_dt)
 	char	**row_splited;
 	int		row_int;
 
-	row_splited = NULL;
+	row_splited = NULL;	
 	a = get_next_line(fd);
 	row_splited = ft_split(a, ' ');
 	map_dt->map_col = map_long(row_splited, *map_dt) - 1;
@@ -101,8 +101,6 @@ int	open_map(const char *map, t_map_dt *map_dt)
 	map_dt->geo_coord = NULL;
 	map_dt->map_col = 0;
 	map_dt->map_lines = 0;
-	map_dt->max_z = 0;
-	map_dt->min_z = 0;
 	fd = open(map, O_RDONLY);
 	read_result = get_next_line(fd);
 	while (read_result != NULL)
@@ -120,7 +118,6 @@ int	main(int argc, char **argv)
 {
 	int			fd;
 	t_map_dt	map_dt;
-
 
 	if (argc != 2)
 		return (-1);
