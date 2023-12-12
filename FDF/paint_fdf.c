@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:00:17 by doller-m          #+#    #+#             */
-/*   Updated: 2023/12/11 14:21:28 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/12/12 16:55:41 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	scr_line_drw(t_scr_dt scr_dt, t_2D_point origin, t_2D_point end)
 	return (0);
 }
 
-int	scr_draw(t_scr_dt *scr_dt, t_map_dt *map_dt)
+int	scr_draw(t_param *param)
 {
 	int			i;
 	int			j;
@@ -58,31 +58,33 @@ int	scr_draw(t_scr_dt *scr_dt, t_map_dt *map_dt)
 
 	i = 0;
 	j = 0;
-	printf("Filas: %i\n", map_dt->map_lines);
-	printf("Columnas: %i\n", map_dt->map_col);
-	printf("Window: [%i][%i]\n", scr_dt->x_win, scr_dt->y_win);
-	printf("Color/Scale/Frame: %i/%f/[%i][%i]\n", scr_dt->color, scr_dt->scale, scr_dt->frame_x, scr_dt->frame_y);
-	printf("X-Grades: %i\n", scr_dt->grades_x);
-	printf("Y-Grades: %i\n", scr_dt->grades_y);
-	printf("Z-Grades: %i\n", scr_dt->grades_z);
-	printf("puntero mlx: %p \n", scr_dt->mlx);
-	printf("puntero mlx_w param: %p \n", scr_dt->mlx_w);
-	while (i < map_dt->map_lines)
+	printf("puntero PARAM: %p \n", param);
+	printf("Filas: %i\n", param->map_dt->map_lines);
+	printf("Columnas: %i\n", param->map_dt->map_col);
+	printf("Window: [%i][%i]\n", param->scr_dt->x_win, param->scr_dt->y_win);
+	printf("Color/Scale/Frame: %i/%f/[%i][%i]\n", param->scr_dt->color, param->scr_dt->scale, param->scr_dt->frame_x, param->scr_dt->frame_y);
+	printf("X-Grades: %i\n", param->scr_dt->grades_x);
+	printf("Y-Grades: %i\n", param->scr_dt->grades_y);
+	printf("Z-Grades: %i\n", param->scr_dt->grades_z);
+	printf("puntero mlx: %p \n", param->scr_dt->mlx);
+	printf("puntero mlx_w param: %p \n", param->scr_dt->mlx_w);
+	mlx_clear_window(param->scr_dt->mlx, param->scr_dt->mlx_w);
+	while (i < param->map_dt->map_lines)
 	{
-		while (j < map_dt->map_col)
+		while (j < param->map_dt->map_col)
 		{
-			printf("Altura [%i][%i]: %i\n", i, j, map_dt->geo_coord[i][j]);
-			p_origin = map_dot_loader(map_dt, scr_dt, i, j);
-			printf("p_origin [%i][%i][%i] -> {%f, %f} \n", i, j, map_dt->geo_coord[i][j], p_origin.x, p_origin.y);
-			p_end = map_dot_loader(map_dt, scr_dt, i, j + 1);
-			if (j <= map_dt->map_col - 2)
-				scr_line_drw(*scr_dt, p_origin, p_end);
-			if (i + 1 < map_dt->map_lines)
+			printf("Altura [%i][%i]: %i\n", i, j, param->map_dt->geo_coord[i][j]);
+			p_origin = map_dot_loader(param->map_dt, param->scr_dt, i, j);
+			printf("p_origin [%i][%i][%i] -> {%f, %f} \n", i, j, param->map_dt->geo_coord[i][j], p_origin.x, p_origin.y);
+			p_end = map_dot_loader(param->map_dt, param->scr_dt, i, j + 1);
+			if (j <= param->map_dt->map_col - 2)
+				scr_line_drw(*param->scr_dt, p_origin, p_end);
+			if (i + 1 < param->map_dt->map_lines)
 			{
-				p_end = map_dot_loader(map_dt, scr_dt, i + 1, j);
-				if (i <= map_dt->map_lines - 2)
+				p_end = map_dot_loader(param->map_dt, param->scr_dt, i + 1, j);
+				if (i <= param->map_dt->map_lines - 2)
 				{
-					scr_line_drw(*scr_dt, p_origin, p_end);
+					scr_line_drw(*param->scr_dt, p_origin, p_end);
 				}
 			}
 			j++;
@@ -100,16 +102,18 @@ int	scr_win_gen(t_map_dt *map_dt)
 
 	param.scr_dt = &scr_dt;
 	param.map_dt = map_dt;
+	param.scr_dt->mlx = NULL;
+	param.scr_dt->mlx_w = NULL;
 	printf("puntero mlx: %p \n", param.scr_dt->mlx);
 	printf("puntero mlx_w: %p \n", param.scr_dt->mlx_w);
 	scr_dt.color = 0xFFFFFF;
 	scr_dt.x_win = 1000;
 	scr_dt.y_win = 1000;
 	scr_dt.mlx = mlx_init();
-	scr_dt.scale = 25;
+	scr_dt.scale = 2;
 	scr_dt.frame_x = 150;
 	scr_dt.frame_y = 150;
-	scr_dt.grades_x = 30;
+	scr_dt.grades_x = 0;
 	scr_dt.grades_y = 0;
 	scr_dt.grades_z = 0;
 	if (scr_dt.mlx == NULL)
@@ -123,9 +127,8 @@ int	scr_win_gen(t_map_dt *map_dt)
 		free(scr_dt.mlx);
 		return (0);
 	}
-	mlx_key_hook(scr_dt.mlx_w, key_pressed, &param.scr_dt);
-
-	scr_draw(&scr_dt, map_dt);
+	mlx_key_hook(scr_dt.mlx_w, key_pressed, &param);
+	scr_draw(&param);
 	mlx_loop(scr_dt.mlx);
 //	mlx_destroy_window(scr_dt.mlx, scr_dt.mlx_w);
 //	free(scr_dt.mlx);

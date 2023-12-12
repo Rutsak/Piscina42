@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:55:14 by doller-m          #+#    #+#             */
-/*   Updated: 2023/12/11 14:17:23 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/12/12 17:04:32 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,51 @@ int	key_pressed(int keycode, t_param *param)
 	}
 	if (keycode == LEFT_KEY)
 	{
-		param->scr_dt->scale += 10;
-		scr_draw(param->scr_dt, param->map_dt);
-		printf("Escala modificada a %f\n", param->scr_dt->scale);
+		param->scr_dt->grades_z += 10;
+		scr_draw(param);
+		printf("Z_graus modificats a %i\n", param->scr_dt->grades_z);
+	}
+	if (keycode == RIGHT_KEY)
+	{
+		param->scr_dt->grades_z -= 10;
+		scr_draw(param);
+		printf("Z_graus modificats a %i\n", param->scr_dt->grades_z);
+	}
+	if (keycode == UP_KEY)
+	{
+		param->scr_dt->grades_y += 10;
+		scr_draw(param);
+		printf("Y_graus modificats a %i\n", param->scr_dt->grades_y);
+	}
+	if (keycode == DOWN_KEY)
+	{
+		param->scr_dt->grades_y -= 10;
+		scr_draw(param);
+		printf("Y_graus modificats a %i\n", param->scr_dt->grades_y);
+	}
+	if (keycode == A_KEY)
+	{
+		param->scr_dt->grades_x += 10;
+		scr_draw(param);
+		printf("X_graus modificats a %i\n", param->scr_dt->grades_x);
+	}
+	if (keycode == S_KEY)
+	{
+		param->scr_dt->grades_x -= 10;
+		scr_draw(param);
+		printf("X_graus modificats a %i\n", param->scr_dt->grades_x);
+	}
+	if (keycode == Z_KEY)
+	{
+		param->scr_dt->scale += 1;
+		scr_draw(param);
+		printf("Zoom modificat a %f\n", param->scr_dt->scale);
+	}
+	if (keycode == X_KEY)
+	{
+		param->scr_dt->scale -= 1;
+		scr_draw(param);
+		printf("Zoom modificat a %f\n", param->scr_dt->scale);
 	}
 	return (0);
 }

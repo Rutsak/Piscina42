@@ -6,11 +6,28 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:51:02 by doller-m          #+#    #+#             */
-/*   Updated: 2023/12/05 16:18:50 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/12/12 13:12:50 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	angle_reductor(t_scr_dt *scr_dt)
+{
+	while (scr_dt->grades_x >= 360)
+		scr_dt->grades_x = scr_dt->grades_x - 360;
+	while (scr_dt->grades_x < 0)
+		scr_dt->grades_x = scr_dt->grades_x + 360;
+	while (scr_dt->grades_y >= 360)
+		scr_dt->grades_y = scr_dt->grades_y - 360;
+	while (scr_dt->grades_y < 0)
+		scr_dt->grades_y = scr_dt->grades_y + 360;
+	while (scr_dt->grades_z >= 360)
+		scr_dt->grades_z = scr_dt->grades_z - 360;
+	while (scr_dt->grades_z < 0)
+		scr_dt->grades_z = scr_dt->grades_z + 360;
+}
+
 
 t_2D_point	map_dot_loader(t_map_dt *map_dt, t_scr_dt *scr_dt, int x, int y)
 {
@@ -28,6 +45,9 @@ t_2D_point	map_dot_loader(t_map_dt *map_dt, t_scr_dt *scr_dt, int x, int y)
 	temp_3d_dst.axis[0] = 0;
 	temp_3d_dst.axis[1] = 0;
 	temp_3d_dst.axis[2] = 0;
+	printf("Els graus X/Y/Z son: %i, %i, %i \n", scr_dt->grades_x, scr_dt->grades_y, scr_dt->grades_z);
+	angle_reductor(scr_dt);
+	printf("Post correcció, els graus X/Y/Z son: %i, %i, %i \n", scr_dt->grades_x, scr_dt->grades_y, scr_dt->grades_z);
 	rotate_x(&temp_3d_ori, &temp_3d_dst, scr_dt->grades_z, 3);
 	rotate_y(&temp_3d_dst, &temp_3d_ori, scr_dt->grades_y, 3);
 	rotate_z(&temp_3d_ori, &temp_3d_dst, scr_dt->grades_z, 3);
