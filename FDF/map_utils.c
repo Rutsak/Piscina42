@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:51:02 by doller-m          #+#    #+#             */
-/*   Updated: 2023/12/12 13:12:50 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/12/13 15:59:11 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	angle_reductor(t_scr_dt *scr_dt)
 		scr_dt->grades_z = scr_dt->grades_z + 360;
 }
 
-
 t_2D_point	map_dot_loader(t_map_dt *map_dt, t_scr_dt *scr_dt, int x, int y)
 {
 	double		x_conv;
@@ -41,11 +40,10 @@ t_2D_point	map_dot_loader(t_map_dt *map_dt, t_scr_dt *scr_dt, int x, int y)
 	a.y = 0;
 	temp_3d_ori.axis[0] = x;
 	temp_3d_ori.axis[1] = y;
-	temp_3d_ori.axis[2] = map_dt->geo_coord[x][y];
+	temp_3d_ori.axis[2] = map_dt->geo_coord[x][y] * scr_dt->elastic_z;
 	temp_3d_dst.axis[0] = 0;
 	temp_3d_dst.axis[1] = 0;
 	temp_3d_dst.axis[2] = 0;
-	printf("Els graus X/Y/Z son: %i, %i, %i \n", scr_dt->grades_x, scr_dt->grades_y, scr_dt->grades_z);
 	angle_reductor(scr_dt);
 	printf("Post correcció, els graus X/Y/Z son: %i, %i, %i \n", scr_dt->grades_x, scr_dt->grades_y, scr_dt->grades_z);
 	rotate_x(&temp_3d_ori, &temp_3d_dst, scr_dt->grades_z, 3);

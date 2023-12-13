@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:55:14 by doller-m          #+#    #+#             */
-/*   Updated: 2023/12/12 17:04:32 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/12/13 15:15:45 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,18 @@ int	key_pressed(int keycode, t_param *param)
 		param->scr_dt->scale -= 1;
 		scr_draw(param);
 		printf("Zoom modificat a %f\n", param->scr_dt->scale);
+	}
+	if (keycode == Q_KEY)
+	{
+		param->scr_dt->elastic_z += 0.1;
+		scr_draw(param);
+		printf("Zoom modificat a %f\n", param->scr_dt->elastic_z);
+	}
+	if (keycode == W_KEY)
+	{
+		param->scr_dt->elastic_z -= 0.1;
+		scr_draw(param);
+		printf("Zoom modificat a %f\n", param->scr_dt->elastic_z);
 	}
 	return (0);
 }

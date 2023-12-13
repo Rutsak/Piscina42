@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:00:17 by doller-m          #+#    #+#             */
-/*   Updated: 2023/12/12 16:55:41 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/12/13 15:08:30 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int	scr_line_drw(t_scr_dt scr_dt, t_2D_point origin, t_2D_point end)
 		if (x_pixel > 0 && x_pixel < scr_dt.x_win)
 		{
 			if (y_pixel > 0 && y_pixel < scr_dt.y_win)
-				scr_pix_gen(scr_dt, x_pixel, y_pixel);
+//				scr_pix_gen(scr_dt, x_pixel, y_pixel);
+				image_pixel_put(&scr_dt, x_pixel, y_pixel, scr_dt.color);
 		}
 		x_pixel += x_line;
 		y_pixel += y_line;
@@ -68,6 +69,9 @@ int	scr_draw(t_param *param)
 	printf("Z-Grades: %i\n", param->scr_dt->grades_z);
 	printf("puntero mlx: %p \n", param->scr_dt->mlx);
 	printf("puntero mlx_w param: %p \n", param->scr_dt->mlx_w);
+	if (param->scr_dt->mlx_img != NULL)
+		mlx_destroy_image(param->scr_dt->mlx, param->scr_dt->mlx_img);
+	image_generator(param->scr_dt);
 	mlx_clear_window(param->scr_dt->mlx, param->scr_dt->mlx_w);
 	while (i < param->map_dt->map_lines)
 	{
@@ -92,6 +96,7 @@ int	scr_draw(t_param *param)
 		j = 0;
 		i++;
 	}
+	mlx_put_image_to_window(param->scr_dt->mlx, param->scr_dt->mlx_w, param->scr_dt->mlx_img, 0, 0);
 	return (0);
 }
 
@@ -104,13 +109,14 @@ int	scr_win_gen(t_map_dt *map_dt)
 	param.map_dt = map_dt;
 	param.scr_dt->mlx = NULL;
 	param.scr_dt->mlx_w = NULL;
-	printf("puntero mlx: %p \n", param.scr_dt->mlx);
-	printf("puntero mlx_w: %p \n", param.scr_dt->mlx_w);
+//	printf("puntero mlx: %p \n", param.scr_dt->mlx);
+//	printf("puntero mlx_w: %p \n", param.scr_dt->mlx_w);
 	scr_dt.color = 0xFFFFFF;
 	scr_dt.x_win = 1000;
 	scr_dt.y_win = 1000;
 	scr_dt.mlx = mlx_init();
-	scr_dt.scale = 2;
+	scr_dt.scale = 20;
+	scr_dt.elastic_z = 1;
 	scr_dt.frame_x = 150;
 	scr_dt.frame_y = 150;
 	scr_dt.grades_x = 0;
@@ -118,7 +124,7 @@ int	scr_win_gen(t_map_dt *map_dt)
 	scr_dt.grades_z = 0;
 	if (scr_dt.mlx == NULL)
 		return (0);
-	scr_dt.mlx_w = mlx_new_window(scr_dt.mlx, scr_dt.x_win, scr_dt.y_win, "Hi");
+	scr_dt.mlx_w = mlx_new_window(scr_dt.mlx, scr_dt.x_win, scr_dt.y_win, "FDF");
 //	printf("puntero mlx: %p \n", param.scr_dt->mlx);
 //	printf("puntero mlx_w param: %p \n", param.scr_dt->mlx_w);
 //	printf("puntero mlx_w: %p \n", scr_dt.mlx_w);

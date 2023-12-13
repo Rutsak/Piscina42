@@ -6,65 +6,33 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:22:51 by doller-m          #+#    #+#             */
-/*   Updated: 2023/12/05 16:21:21 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/12/13 13:15:49 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <mlx.h>
 #include "fdf.h"
 
-// reduir a menys de 360 i despres això
-double	gr_to_rad(int grades)
+void	image_generator(t_scr_dt *scr_dt)
 {
-	double	i;
+	void	*mlx;
+	void	*img;
+	int		x_win;
+	int		y_win;
 
-	while (grades >= 360)
-		grades = grades - 360;
-	i = (grades * M_1_PI) / 180;
-//	printf("Grados a Radians: %i -> %f\n", scr_dt.p_grades, i);
-	return (i);
+	mlx = scr_dt->mlx;
+	x_win = scr_dt->x_win;
+	y_win = scr_dt->y_win;
+	scr_dt->mlx_img = mlx_new_image(mlx, x_win, x_win);
+	img = scr_dt->mlx_img;
+	scr_dt->addr = mlx_get_data_addr(img, &scr_dt->bits_pixel,
+			&scr_dt->l_length, &scr_dt->endian);
 }
 
-int	scr_x_convert(int x, int y, int z, t_scr_dt scr_dt)
+void	image_pixel_put(t_scr_dt *scr_dt, int x, int y, int color)
 {
-	double	i;
+	char	*dst;
 
-	i = x;
-	i = y;
-	i = z;
-	i = scr_dt.scale;
-	return (i);
+	dst = scr_dt->addr + (y * scr_dt->l_length + x * (scr_dt->bits_pixel / 8));
+	*(unsigned int *)dst = color;
 }
-
-int	scr_y_convert(int x, int y, int z, t_scr_dt scr_dt)
-{
-	double	i;
-
-	i = x;
-	i = y;
-	i = z;
-	i = scr_dt.scale;
-
-	return (i);
-}
-
-/* int	main(void)
-{
-	int	x;
-	int	y;
-	int	z;
-	int	grades;
-	int	scr_x;
-	int	scr_y;
-
-	x = 100;
-	y = 50;
-	z = 0;
-	printf("XYZ %i, %i, %i\n", x, y, z);
-	grades = 30;
-	printf("Grades: %i\n", grades);
-	scr_x = scr_x_convert(x, y, z, grades);
-	printf("scrX %i\n", scr_x);
-	scr_y = scr_y_convert(x, y, z, grades);
-	printf("scrY %i\n", scr_y);
-	return (0);
-} */

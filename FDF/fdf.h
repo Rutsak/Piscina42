@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:42:20 by doller-m          #+#    #+#             */
-/*   Updated: 2023/12/12 12:48:50 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/12/13 15:08:53 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,16 @@ typedef struct s_screen_data
 {
 	void	*mlx;
 	void	*mlx_w;
+	void	*mlx_img;
+	char	*addr;
+	int		bits_pixel;
+	int		l_length;
+	int		endian;
 	int		x_win;
 	int		y_win;
 	int		color;
 	float	scale;
+	float	elastic_z;
 	int		frame_x;
 	int		frame_y;
 	int		grades_x;
@@ -62,8 +68,8 @@ typedef struct s_2D_point
 int			scr_win_gen(t_map_dt *map_dt);
 int			scr_pix_gen(t_scr_dt scr_dt, int x, int y);
 int			scr_draw(t_param *param);
-int			scr_x_convert(int x, int y, int z, t_scr_dt scr_dt);
-int			scr_y_convert(int x, int y, int z, t_scr_dt scr_dt);
+void		image_generator(t_scr_dt *scr_dt);
+void		image_pixel_put(t_scr_dt *scr_dt, int x, int y, int color);
 void		rotate_x(t_point_3d *points, t_point_3d *proy, float ang, int len);
 void		rotate_y(t_point_3d *points, t_point_3d *proy, float ang, int len);
 void		rotate_z(t_point_3d *points, t_point_3d *proy, float ang, int len);
