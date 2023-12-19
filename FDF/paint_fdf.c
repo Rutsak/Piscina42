@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:00:17 by doller-m          #+#    #+#             */
-/*   Updated: 2023/12/13 15:08:30 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/12/13 17:04:33 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	scr_draw(t_param *param)
 
 	i = 0;
 	j = 0;
-	printf("puntero PARAM: %p \n", param);
+/* 	printf("puntero PARAM: %p \n", param);
 	printf("Filas: %i\n", param->map_dt->map_lines);
 	printf("Columnas: %i\n", param->map_dt->map_col);
 	printf("Window: [%i][%i]\n", param->scr_dt->x_win, param->scr_dt->y_win);
@@ -68,7 +68,7 @@ int	scr_draw(t_param *param)
 	printf("Y-Grades: %i\n", param->scr_dt->grades_y);
 	printf("Z-Grades: %i\n", param->scr_dt->grades_z);
 	printf("puntero mlx: %p \n", param->scr_dt->mlx);
-	printf("puntero mlx_w param: %p \n", param->scr_dt->mlx_w);
+	printf("puntero mlx_w param: %p \n", param->scr_dt->mlx_w); */
 	if (param->scr_dt->mlx_img != NULL)
 		mlx_destroy_image(param->scr_dt->mlx, param->scr_dt->mlx_img);
 	image_generator(param->scr_dt);
@@ -77,9 +77,9 @@ int	scr_draw(t_param *param)
 	{
 		while (j < param->map_dt->map_col)
 		{
-			printf("Altura [%i][%i]: %i\n", i, j, param->map_dt->geo_coord[i][j]);
+//			printf("Altura [%i][%i]: %i\n", i, j, param->map_dt->geo_coord[i][j]);
 			p_origin = map_dot_loader(param->map_dt, param->scr_dt, i, j);
-			printf("p_origin [%i][%i][%i] -> {%f, %f} \n", i, j, param->map_dt->geo_coord[i][j], p_origin.x, p_origin.y);
+//			printf("p_origin [%i][%i][%i] -> {%f, %f} \n", i, j, param->map_dt->geo_coord[i][j], p_origin.x, p_origin.y);
 			p_end = map_dot_loader(param->map_dt, param->scr_dt, i, j + 1);
 			if (j <= param->map_dt->map_col - 2)
 				scr_line_drw(*param->scr_dt, p_origin, p_end);
@@ -109,25 +109,20 @@ int	scr_win_gen(t_map_dt *map_dt)
 	param.map_dt = map_dt;
 	param.scr_dt->mlx = NULL;
 	param.scr_dt->mlx_w = NULL;
-//	printf("puntero mlx: %p \n", param.scr_dt->mlx);
-//	printf("puntero mlx_w: %p \n", param.scr_dt->mlx_w);
 	scr_dt.color = 0xFFFFFF;
-	scr_dt.x_win = 1000;
-	scr_dt.y_win = 1000;
+	scr_dt.x_win = 1020;
+	scr_dt.y_win = 700;
 	scr_dt.mlx = mlx_init();
 	scr_dt.scale = 20;
-	scr_dt.elastic_z = 1;
-	scr_dt.frame_x = 150;
-	scr_dt.frame_y = 150;
-	scr_dt.grades_x = 0;
-	scr_dt.grades_y = 0;
-	scr_dt.grades_z = 0;
+	scr_dt.elastic_z = -0.1;
+	scr_dt.frame_x = scr_dt.x_win / 2;
+	scr_dt.frame_y = scr_dt.y_win / 2;
+	scr_dt.grades_x = 30;
+	scr_dt.grades_y = 215;
+	scr_dt.grades_z = 310;
 	if (scr_dt.mlx == NULL)
 		return (0);
 	scr_dt.mlx_w = mlx_new_window(scr_dt.mlx, scr_dt.x_win, scr_dt.y_win, "FDF");
-//	printf("puntero mlx: %p \n", param.scr_dt->mlx);
-//	printf("puntero mlx_w param: %p \n", param.scr_dt->mlx_w);
-//	printf("puntero mlx_w: %p \n", scr_dt.mlx_w);
 	if (scr_dt.mlx_w == NULL)
 	{
 		free(scr_dt.mlx);
@@ -136,7 +131,5 @@ int	scr_win_gen(t_map_dt *map_dt)
 	mlx_key_hook(scr_dt.mlx_w, key_pressed, &param);
 	scr_draw(&param);
 	mlx_loop(scr_dt.mlx);
-//	mlx_destroy_window(scr_dt.mlx, scr_dt.mlx_w);
-//	free(scr_dt.mlx);
 	return (0);
 }

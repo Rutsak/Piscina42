@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:41:54 by doller-m          #+#    #+#             */
-/*   Updated: 2023/12/11 14:29:39 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/12/19 14:53:44 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,16 @@ int	map_fill(int fd, t_map_dt *map_dt)
 		i++;
 		j = 0;
 		if (i < map_dt->map_lines)
+		{
+			free(a);
 			row_splited = ft_split(get_next_line(fd), ' ');
+		}
+	}
+	i = 0;
+	while (i < (map_dt->map_col))
+	{
+		free(row_splited[i]);
+		i++;
 	}
 	free(row_splited);
 	return (1);

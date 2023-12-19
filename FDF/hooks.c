@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:55:14 by doller-m          #+#    #+#             */
-/*   Updated: 2023/12/13 15:15:45 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/12/13 17:06:07 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	key_pressed(int keycode, t_param *param)
 {
 	if (keycode == ESC_KEY)
 	{
-		printf("puntero mlx: %p \n", param->scr_dt->mlx);
-		printf("puntero mlx_w: %p \n", param->scr_dt->mlx_w);
 		close_window(param);
 	}
 	if (keycode == LEFT_KEY)
@@ -74,13 +72,13 @@ int	key_pressed(int keycode, t_param *param)
 	{
 		param->scr_dt->elastic_z += 0.1;
 		scr_draw(param);
-		printf("Zoom modificat a %f\n", param->scr_dt->elastic_z);
+		printf("Z-Elastic modificat a %f\n", param->scr_dt->elastic_z);
 	}
 	if (keycode == W_KEY)
 	{
 		param->scr_dt->elastic_z -= 0.1;
 		scr_draw(param);
-		printf("Zoom modificat a %f\n", param->scr_dt->elastic_z);
+		printf("Z-Elastic modificat a %f\n", param->scr_dt->elastic_z);
 	}
 	return (0);
 }
