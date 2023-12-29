@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:41:54 by doller-m          #+#    #+#             */
-/*   Updated: 2023/12/19 14:53:44 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:39:57 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 #include <fcntl.h>
 #include "fdf.h"
 
-#include <mlx.h>
-
-void	fdf_free(int **index, int i)
+void	fdf_free(void **index)
 {
-	while (i > 0)
+	int	i;
+
+	i = 0;
+	while (index[i])
 	{
-		free (index[i - 1]);
-		i--;
+		free (index[i]);
+		i++;
 	}
 	free (index);
 }
@@ -50,7 +51,7 @@ int	**map_gen(t_map_dt *map_dt)
 		map_dt->geo_coord[i] = ft_calloc((sizeof (int)), map_dt->map_col + 1);
 		if (!map_dt->geo_coord[i])
 		{
-			fdf_free(map_dt->geo_coord, i);
+			fdf_free((void **)map_dt->geo_coord);
 			return (NULL);
 		}
 		i++;
@@ -70,7 +71,7 @@ int	map_fill(int fd, t_map_dt *map_dt)
 	row_splited = NULL;	
 	a = get_next_line(fd);
 	row_splited = ft_split(a, ' ');
-	map_dt->map_col = map_long(row_splited, *map_dt) - 1;
+	map_dt->map_col = map_long(row_splited, *map_dt);
 	map_dt->geo_coord = map_gen(map_dt);
 	i = 0;
 	j = 0;
@@ -89,16 +90,13 @@ int	map_fill(int fd, t_map_dt *map_dt)
 		if (i < map_dt->map_lines)
 		{
 			free(a);
-			row_splited = ft_split(get_next_line(fd), ' ');
+			fdf_free((void **)row_splited);
+			a = get_next_line(fd);
+			row_splited = ft_split(a, ' ');
 		}
 	}
-	i = 0;
-	while (i < (map_dt->map_col))
-	{
-		free(row_splited[i]);
-		i++;
-	}
-	free(row_splited);
+	fdf_free((void **)row_splited);
+	free(a);
 	return (1);
 }
 
@@ -132,6 +130,7 @@ int	main(int argc, char **argv)
 		return (-1);
 	else
 	{
+		init_map(&map_dt);
 		open_map((const char *)argv[1], &map_dt);
 		fd = open((const char *)argv[1], O_RDONLY);
 		map_fill(fd, &map_dt);

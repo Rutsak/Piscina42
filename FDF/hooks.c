@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:55:14 by doller-m          #+#    #+#             */
-/*   Updated: 2023/12/13 17:06:07 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:37:59 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	key_pressed(int keycode, t_param *param)
 int	close_window(t_param *param)
 {
 	printf("Free pendent\n");
-	fdf_free(param->map_dt->geo_coord, param->map_dt->map_lines);
+	fdf_free((void **)param->map_dt->geo_coord);
 	printf("Free fet\n");
 	printf("puntero mlx: %p \n", param->scr_dt->mlx);
 	printf("puntero mlx_w: %p \n", param->scr_dt->mlx_w);

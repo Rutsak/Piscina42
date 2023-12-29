@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:42:20 by doller-m          #+#    #+#             */
-/*   Updated: 2023/12/13 15:08:53 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:37:56 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ void		rotate_y(t_point_3d *points, t_point_3d *proy, float ang, int len);
 void		rotate_z(t_point_3d *points, t_point_3d *proy, float ang, int len);
 void		scale(t_point_3d *points, t_point_3d *proy, float scale, int len);
 t_2D_point	map_dot_loader(t_map_dt *map_dt, t_scr_dt *scr_dt, int x, int y);
-void		fdf_free(int **index, int i);
+void		fdf_free(void **index);
+void		init_map(t_map_dt *map_dt);
+void		init_scr(t_scr_dt *scr_dt);
 int			key_pressed(int keycode, t_param *param);
 int			close_window(t_param *param);
 

@@ -6,16 +6,12 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:05:24 by doller-m          #+#    #+#             */
-/*   Updated: 2023/12/05 11:58:47 by doller-m         ###   ########.fr       */
+/*   Updated: 2023/12/19 15:25:30 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-/*
-*   Multiply a 3 points coordinate "point" by Matrix [3][3]
-*   and return the result.
-*/
 t_point_3d	mul_mat(float matrix[3][3], t_point_3d point)
 {
 	int			i;
