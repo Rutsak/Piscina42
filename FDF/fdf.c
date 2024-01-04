@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:41:54 by doller-m          #+#    #+#             */
-/*   Updated: 2023/12/29 13:39:57 by doller-m         ###   ########.fr       */
+/*   Updated: 2024/01/04 14:00:04 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,89 +14,59 @@
 #include <fcntl.h>
 #include "fdf.h"
 
-void	fdf_free(void **index)
-{
-	int	i;
-
-	i = 0;
-	while (index[i])
-	{
-		free (index[i]);
-		i++;
-	}
-	free (index);
-}
-
-int	map_long(char **row_splited, t_map_dt map_dt)
-{
-	int	i;
-
-	i = 0;
-	while (row_splited[i] != NULL)
-		i++;
-	map_dt.map_col = i;
-	return (i);
-}
-
 int	**map_gen(t_map_dt *map_dt)
 {
-	int		i;
-
 	map_dt->geo_coord = ft_calloc(sizeof (int *), map_dt->map_lines + 1);
 	if (!map_dt->geo_coord)
 		return (NULL);
-	i = 0;
-	while (i < map_dt->map_lines)
+	map_dt->i = 0;
+	while (map_dt->i < map_dt->map_lines)
 	{
-		map_dt->geo_coord[i] = ft_calloc((sizeof (int)), map_dt->map_col + 1);
-		if (!map_dt->geo_coord[i])
+		map_dt->geo_coord[map_dt->i] = ft_calloc(4, map_dt->map_col + 1);
+		if (!map_dt->geo_coord[map_dt->i])
 		{
 			fdf_free((void **)map_dt->geo_coord);
 			return (NULL);
 		}
-		i++;
+		map_dt->i++;
 	}
 	return (map_dt->geo_coord);
 }
-// si Get_Next_Line torna NULL, el ATOI dona error
+
+void	new_line(int fd, t_map_dt *map_dt)
+{
+	free(map_dt->a);
+	fdf_free((void **)map_dt->row_splited);
+	map_dt->a = get_next_line(fd);
+	map_dt->row_splited = ft_split(map_dt->a, ' ');
+}
 
 int	map_fill(int fd, t_map_dt *map_dt)
 {
-	int		i;
-	int		j;
-	char	*a;
-	char	**row_splited;
-	int		row_int;
-
-	row_splited = NULL;	
-	a = get_next_line(fd);
-	row_splited = ft_split(a, ' ');
-	map_dt->map_col = map_long(row_splited, *map_dt);
+	map_dt->row_splited = NULL;
+	map_dt->a = get_next_line(fd);
+	map_dt->row_splited = ft_split(map_dt->a, ' ');
+	map_dt->map_col = map_long(map_dt->row_splited, *map_dt);
 	map_dt->geo_coord = map_gen(map_dt);
-	i = 0;
-	j = 0;
-	while (i < map_dt->map_lines)
+	map_dt->i = 0;
+	map_dt->j = 0;
+	while (map_dt->i < map_dt->map_lines)
 	{
-		while (j < (map_dt->map_col))
+		while (map_dt->j < (map_dt->map_col))
 		{
-			printf("Rowspllited %s \n", *row_splited);
-			row_int = ft_atoi(row_splited[j]);
-			printf("Atoi[%i]: %i\n", j, row_int);
-			map_dt->geo_coord[i][j] = row_int;
-			j++;
+			printf("Rowspllited %s \n", *map_dt->row_splited);
+			map_dt->row_int = ft_atoi(map_dt->row_splited[map_dt->j]);
+			printf("Atoi[%i]: %i\n", map_dt->j, map_dt->row_int);
+			map_dt->geo_coord[map_dt->i][map_dt->j] = map_dt->row_int;
+			map_dt->j++;
 		}
-		i++;
-		j = 0;
-		if (i < map_dt->map_lines)
-		{
-			free(a);
-			fdf_free((void **)row_splited);
-			a = get_next_line(fd);
-			row_splited = ft_split(a, ' ');
-		}
+		map_dt->i++;
+		map_dt->j = 0;
+		if (map_dt->i < map_dt->map_lines)
+			new_line(fd, map_dt);
 	}
-	fdf_free((void **)row_splited);
-	free(a);
+	fdf_free((void **)map_dt->row_splited);
+	free(map_dt->a);
 	return (1);
 }
 

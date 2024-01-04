@@ -6,33 +6,11 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:05:24 by doller-m          #+#    #+#             */
-/*   Updated: 2023/12/19 15:25:30 by doller-m         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:11:43 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-t_point_3d	mul_mat(float matrix[3][3], t_point_3d point)
-{
-	int			i;
-	int			k;
-	t_point_3d	result;
-
-	result = point;
-	i = 0;
-	while (i < 3)
-	{
-		result.axis[i] = 0;
-		k = 0;
-		while (k < 3)
-		{
-			result.axis[i] += matrix[i][k] * point.axis[k];
-			k++;
-		}
-		i++;
-	}
-	return (result);
-}
 
 void	matrix_init(float (*matrix)[3])
 {

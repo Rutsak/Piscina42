@@ -6,13 +6,33 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:55:14 by doller-m          #+#    #+#             */
-/*   Updated: 2023/12/29 13:37:59 by doller-m         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:17:29 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include <fcntl.h>
 #include "fdf.h"
+
+void	key_loop(t_param *param, int *variable, int new_valor)
+{
+	int	a;
+
+	a = *variable;
+	*variable = a + new_valor;
+	scr_init(param, param->scr_dt);
+	printf("Valor a %i\n", new_valor);
+}
+
+void	key_loop_float(t_param *param, float *variable, float new_valor)
+{
+	float	a;
+
+	a = *variable;
+	*variable = a + new_valor;
+	scr_init(param, param->scr_dt);
+	printf("Valor a %f\n", new_valor);
+}
 
 int	key_pressed(int keycode, t_param *param)
 {
@@ -21,65 +41,21 @@ int	key_pressed(int keycode, t_param *param)
 		close_window(param);
 	}
 	if (keycode == LEFT_KEY)
-	{
-		param->scr_dt->grades_z += 10;
-		scr_draw(param);
-		printf("Z_graus modificats a %i\n", param->scr_dt->grades_z);
-	}
+		key_loop(param, &param->scr_dt->grades_z, 10);
 	if (keycode == RIGHT_KEY)
-	{
-		param->scr_dt->grades_z -= 10;
-		scr_draw(param);
-		printf("Z_graus modificats a %i\n", param->scr_dt->grades_z);
-	}
+		key_loop(param, &param->scr_dt->grades_z, -10);
 	if (keycode == UP_KEY)
-	{
-		param->scr_dt->grades_y += 10;
-		scr_draw(param);
-		printf("Y_graus modificats a %i\n", param->scr_dt->grades_y);
-	}
+		key_loop(param, &param->scr_dt->grades_y, 10);
 	if (keycode == DOWN_KEY)
-	{
-		param->scr_dt->grades_y -= 10;
-		scr_draw(param);
-		printf("Y_graus modificats a %i\n", param->scr_dt->grades_y);
-	}
-	if (keycode == A_KEY)
-	{
-		param->scr_dt->grades_x += 10;
-		scr_draw(param);
-		printf("X_graus modificats a %i\n", param->scr_dt->grades_x);
-	}
-	if (keycode == S_KEY)
-	{
-		param->scr_dt->grades_x -= 10;
-		scr_draw(param);
-		printf("X_graus modificats a %i\n", param->scr_dt->grades_x);
-	}
+		key_loop(param, &param->scr_dt->grades_y, -10);
 	if (keycode == Z_KEY)
-	{
-		param->scr_dt->scale += 1;
-		scr_draw(param);
-		printf("Zoom modificat a %f\n", param->scr_dt->scale);
-	}
+		key_loop_float(param, &param->scr_dt->scale, 1);
 	if (keycode == X_KEY)
-	{
-		param->scr_dt->scale -= 1;
-		scr_draw(param);
-		printf("Zoom modificat a %f\n", param->scr_dt->scale);
-	}
+		key_loop_float(param, &param->scr_dt->scale, -1);
 	if (keycode == Q_KEY)
-	{
-		param->scr_dt->elastic_z += 0.1;
-		scr_draw(param);
-		printf("Z-Elastic modificat a %f\n", param->scr_dt->elastic_z);
-	}
+		key_loop_float(param, &param->scr_dt->elastic_z, 0.1);
 	if (keycode == W_KEY)
-	{
-		param->scr_dt->elastic_z -= 0.1;
-		scr_draw(param);
-		printf("Z-Elastic modificat a %f\n", param->scr_dt->elastic_z);
-	}
+		key_loop_float(param, &param->scr_dt->elastic_z, -0.1);
 	return (0);
 }
 

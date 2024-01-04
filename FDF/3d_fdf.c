@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:22:51 by doller-m          #+#    #+#             */
-/*   Updated: 2023/12/13 13:15:49 by doller-m         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:13:22 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,26 @@ void	image_pixel_put(t_scr_dt *scr_dt, int x, int y, int color)
 
 	dst = scr_dt->addr + (y * scr_dt->l_length + x * (scr_dt->bits_pixel / 8));
 	*(unsigned int *)dst = color;
+}
+
+t_point_3d	mul_mat(float matrix[3][3], t_point_3d point)
+{
+	int			i;
+	int			k;
+	t_point_3d	result;
+
+	result = point;
+	i = 0;
+	while (i < 3)
+	{
+		result.axis[i] = 0;
+		k = 0;
+		while (k < 3)
+		{
+			result.axis[i] += matrix[i][k] * point.axis[k];
+			k++;
+		}
+		i++;
+	}
+	return (result);
 }

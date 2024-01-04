@@ -6,7 +6,7 @@
 #    By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/04 14:13:56 by doller-m          #+#    #+#              #
-#    Updated: 2023/12/19 15:36:34 by doller-m         ###   ########.fr        #
+#    Updated: 2024/01/04 13:41:28 by doller-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ SRCS =	fdf.c\
 		map_utils.c\
 		matrius.c\
 		hooks.c\
-		struc_init.c\
+		utils.c\
 
 OBJS = $(SRCS:.c=.o)
 
