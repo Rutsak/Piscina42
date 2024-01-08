@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:55:14 by doller-m          #+#    #+#             */
-/*   Updated: 2024/01/04 13:17:29 by doller-m         ###   ########.fr       */
+/*   Updated: 2024/01/05 11:43:51 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	key_loop(t_param *param, int *variable, int new_valor)
 	a = *variable;
 	*variable = a + new_valor;
 	scr_init(param, param->scr_dt);
-	printf("Valor a %i\n", new_valor);
 }
 
 void	key_loop_float(t_param *param, float *variable, float new_valor)
@@ -31,7 +30,6 @@ void	key_loop_float(t_param *param, float *variable, float new_valor)
 	a = *variable;
 	*variable = a + new_valor;
 	scr_init(param, param->scr_dt);
-	printf("Valor a %f\n", new_valor);
 }
 
 int	key_pressed(int keycode, t_param *param)
@@ -61,11 +59,7 @@ int	key_pressed(int keycode, t_param *param)
 
 int	close_window(t_param *param)
 {
-	printf("Free pendent\n");
 	fdf_free((void **)param->map_dt->geo_coord);
-	printf("Free fet\n");
-	printf("puntero mlx: %p \n", param->scr_dt->mlx);
-	printf("puntero mlx_w: %p \n", param->scr_dt->mlx_w);
 	mlx_clear_window(param->scr_dt->mlx, param->scr_dt->mlx_w);
 	mlx_destroy_window(param->scr_dt->mlx, param->scr_dt->mlx_w);
 	exit (EXIT_SUCCESS);

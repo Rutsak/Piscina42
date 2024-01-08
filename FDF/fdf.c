@@ -6,7 +6,7 @@
 /*   By: doller-m <doller-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:41:54 by doller-m          #+#    #+#             */
-/*   Updated: 2024/01/04 14:00:04 by doller-m         ###   ########.fr       */
+/*   Updated: 2024/01/05 11:41:19 by doller-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	**map_gen(t_map_dt *map_dt)
 	map_dt->i = 0;
 	while (map_dt->i < map_dt->map_lines)
 	{
-		map_dt->geo_coord[map_dt->i] = ft_calloc(4, map_dt->map_col + 1);
+		map_dt->geo_coord[map_dt->i] = ft_calloc((sizeof(int)),
+				map_dt->map_col + 1);
 		if (!map_dt->geo_coord[map_dt->i])
 		{
 			fdf_free((void **)map_dt->geo_coord);
@@ -48,15 +49,15 @@ int	map_fill(int fd, t_map_dt *map_dt)
 	map_dt->row_splited = ft_split(map_dt->a, ' ');
 	map_dt->map_col = map_long(map_dt->row_splited, *map_dt);
 	map_dt->geo_coord = map_gen(map_dt);
+	if (map_dt->geo_coord == NULL)
+		return (-1);
 	map_dt->i = 0;
 	map_dt->j = 0;
 	while (map_dt->i < map_dt->map_lines)
 	{
 		while (map_dt->j < (map_dt->map_col))
 		{
-			printf("Rowspllited %s \n", *map_dt->row_splited);
 			map_dt->row_int = ft_atoi(map_dt->row_splited[map_dt->j]);
-			printf("Atoi[%i]: %i\n", map_dt->j, map_dt->row_int);
 			map_dt->geo_coord[map_dt->i][map_dt->j] = map_dt->row_int;
 			map_dt->j++;
 		}
@@ -79,7 +80,11 @@ int	open_map(const char *map, t_map_dt *map_dt)
 	map_dt->map_col = 0;
 	map_dt->map_lines = 0;
 	fd = open(map, O_RDONLY);
+	if (fd < 0)
+		return (-1);
 	read_result = get_next_line(fd);
+	if (read_result == NULL)
+		return (-1);
 	while (read_result != NULL)
 	{
 		map_dt->map_lines++;
@@ -95,15 +100,23 @@ int	main(int argc, char **argv)
 {
 	int			fd;
 	t_map_dt	map_dt;
+	int			a;
 
 	if (argc != 2)
 		return (-1);
 	else
 	{
 		init_map(&map_dt);
-		open_map((const char *)argv[1], &map_dt);
+		a = open_map((const char *)argv[1], &map_dt);
+		if (a < 0)
+		{
+			write(1, "Reading Map Error", 18);
+			return (0);
+		}
 		fd = open((const char *)argv[1], O_RDONLY);
-		map_fill(fd, &map_dt);
+		a = map_fill(fd, &map_dt);
+		if (a < 0)
+			return (0);
 		close(fd);
 		scr_win_gen(&map_dt);
 	}
